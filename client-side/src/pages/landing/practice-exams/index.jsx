@@ -1,33 +1,22 @@
 import React, { useEffect, useState } from "react";
 
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
-import MenuList from "@mui/material/MenuList";
-import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemButton from "@mui/material/ListItemButton";
-import { Box, Container, Grid } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import {
-  Button,
-  ChakraProvider,
-  Input,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { Container, Grid } from "@mui/material";
+
 import LinearProgress from "@mui/material/LinearProgress";
 import { Result } from "antd";
 import "./practice-exam.m.css";
 import { getApiHandler, serverURL } from "../../../apiHandler";
-import SubjectCard from "../../../components/landing/practice-exams/Card/SubjectCard";
+import SubjectCard from "../../../components/landing/practice-exams/SubjectCard";
+import PracticeCategory from "../../../components/landing/practice-exams/PracticeCategory";
+import SearchPracticeExam from "../../../components/landing/practice-exams/SearchPracticeExam";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: "center",
+//   color: theme.palette.text.secondary,
+// }));
 export default function PracticeExam() {
   const [exams, setExams] = useState([]);
   const [subjects, setSubjects] = useState([]);
@@ -61,65 +50,17 @@ export default function PracticeExam() {
       <Container className="my-3">
         <Grid container spacing={2}>
           <Grid item xs={12} md={2} sm={12}>
-            <Paper sx={{ width: "100%", maxWidth: "100%" }}>
-              <MenuList>
-                <List
-                  // key={exam.examName}
-                  component="nav"
-                  aria-label="main mailbox folders"
-                  sx={{
-                    width: "100%",
-                    // maxWidth: 360,
-                    bgcolor: "background.paper",
-                    position: "relative",
-                    overflow: "auto",
-                    maxHeight: 300,
-                    // "& ul": { padding: 0 },
-                  }}
-                >
-                  {exams.map((exam, index) => {
-                    return (
-                      <ListItemButton
-                        key={exam.examName}
-                        selected={selectedIndex === exam._id}
-                        onClick={() => {
-                          setSelectedIndex(exam._id);
-                          setSelectedExam(exam.examName);
-                          getSubjectByCategory(exam._id);
-                        }}
-                      >
-                        <ListItemText>{exam.examName}</ListItemText>
-                      </ListItemButton>
-                    );
-                  })}
-                </List>
-              </MenuList>
-            </Paper>
+            <PracticeCategory
+              exams={exams}
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+              setSelectedExam={setSelectedExam}
+              getSubjectByCategory={getSubjectByCategory}
+            />
           </Grid>
           <Grid item container spacing={3} xs={12} md={10} sm={12}>
             <Grid item xs={12}>
-              <ChakraProvider>
-                <InputGroup size="lg">
-                  <Input
-                    pr="4.5rem"
-                    type="text"
-                    placeholder="Search Subject..."
-                    className="bg-white"
-                  />
-                  <InputRightElement width="4.5rem">
-                    <Button
-                      h="2rem"
-                      size="md"
-                      colorScheme="blue"
-                      onClick={() => {
-                        console.log("hello");
-                      }}
-                    >
-                      <SearchIcon />
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </ChakraProvider>
+              <SearchPracticeExam />
             </Grid>
             <Grid item xs={12}>
               <div className="bg-white p-3 fw-bold rounded border text-black-50">
