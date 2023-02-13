@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { NavLink,Link} from "react-router-dom";
 
 const pages = [
-  { name: "Home", path: "/home" },
+  { name: "Home", path: "/" },
   { name: "Practice Exam", path: "/practices" },
   { name: "LMS", path: "/lms" },
   { name: "Courses", path: "/courses" },

@@ -9,6 +9,7 @@ import { getApiHandler, serverURL } from "../../../apiHandler";
 import SubjectCard from "../../../components/landing/practice-exams/SubjectCard";
 import PracticeCategory from "../../../components/landing/practice-exams/PracticeCategory";
 import SearchPracticeExam from "../../../components/landing/practice-exams/SearchPracticeExam";
+import LandingLayout from "../../../layouts/landing-layout";
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -46,6 +47,8 @@ export default function PracticeExam() {
   }, []);
 
   return (
+    <LandingLayout>
+      <Container maxWidth="xl" className="p-0">
     <div className="background py-5">
       <Container className="my-3">
         <Grid container spacing={2}>
@@ -98,5 +101,7 @@ export default function PracticeExam() {
         </Grid>
       </Container>
     </div>
+    </Container>
+    </LandingLayout>
   );
 }

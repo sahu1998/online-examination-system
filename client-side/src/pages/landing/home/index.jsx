@@ -17,6 +17,8 @@ function Home() {
     getPracticeExams();
   }, []);
   return (
+    <>
+    <LandingLayout>
     <Container maxWidth="xl" className="p-0">
       <div className="banner">
         <div className="py-5 fw-bold fs-1 text-center">
@@ -96,6 +98,8 @@ function Home() {
         </Container>
       </div>
     </Container>
+    </LandingLayout>
+    </>
   );
 }
 
