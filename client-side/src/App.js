@@ -6,8 +6,8 @@ import PracticeExam from "./pages/landing/practice-exams";
 function App() {
   return (
     <div>
-      <PracticeExam />
-      {/* <Home /> */}
+      {/* <PracticeExam /> */}
+      <Home />
       {/* <Users /> */}
     </div>
   );
