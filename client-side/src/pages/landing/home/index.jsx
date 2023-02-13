@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Container, Grid, Divider } from "@mui/material";
 import { Button, ChakraProvider } from "@chakra-ui/react";
 import { getApiHandler, serverURL } from "../../../apiHandler";
-import banner from "../../../assets/images/landing/banner3.png";
-import SubjectCard from "../../../components/landing/practice-exams/Card/SubjectCard";
+import SubjectCard from "../../../components/landing/practice-exams/SubjectCard";
 import "./home.m.css";
+import LandingLayout from "../../../layouts/landing-layout";
 function Home() {
   const [subjects, setSubjects] = useState();
   const getPracticeExams = async () => {
@@ -17,20 +17,24 @@ function Home() {
     getPracticeExams();
   }, []);
   return (
-    <div className="">
+    <>
+    <LandingLayout>
+    <Container maxWidth="xl" className="p-0">
       <div className="banner">
-        <Container className="">
-          <div className="py-5 fw-bold fs-1 text-center">
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6} sm={12}>
-                <img src={banner} className="w-75 m-auto" />
-              </Grid>
-              <Grid item xs={12} md={6} sm={12} className="m-auto text-white">
-                Online Learning and Examination System
-              </Grid>
+        <div className="py-5 fw-bold fs-1 text-center">
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6} sm={12}>
+              <img
+                src={"assets/images/landing/banner3.png"}
+                alt="banner"
+                className="w-75 m-auto"
+              />
             </Grid>
-          </div>
-        </Container>
+            <Grid item xs={12} md={6} sm={12} className="m-auto text-white">
+              Online Learning and Examination System
+            </Grid>
+          </Grid>
+        </div>
       </div>
       <div className="">
         <Container>
@@ -93,7 +97,9 @@ function Home() {
           </Grid>
         </Container>
       </div>
-    </div>
+    </Container>
+    </LandingLayout>
+    </>
   );
 }
 

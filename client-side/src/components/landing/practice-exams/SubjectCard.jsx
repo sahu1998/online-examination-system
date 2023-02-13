@@ -3,7 +3,7 @@ import Divider from "@mui/material/Divider";
 import { ChakraProvider } from "@chakra-ui/react";
 import CardMedia from "@mui/material/CardMedia";
 import { Card, CardBody, CardFooter, Stack, Button } from "@chakra-ui/react";
-import quizAlternateImg from "../../../../assets/images/landing/quizAlternate.png";
+import quizAlternateImg from "../../../assets/images/landing/quizAlternate.png";
 
 const SubjectCard = ({ subject, url, image }) => {
   return (
