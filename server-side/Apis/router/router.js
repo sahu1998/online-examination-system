@@ -6,6 +6,7 @@ const {
   postSubjectController,
   getAllSubjectController,
   getRandomSubjController,
+  getAboutController,
 } = require("../controller/controller");
 const { uploadSubjectImage } = require("../middleware");
 const router = express.Router();
@@ -15,6 +16,7 @@ router.post("/post", postController);
 
 router.post("/postexam", postController);
 router.get("/getexam", getAllExamController);
+router.get("/about", getAboutController);
 
 router.post(
   "/postsubject",

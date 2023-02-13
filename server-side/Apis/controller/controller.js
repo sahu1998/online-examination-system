@@ -1,3 +1,4 @@
+const fs = require("fs");
 const {
   // postModel,
   postExamData,
@@ -45,6 +46,13 @@ const getRandomSubjController = async (req, res) => {
   const data = await getRandomSubjects(limit);
   res.send(data);
 };
+const getAboutController = (req, res) => {
+  // const data = fs.readFileSync("files/about.txt", "utf-8");
+  const data = fs.readFileSync("files/about.txt", "utf-8");
+
+  console.log("aboutdata", data);
+  res.send("done");
+};
 
 module.exports = {
   getController,
@@ -53,4 +61,5 @@ module.exports = {
   postSubjectController,
   getAllSubjectController,
   getRandomSubjController,
+  getAboutController,
 };
