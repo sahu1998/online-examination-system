@@ -5,6 +5,7 @@ import { getApiHandler, serverURL } from "../../../apiHandler";
 import banner from "../../../assets/images/landing/banner3.png";
 import SubjectCard from "../../../components/landing/practice-exams/Card/SubjectCard";
 import "./home.m.css";
+import LandingLayout from "../../../layouts/landing-layout";
 function Home() {
   const [subjects, setSubjects] = useState();
   const getPracticeExams = async () => {
@@ -17,6 +18,7 @@ function Home() {
     getPracticeExams();
   }, []);
   return (
+    <LandingLayout>
     <div className="">
       <div className="banner">
         <Container className="">
@@ -94,6 +96,7 @@ function Home() {
         </Container>
       </div>
     </div>
+    </LandingLayout>
   );
 }
 
