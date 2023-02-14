@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { NavLink,Link} from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const pages = [
   { name: "Home", path: "/" },
@@ -44,8 +44,8 @@ function Navbar() {
 
   return (
     <>
-      <AppBar position="static" sx={{backgroundColor:'currentColor'}}>
-        <Container maxWidth="xl" sx={{backgroundColor:'currentColor'}} >
+      <AppBar position="static" sx={{ backgroundColor: "currentColor" }}>
+        <Container maxWidth="xl" sx={{ backgroundColor: "currentColor" }}>
           {/* /////......logo......///// */}
           <Toolbar disableGutters>
             <img
@@ -102,8 +102,10 @@ function Navbar() {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <NavLink to={page.path} style={{textDecoration:"none"}}>
-                      <Typography textAlign="center" sx={{color:"black"}}>{page.name}</Typography>
+                    <NavLink to={page.path} style={{ textDecoration: "none" }}>
+                      <Typography textAlign="center" sx={{ color: "black" }}>
+                        {page.name}
+                      </Typography>
                     </NavLink>
                   </MenuItem>
                 ))}
@@ -126,7 +128,7 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-             Online Exam..
+              Online Exam..
             </Typography>
             {/* ////////.......All tabes.......///////// */}
             <Box
@@ -137,7 +139,7 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <NavLink to={page.path} style={{textDecoration:"none"}}>
+                <NavLink to={page.path} style={{ textDecoration: "none" }}>
                   <Button
                     key={page}
                     onClick={handleCloseNavMenu}
@@ -147,7 +149,6 @@ function Navbar() {
                       display: "block",
                       fontSize: "13px",
                       fontFamily: "inherit",
-                      
                     }}
                   >
                     {page.name}
@@ -156,39 +157,37 @@ function Navbar() {
               ))}
             </Box>
             {/* /////////.....Buttons.....///////// */}
-            
-              <Link to="/createaccount"  style={{textDecoration:"none"}}>
-            <Button
-              sx={{
-                fontSize: "13px",
-                backgroundColor: "ghostwhite",
-                color: "black",
-                fontFamily: "inherit",
-                border: "ridge",
-                marginRight:"6px",
-              }}
-              variant=""
-            >
-              Creat Account
-            </Button>
+
+            <Link to="/createaccount" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  fontSize: "13px",
+                  backgroundColor: "ghostwhite",
+                  color: "black",
+                  fontFamily: "inherit",
+                  border: "ridge",
+                  marginRight: "6px",
+                }}
+                variant=""
+              >
+                Create Account
+              </Button>
             </Link>
-            <Link to="/signin"  style={{textDecoration:"none"}}>
-            <Button
-              sx={{
-                textDecoration:"none",
-                fontSize: "13px",
-                backgroundColor: "ghostwhite",
-                color: "black",
-                fontFamily: "inherit",
-                border:"solid",
-                
-              }}
-              variant=""
-            >
-              Sign In
-            </Button>
+            <Link to="/signin" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  textDecoration: "none",
+                  fontSize: "13px",
+                  backgroundColor: "ghostwhite",
+                  color: "black",
+                  fontFamily: "inherit",
+                  border: "solid",
+                }}
+                variant=""
+              >
+                Sign In
+              </Button>
             </Link>
-           
           </Toolbar>
         </Container>
       </AppBar>

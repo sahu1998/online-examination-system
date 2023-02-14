@@ -7,10 +7,14 @@ const {
   getAllSubjectController,
   getRandomSubjController,
   getAboutController,
+<<<<<<< HEAD
   PostLmsSubController,
   getLmsSubController,
   PostLmsCatController,
   getLmsCatController,
+=======
+  getSubjectByCatgController,
+>>>>>>> bacfda700a5def449e1250e08d73c8bcea5fc0ab
 } = require("../controller/controller");
 const { uploadSubjectImage, uploadLmsSubImage } = require("../middleware");
 const router = express.Router();
@@ -28,6 +32,7 @@ router.post(
   postSubjectController
 );
 router.get("/getsubject", getAllSubjectController);
+router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
 
 router.use("/subject", express.static("storage/subjects"));

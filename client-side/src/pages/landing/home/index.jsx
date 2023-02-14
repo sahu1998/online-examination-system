@@ -5,6 +5,7 @@ import { getApiHandler, serverURL } from "../../../apiHandler";
 import SubjectCard from "../../../components/landing/practice-exams/SubjectCard";
 import "./home.m.css";
 import LandingLayout from "../../../layouts/landing-layout";
+import Banner from "../../../components/landing/home/Banner";
 function Home() {
   const [subjects, setSubjects] = useState();
   const getPracticeExams = async () => {
@@ -18,87 +19,110 @@ function Home() {
   }, []);
   return (
     <>
-    <LandingLayout>
-    <Container maxWidth="xl" className="p-0">
-      <div className="banner">
-        <div className="py-5 fw-bold fs-1 text-center">
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6} sm={12}>
-              <img
-                src={"assets/images/landing/banner3.png"}
-                alt="banner"
-                className="w-75 m-auto"
-              />
+      <LandingLayout>
+        <Container maxWidth="xl" className="p-0">
+          <Banner />
+          {/* <div className=""> */}
+          <Container>
+            <Grid container spacing={2} className="">
+              <Grid item xs={12} className="py-5 fw-bold fs-1 text-center ">
+                Practice Exams
+              </Grid>
+              {subjects?.map((sub, index) => {
+                return (
+                  <Grid
+                    key={`subject-${sub.subjectName}-${index}`}
+                    item
+                    xs={12}
+                    md={3}
+                    sm={6}
+                  >
+                    <SubjectCard
+                      subject={sub}
+                      url={`${serverURL}/subject`}
+                      image={sub.subjectImg?.split("\\")[2]}
+                    />
+                  </Grid>
+                );
+              })}
+              <Grid item xs={12} className="text-center py-5">
+                <ChakraProvider>
+                  <Button
+                    colorScheme="blue"
+                    variant="outline"
+                    className="fs-3 p-4"
+                  >
+                    Browse All Exams
+                  </Button>
+                </ChakraProvider>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6} sm={12} className="m-auto text-white">
-              Online Learning and Examination System
+          </Container>
+          <Divider />
+          <Container>
+            <Grid container spacing={2} className="">
+              <Grid item xs={12} className="py-5 fw-bold fs-1 text-center ">
+                LMS
+              </Grid>
+              {subjects?.map((sub, index) => {
+                return (
+                  <Grid key={`catg-${index}`} item xs={12} md={3} sm={6}>
+                    <SubjectCard
+                      subject={sub}
+                      url={`${serverURL}/subject`}
+                      image={sub.subjectImg?.split("\\")[2]}
+                    />
+                  </Grid>
+                );
+              })}
+              <Grid item xs={12} className="text-center py-5">
+                <ChakraProvider>
+                  <Button
+                    colorScheme="blue"
+                    variant="outline"
+                    className="fs-3 p-4"
+                  >
+                    Browse All Categories
+                  </Button>
+                </ChakraProvider>
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
-      </div>
-      <div className="">
-        <Container>
-          <Grid container spacing={2} className="">
-            <Grid item xs={12} className="py-5 fw-bold fs-1 text-center ">
-              Practice Exams
-            </Grid>
-            {subjects?.map((sub, index) => {
-              return (
-                <Grid key={index} item xs={12} md={3} sm={6}>
-                  <SubjectCard
-                    subject={sub}
-                    url={`${serverURL}/subject`}
-                    image={sub.subjectImg?.split("\\")[2]}
+          </Container>
+          {/* <Container>
+            <Grid container className="py-5 item-center">
+              <Grid item xs={12} sm={12} md={4}>
+                <div className="">
+                  <img
+                    src="assets/images/landing/onlineexam.png"
+                    alt="Free Exams"
+                    width={100}
+                    className="m-auto"
                   />
-                </Grid>
-              );
-            })}
-            <Grid xs={12} className="text-center py-5">
-              <ChakraProvider>
-                <Button
-                  colorScheme="blue"
-                  variant="outline"
-                  className="fs-3 p-4"
-                >
-                  Browse All Exams
-                </Button>
-              </ChakraProvider>
-            </Grid>
-          </Grid>
-        </Container>
-        <Divider />
-        <Container>
-          <Grid container spacing={2} className="">
-            <Grid item xs={12} className="py-5 fw-bold fs-1 text-center ">
-              LMS
-            </Grid>
-            {subjects?.map((sub, index) => {
-              return (
-                <Grid key={index} item xs={12} md={3} sm={6}>
-                  <SubjectCard
-                    subject={sub}
-                    url={`${serverURL}/subject`}
-                    image={sub.subjectImg?.split("\\")[2]}
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={4}>
+                <div className="">
+                  <img
+                    src="assets/images/landing/onlinelearning.png"
+                    alt="Free Learning"
+                    width={100}
+                    className="m-auto"
                   />
-                </Grid>
-              );
-            })}
-            <Grid xs={12} className="text-center py-5">
-              <ChakraProvider>
-                <Button
-                  colorScheme="blue"
-                  variant="outline"
-                  className="fs-3 p-4"
-                >
-                  Browse All Categories
-                </Button>
-              </ChakraProvider>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={4}>
+                <img
+                  src="assets/images/landing/onlinelearning.png"
+                  alt="Free Learning"
+                  width={100}
+                  className="m-auto"
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          </Container> */}
+          {/* </div> */}
         </Container>
-      </div>
-    </Container>
-    </LandingLayout>
+      </LandingLayout>
     </>
   );
 }
