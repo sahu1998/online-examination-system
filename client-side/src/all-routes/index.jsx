@@ -10,7 +10,7 @@ import PracticeExam from '../pages/landing/practice-exams'
 export default function AllRoutes() {
   return (
     <Routes>
-      {/* //////////.....Home.....////////// */}
+
       <Route path='/' element={<Home />} />
       <Route path='/practices' element={<PracticeExam />} />
       <Route path='/pattern' element={<Pattern />} />
@@ -18,7 +18,6 @@ export default function AllRoutes() {
       <Route path='/syllabus' element={<Syllabus />} />
       <Route path='about' element={<AboutUs />} />
 
-      {/* //////////////.......Owner.....///////////// */}
 
     </Routes>
   )
