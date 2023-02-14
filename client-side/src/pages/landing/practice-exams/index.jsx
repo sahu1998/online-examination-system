@@ -79,9 +79,6 @@ export default function PracticeExam() {
                 ) : subjects.length ? (
                   subjects.map((sub, index) => {
                     return (
-<<<<<<< HEAD
-                      <Grid key={index} item xs={12} md={4} sm={6}>
-=======
                       <Grid
                         key={`practice-${selectedExam}-${index}`}
                         item
@@ -89,7 +86,6 @@ export default function PracticeExam() {
                         md={4}
                         sm={6}
                       >
->>>>>>> bacfda700a5def449e1250e08d73c8bcea5fc0ab
                         <SubjectCard
                           subject={sub}
                           url={`${serverURL}/subject`}
