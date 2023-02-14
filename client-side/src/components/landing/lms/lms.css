@@ -1,0 +1,25 @@
+.btn1{
+   
+   
+    width: 100px;
+}
+
+.card1{
+    /* box-shadow: 0 0 20px 0; */
+    width: 100%;
+    /* height: 450px; */
+}
+/* .url{
+    margin:10px;
+} */
+.hading2{
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border: 1px solid rgb(124, 124, 124) ;
+    margin-top: 10px;
+    /* margin-bottom: 40px; */
+}
+.grid-container {
+    grid-row-gap: 50px;
+  }
