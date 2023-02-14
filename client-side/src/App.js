@@ -1,14 +1,13 @@
+import { BrowserRouter } from "react-router-dom";
+import AllRoutes from "./all-routes";
 import "./App.css";
-import Users from "./pages/admin/users";
-import Home from "./pages/landing/home";
-import PracticeExam from "./pages/landing/practice-exams";
 
 function App() {
   return (
     <div>
-      {/* <PracticeExam /> */}
-      <Home />
-      {/* <Users /> */}
+      <BrowserRouter>
+        <AllRoutes />
+      </BrowserRouter>
     </div>
   );
 }

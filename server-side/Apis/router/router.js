@@ -7,6 +7,7 @@ const {
   getAllSubjectController,
   getRandomSubjController,
   getAboutController,
+  getSubjectByCatgController,
 } = require("../controller/controller");
 const { uploadSubjectImage } = require("../middleware");
 const router = express.Router();
@@ -24,6 +25,7 @@ router.post(
   postSubjectController
 );
 router.get("/getsubject", getAllSubjectController);
+router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
 
 router.use("/subject", express.static("storage/subjects"));

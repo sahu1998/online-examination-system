@@ -36,8 +36,13 @@ const postSubjectController = async (req, res) => {
 };
 
 const getAllSubjectController = async (req, res) => {
-  const id = req.query.id;
-  const data = id ? await getSubjectByCategory(id) : await getAllSubjectData();
+  const data = await getAllSubjectData();
+  res.send(data);
+};
+
+const getSubjectByCatgController = async (req, res) => {
+  const id = req.params.id;
+  const data = await getSubjectByCategory(id);
   res.send(data);
 };
 
@@ -60,6 +65,7 @@ module.exports = {
   getAllExamController,
   postSubjectController,
   getAllSubjectController,
+  getSubjectByCatgController,
   getRandomSubjController,
   getAboutController,
 };
