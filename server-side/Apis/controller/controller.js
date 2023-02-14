@@ -4,6 +4,8 @@ const {
   postExamData,
   getAllExamData,
 } = require("../model/categoryModel");
+const { PostLmsCatData, getLmsCatData } = require("../model/lmscatmodal");
+const { PostLmsSubData, getLmsSubByCategory, getLmsSubData } = require("../model/lmssubmodal");
 const {
   postSubjectData,
   getAllSubjectData,
@@ -53,8 +55,30 @@ const getAboutController = (req, res) => {
   console.log("aboutdata", data);
   res.send("done");
 };
+const PostLmsSubController = async (req, res) => {
+  const file = req.file.path;
+  const temp={...req.body,image:file}
+
+  const data = await PostLmsSubData(temp);
+  res.send(data);
+};
+const PostLmsCatController = async (req, res) => {
+    const temp = req.body;
+    const data = await PostLmsCatData(temp);
+    res.send(data);
+  };
+  const getLmsSubController=async(req,res)=>{
+    const id=req.query.id;
+    const data= id? await getLmsSubByCategory(id):await getLmsSubData();
+    res.send(data);
+  }
+  const getLmsCatController=async(req,res)=>{
+    const data=await getLmsCatData();
+    res.send(data);
+  }
 
 module.exports = {
+  PostLmsSubController ,PostLmsCatController,getLmsSubController,getLmsCatController,
   getController,
   postController,
   getAllExamController,
