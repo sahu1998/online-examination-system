@@ -44,8 +44,8 @@ function Navbar() {
 
   return (
     <>
-      <AppBar position="static" sx={{ backgroundColor: 'currentColor' }}>
-        <Container maxWidth="xl" sx={{ backgroundColor: 'currentColor' }} >
+      <AppBar position="static" sx={{ backgroundColor: "currentColor" }}>
+        <Container maxWidth="xl" sx={{ backgroundColor: "currentColor" }}>
           {/* /////......logo......///// */}
           <Toolbar disableGutters>
             <img
@@ -103,7 +103,9 @@ function Navbar() {
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <NavLink to={page.path} style={{ textDecoration: "none" }}>
-                      <Typography textAlign="center" sx={{ color: "black" }}>{page.name}</Typography>
+                      <Typography textAlign="center" sx={{ color: "black" }}>
+                        {page.name}
+                      </Typography>
                     </NavLink>
                   </MenuItem>
                 ))}
@@ -147,7 +149,6 @@ function Navbar() {
                       display: "block",
                       fontSize: "13px",
                       fontFamily: "inherit",
-
                     }}
                   >
                     {page.name}
@@ -169,7 +170,7 @@ function Navbar() {
                 }}
                 variant=""
               >
-                Creat Account
+                Create Account
               </Button>
             </Link>
             <Link to="/signin" style={{ textDecoration: "none" }}>
@@ -181,14 +182,12 @@ function Navbar() {
                   color: "black",
                   fontFamily: "inherit",
                   border: "solid",
-
                 }}
                 variant=""
               >
                 Sign In
               </Button>
             </Link>
-
           </Toolbar>
         </Container>
       </AppBar>
