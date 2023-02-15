@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const examSchema = mongoose.Schema({
   examName: String,
   image: String,
-  description: String
+  description: String,
 });
 const exam = mongoose.model("lmscategories", examSchema);
 const getLmsCatData = async () => {
   try {
     const data = await exam.find();
-    return { data: data, message: " get data succesfully", status: 200 };
+    return { data: data, message: "get data succesfully", status: 200 };
   } catch (error) {
     return { message: error.message, status: 400 };
   }

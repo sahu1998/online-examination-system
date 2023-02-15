@@ -15,7 +15,7 @@ import "./lms.css";
 import Grid from "@mui/material/Grid";
 import { serverURL } from "../../../apiHandler";
 import { Result } from "antd";
-const Cards = ({ data }) => {
+const Cards = ({ data, setHed }) => {
   console.log("data===============", data);
   // console.log(`${serverUrl}/lms-image/${data[0].image?.split("\\")[2]}`)
 
@@ -32,22 +32,16 @@ const Cards = ({ data }) => {
           <Card maxW="sm" className="card1" >
             <CardBody >
               <img
-                src={`${serverURL}/lms-subject/${row.image?.split("\\")[2]}`}
+                src={`${serverURL}/lms-image/${row.image?.split("\\")[2]}`}
                 width={"95%"}
                 className="p-2"
-                style={{
-                  height: "200px",
-                  objectFit: "fill"
-
-
-                }}
               />
               <Stack mt="6" spacing="3"></Stack>
               <Grid item xs={12} className="d-flex" >
                 <Grid item xs={6}>
                   <h4>{row.subjectName}</h4>
                   <p>total-item :{row.totalItem}</p>
-                  {/* <p>{setHed(row.category[0].examName)} </p> */}
+                  <p>{setHed(row.category[0].examName)} </p>
                 </Grid>
                 <Grid item xs={6}  >
                   <button type="button" className="btn btn-warning btn1 mt-4">
