@@ -61,14 +61,17 @@ const getAboutController = (req, res) => {
   res.send("done");
 };
 const PostLmsSubController = async (req, res) => {
-  const file = req.file.path;
-  const temp={...req.body,image:file}
-
+  // const temp=req.body;
+  const files = req.file.path;
+  const temp={...req.body,image:files}
+console.log("temp======",temp);
   const data = await PostLmsSubData(temp);
+  console.log("temp data====",data);
   res.send(data);
 };
 const PostLmsCatController = async (req, res) => {
-    const temp = req.body;
+  const files = req.file.path;
+  const temp={...req.body,image:files}
     const data = await PostLmsCatData(temp);
     res.send(data);
   };

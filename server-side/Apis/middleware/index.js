@@ -17,7 +17,8 @@ const subjectLmsStorage = multer.diskStorage({
     
   destination: (req, file, cb) => {
     console.log("mahi ===============");
-    cb(null, "./storage/subject");
+    console.log("file===",file);
+    cb(null, "./storage/lmssubject");
   },
   filename: (req, file, cb) => {
     console.log("file.....", file);
@@ -25,7 +26,24 @@ const subjectLmsStorage = multer.diskStorage({
   },
 });
 const uploadLmsSubImage = multer({
-  storage: subjectLmsStorage,
-  limits:{fileSize:1000000}
+  storage: subjectLmsStorage, 
+  limits:{ fileSize:1000000 },
 });
-module.exports = { uploadSubjectImage,uploadLmsSubImage };
+const categoryLmsStorage = multer.diskStorage({
+    
+  destination: (req, file, cb) => {
+    console.log("mahi ===============");
+    console.log("file===",file);
+
+    cb(null, "./storage/lmscategory");
+  },
+  filename: (req, file, cb) => {
+    console.log("file.....", file);
+    cb(null,file.originalname);
+  },
+});
+const uploadLmsCatImage = multer({
+  storage: categoryLmsStorage, 
+  limits:{ fileSize:1000000 },
+});
+module.exports = { uploadSubjectImage,uploadLmsSubImage,uploadLmsCatImage };

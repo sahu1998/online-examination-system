@@ -13,7 +13,7 @@ const {
   getLmsCatController,
   getSubjectByCatgController,
 } = require("../controller/controller");
-const { uploadSubjectImage, uploadLmsSubImage } = require("../middleware");
+const { uploadSubjectImage, uploadLmsSubImage, uploadLmsCatImage } = require("../middleware");
 const router = express.Router();
 
 router.get("/get", getController);
@@ -34,13 +34,14 @@ router.get("/get-random-subjects", getRandomSubjController);
 
 router.use("/subject", express.static("storage/subjects"));
 
-router.use("/lms-image", express.static("storage/subject"));
+router.use("/lms-sub", express.static("storage/lmssubject"));
+router.use("/lms-cat", express.static("storage/lmscategory"));
 router.post(
   "/postLmsSub",
   uploadLmsSubImage.single("image"),
-  PostLmsSubController
+  PostLmsSubController   
 );
 router.get("/getLmsSub", getLmsSubController);
-router.post("/postLmsCat", PostLmsCatController);
+router.post("/postLmsCat",uploadLmsCatImage.single("image"), PostLmsCatController);
 router.get("/getLmsCat", getLmsCatController);
 module.exports = router;

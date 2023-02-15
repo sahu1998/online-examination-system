@@ -58,6 +58,7 @@ export default function IconMenu() {
                       <MenuItem>
                         <ListItemText
                           onClick={() => {
+                            setHed(row.examName)
                             setId(row._id);
                           }}
                         >
@@ -95,7 +96,7 @@ export default function IconMenu() {
               <h5 className="h3">{hed}</h5>
             </div>
           </Grid>
-          <Cards data={getIdData} setHed={setHed} />
+          <Cards data={getIdData}  />
         </Grid>
       </Grid>
     </Container>

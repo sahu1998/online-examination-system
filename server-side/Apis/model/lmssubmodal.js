@@ -1,13 +1,18 @@
 const mongoose = require("mongoose");
 const subjectSchema = mongoose.Schema({
+  
   image: String,
   subjectName: String,
-  totalItem: Number,
+  title:String,
+  
+  description:String,
+  type:String,
   categoryId: mongoose.Schema.Types.ObjectId,
 });
-const subject = mongoose.model("subject", subjectSchema);
+const lmssubject = mongoose.model("lmssubject", subjectSchema);
 const PostLmsSubData = async (obj) => {
   try {
+    console.log("obj==========",obj);
     const data = await subject.create(obj);
     return { data: data, message: "data added succesfully", status: 200 };
   } catch (error) {
@@ -30,7 +35,7 @@ const objectId = mongoose.Types.ObjectId;
 const getLmsSubByCategory = async (id) => {
   console.log("id :================", id);
   try {
-    const data = await subject.aggregate([
+    const data = await lmssubject.aggregate([
       {
         $match: {
           categoryId: objectId(id),
@@ -38,7 +43,7 @@ const getLmsSubByCategory = async (id) => {
       },
       {
         $lookup: {
-          from: "exams",
+          from: "lmscategories",
           localField: "categoryId",
           foreignField: "_id",
           as: "category",
@@ -59,6 +64,7 @@ const getLmsSubByCategory = async (id) => {
     console.log("data =======", data);
     return { data: data, status: 200, message: "success by id" };
   } catch (error) {
+    console.log("error catch====");
     return { message: error.message, status: 400 };
   }
 };
