@@ -24,7 +24,7 @@ export default function Footer() {
   return (
     <>  
     <Container maxWidth="xl" sx={{background:'linear-gradient(176deg, #f5eded, #4998d0)'}}>
-  <div style={{ display:"flex",padding:"6rem"}}>
+  <div class="outer-div" style={{padding:"6rem",display:"flex"}}>
       <div style={{width:"20rem",padding:"1rem"}}>
             <img src="https://cdn0.iconfinder.com/data/icons/education-15/500/examination-512.png"
               height={80}
