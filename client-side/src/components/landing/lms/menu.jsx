@@ -4,7 +4,6 @@ import Paper from "@mui/material/Paper";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
-
 import Grid from "@mui/material/Grid";
 import { Button, Container, TextField, Typography } from "@mui/material";
 import Cards from "./card";
@@ -12,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./lms.css";
 import { getApiHandler } from "../../../apiHandler";
 import { Result } from "antd";
+import SearchLms from "./SearchLms";
 
 export default function IconMenu() {
   const [category, setCategory] = React.useState([]);
@@ -20,7 +20,6 @@ export default function IconMenu() {
   const [id, setId] = React.useState();
   const [hed, setHed] = React.useState();
 
-  
   const getByData = async () => {
     const getApi = await getApiHandler("/getLmsCat");
     console.log("getApi====", getApi.data);
@@ -70,29 +69,20 @@ export default function IconMenu() {
                 })
               ) : (
                 <Grid item xs={12} md={12} sm={12}>
-                 <p>!no data found</p>
+                  <p>!no data found</p>
                 </Grid>
               )}
-              
             </MenuList>
           </Paper>
         </Grid>
 
-        <Grid item container className="grid-container" xs={12} md={10} sm={12}>
-          <Grid item container className="" xs={12} md={10} sm={12}>
-            <TextField
-              type="search"
-              label="Search...."
-              variant="outlined"
-              style={{ height: "45px", width: "90%" }}
-            ></TextField>
-            <Button variant="contained" style={{ height: "45px", width: "8%" }}>
-              <SearchIcon />
-            </Button>
+        <Grid item container xs={12} md={10} sm={12}>
+          <Grid item xs={12} md={12} sm={12}>
+            <SearchLms />
           </Grid>
-          <Grid item container className="" xs={12} md={10} sm={12}>
-            <div className="hading2">
-              <h5 className="h3">{hed}</h5>
+          <Grid item xs={12} md={12} sm={12}>
+            <div className="bg-white p-3 fw-bold rounded border text-black-50">
+              {hed}
             </div>
           </Grid>
           <Cards data={getIdData} setHed={setHed} />

@@ -1,6 +1,5 @@
 const express = require("express");
 const {
-  getController,
   postController,
   getAllExamController,
   postSubjectController,
@@ -12,12 +11,12 @@ const {
   PostLmsCatController,
   getLmsCatController,
   getSubjectByCatgController,
+  postQuesInSubjController,
+  pushQuesInSubjController,
 } = require("../controller/controller");
+const { postQueBankController } = require("../controller/queBankController");
 const { uploadSubjectImage, uploadLmsSubImage } = require("../middleware");
 const router = express.Router();
-
-router.get("/get", getController);
-router.post("/post", postController);
 
 router.post("/postexam", postController);
 router.get("/getexam", getAllExamController);
@@ -28,6 +27,9 @@ router.post(
   uploadSubjectImage.single("image"),
   postSubjectController
 );
+router.post("/postques/:id", postQuesInSubjController);
+router.put("/add-que-in-subj/:id", pushQuesInSubjController);
+
 router.get("/getsubject", getAllSubjectController);
 router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
@@ -43,4 +45,6 @@ router.post(
 router.get("/getLmsSub", getLmsSubController);
 router.post("/postLmsCat", PostLmsCatController);
 router.get("/getLmsCat", getLmsCatController);
+
+router.post("/addsubjectque", postQueBankController);
 module.exports = router;
