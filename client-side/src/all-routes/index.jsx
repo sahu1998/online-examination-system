@@ -7,6 +7,13 @@ import ResetPassword from "../pages/landing/login-signup/resetpass";
 import SignUp from "../pages/landing/login-signup/signup";
 import PracticeExam from "../pages/landing/practice-exams";
 
+import Lms from "../pages/landing/lms";
+
+import AboutUs from "../components/landing/about-us/temp";
+import Pattern from "../components/landing/pattern/temp";
+import Pricing from "../components/landing/pricing/temp";
+import Syllabus from "../components/landing/syllabus/temp";
+
 export default function AllRoutes() {
   return (
     <Routes>
@@ -19,6 +26,13 @@ export default function AllRoutes() {
       <Route path="/forgotPass" element={<ForgotPass />} />
 
       <Route path="/resetPassword/:id/:token" element={<ResetPassword />} />
+
+      <Route path="/lms" element={<Lms />} />
+      {/* //////////.....Home.....////////// */}
+      <Route path="/pattern" element={<Pattern />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/syllabus" element={<Syllabus />} />
+      <Route path="about" element={<AboutUs />} />
     </Routes>
   );
 }

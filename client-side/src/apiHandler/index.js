@@ -1,6 +1,5 @@
 import axios from "axios";
-
-export const serverURL = "http://localhost:8000/api";
+export const serverURL = "http://localhost:8080/oes";
 
 const postApiHandler = async (endPoint, value) => {
   try {
@@ -11,14 +10,16 @@ const postApiHandler = async (endPoint, value) => {
   }
 };
 
-const getApiHandler = async (endPoint) => {
+export const getApiHandler = async (endpoint) => {
   try {
-    const res = await axios.get(serverURL + endPoint);
-    return res.data;
-  } catch (err) {
-    console.log("errors=>", err);
+    const getExamApi = await axios.get(serverURL + endpoint);
+    console.log("getExamApi===", getExamApi.data);
+    return getExamApi.data;
+  } catch (error) {
+    return { message: error.message, status: 400 };
   }
 };
+
 const deleteApiHandler = async (endPoint) => {
   try {
     const res = await axios.delete(serverURL + endPoint);
