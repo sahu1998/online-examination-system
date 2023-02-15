@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes,  } from 'react-router-dom'
+import { Route, Routes, } from 'react-router-dom'
 import Home from '../pages/landing/home'
 import Lms from '../pages/landing/lms'
 import PracticeExam from '../pages/landing/practice-exams'
@@ -12,15 +12,16 @@ import Syllabus from "../components/landing/syllabus/temp";
 export default function AllRoutes() {
   return (
     <Routes>
-        
-        <Route path='/lms' element={<Lms/>}/>
       {/* //////////.....Home.....////////// */}
-      <Route path="/" element={<Home />} />
-      <Route path="/practices" element={<PracticeExam />} />
-      <Route path="/pattern" element={<Pattern />} />
-      <Route path="/pricing" element={<Pricing />} />
-      <Route path="/syllabus" element={<Syllabus />} />
-      <Route path="about" element={<AboutUs />} />
+      <Route path='/' element={<Home />} />
+      <Route path='/practices' element={<PracticeExam />} />
+      <Route path='/lms' element={<Lms />} />
+      <Route path='/pattern' element={<Pattern />} />
+      <Route path='/pricing' element={<Pricing />} />
+      <Route path='/syllabus' element={<Syllabus />} />
+      <Route path='about' element={<AboutUs />} />
+
+      {/* //////////////.......Owner.....///////////// */}
 
     </Routes>
   );
