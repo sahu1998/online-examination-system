@@ -13,7 +13,11 @@ const SubjectCard = ({ subject, url, image }) => {
           className="rounded"
           component="img"
           height="194"
-          image={image ? `${url}/${image}` : quizAlternateImg}
+          image={
+            image
+              ? `${url}/${image}`
+              : "assets/images/landing/quizAlternate.png"
+          }
           alt="Paella dish"
           style={{
             // width: "285px",

@@ -114,9 +114,9 @@ const getSubjectByCategory = async (id) => {
   }
 };
 
-const getRandomSubjects = async (limit = null) => {
+const getRandomSubjects = async () => {
   const response = await subjectModel.aggregate([
-    { $sample: { size: parseInt(limit) || 4 } },
+    { $sample: { size: 4 } },
     {
       $lookup: {
         from: "exams",
