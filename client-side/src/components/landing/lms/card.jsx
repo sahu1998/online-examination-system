@@ -32,9 +32,10 @@ const Cards = ({ data, setHed }) => {
           <Card maxW="sm" className="card1" >
             <CardBody >
               <img
-                src={`${serverURL}/lms-image/${row.image?.split("\\")[2]}`}
+                src={`${serverURL}/lms-sub/${row.image?.split("\\")[2]}`}
                 width={"95%"}
                 className="p-2"
+                style={{height:"200px",objectFit:"fill"}}
               />
               <Stack mt="6" spacing="3"></Stack>
               <Grid item xs={12} className="d-flex" >
