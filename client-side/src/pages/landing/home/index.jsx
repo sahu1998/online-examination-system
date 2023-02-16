@@ -80,13 +80,15 @@ function Home() {
               })}
               <Grid item xs={12} className="text-center py-5">
                 <ChakraProvider>
-                  <Button
-                    colorScheme="blue"
-                    variant="outline"
-                    className="fs-3 p-4"
-                  >
-                    Browse All Categories
-                  </Button>
+                  <NavLink to="/lms">
+                    <Button
+                      colorScheme="blue"
+                      variant="outline"
+                      className="fs-3 p-4"
+                    >
+                      Browse All Categories
+                    </Button>
+                  </NavLink>
                 </ChakraProvider>
               </Grid>
             </Grid>

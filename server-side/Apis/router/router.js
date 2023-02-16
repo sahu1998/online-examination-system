@@ -1,6 +1,5 @@
 const express = require("express");
 const {
-  getController,
   postController,
   getAllExamController,
   postSubjectController,
@@ -12,6 +11,8 @@ const {
   PostLmsCatController,
   getLmsCatController,
   getSubjectByCatgController,
+  postQuesInSubjController,
+  pushQuesInSubjController,
 } = require("../controller/controller");
 const {
   postFeedbackController,
@@ -34,11 +35,12 @@ const {
   putUsersController,
 } = require("../controller/userscontroller");
 const { auth, uploadUserImage, uploadFeedbackImage } = require("../middleware");
-const { uploadSubjectImage, uploadLmsSubImage } = require("../middleware");
+const {
+  uploadSubjectImage,
+  uploadLmsSubImage,
+  uploadLmsCatImage,
+} = require("../middleware");
 const router = express.Router();
-
-router.get("/get", getController);
-router.post("/post", postController);
 
 router.post("/postexam", postController);
 router.get("/getexam", getAllExamController);
@@ -49,6 +51,9 @@ router.post(
   uploadSubjectImage.single("image"),
   postSubjectController
 );
+router.post("/postques/:id", postQuesInSubjController);
+router.put("/add-que-in-subj/:id", pushQuesInSubjController);
+
 router.get("/getsubject", getAllSubjectController);
 router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
@@ -72,13 +77,19 @@ router.put("/put-users/:id", uploadUserImage, putUsersController);
 router.post("/post-feedback", uploadFeedbackImage, postFeedbackController);
 router.get("/get-feedback", getFeedbackController);
 
-router.use("/lms-image", express.static("storage/subject"));
+router.use("/lms-sub", express.static("storage/lmssubject"));
+router.use("/lms-cat", express.static("storage/lmscategory"));
 router.post(
   "/postLmsSub",
   uploadLmsSubImage.single("image"),
   PostLmsSubController
 );
 router.get("/getLmsSub", getLmsSubController);
-router.post("/postLmsCat", PostLmsCatController);
+router.post(
+  "/postLmsCat",
+  uploadLmsCatImage.single("image"),
+  PostLmsCatController
+);
 router.get("/getLmsCat", getLmsCatController);
+
 module.exports = router;
