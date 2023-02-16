@@ -1,6 +1,16 @@
 import axios from "axios";
 export const serverURL = "http://localhost:8080/oes";
-export const getApiHandler = async (endpoint) => {
+
+const postApiHandler = async (endPoint, value) => {
+  try {
+    const res = await axios.post(serverURL + endPoint, value);
+    return res.data;
+  } catch (err) {
+    console.log("errors=>", err);
+  }
+};
+
+const getApiHandler = async (endpoint) => {
   try {
     const getExamApi = await axios.get(serverURL + endpoint);
     console.log("getExamApi===", getExamApi.data);
@@ -9,3 +19,24 @@ export const getApiHandler = async (endpoint) => {
     return { message: error.message, status: 400 };
   }
 };
+
+const deleteApiHandler = async (endPoint) => {
+  try {
+    const res = await axios.delete(serverURL + endPoint);
+
+    return res.data;
+  } catch (err) {
+    console.log("errors=>", err);
+  }
+};
+const putApiHandler = async (endPoint, value) => {
+  try {
+    const res = await axios.put(serverURL + endPoint, value);
+
+    return res.data;
+  } catch (err) {
+    console.log("errors=>", err);
+  }
+};
+
+export { getApiHandler, postApiHandler, deleteApiHandler, putApiHandler };
