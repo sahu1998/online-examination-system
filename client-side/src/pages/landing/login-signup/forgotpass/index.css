@@ -1,0 +1,83 @@
+@media screen and (min-width: 480px) {
+}
+
+@media screen and (max-width: 992px) {
+}
+
+@media screen and (max-width: 600px) {
+}
+
+.submit {
+  background: #4c4c9d;
+  color: white;
+  text-transform: capitalize;
+  font-size: 14px !important;
+  font-weight: 600;
+  width: 5rem !important;
+
+  height: 37px;
+  margin-top: 7rem;
+  margin-left: 26rem;
+}
+.close {
+  text-transform: capitalize;
+  font-size: 17px;
+  font-weight: 500;
+  color: #333;
+  position: absolute;
+  left: 18rem;
+  top: 3rem;
+  margin-top: 4rem;
+  top: 7rem;
+}
+.typ {
+  /* position: absolute;
+  top: 1rem; */
+  font-size: 20px;
+}
+.mail {
+  position: absolute;
+  left: 1rem;
+  font-size: 18px;
+}
+.BOX {
+  border-radius: 10px;
+  width: 35rem;
+  height: 19rem;
+  box-shadow: 4px 6px 34px -6px grey;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 32px auto;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.Typography {
+  font-size: 16px;
+  color: #777777;
+  margin-right: 296px !important;
+}
+.boxx {
+  position: relative;
+  top: 2rem;
+  right: 4rem;
+}
+.form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+  margin: 12px;
+  margin-top: 24px;
+}
+.abc {
+  background: #1976d2 !important;
+  color: white !important;
+}

@@ -26,7 +26,7 @@ export default function PracticeExam() {
   const [loading, setLoading] = useState(false);
 
   const getExamCategory = async () => {
-    const temp = await getApiHandler("/getexam");
+    const temp = await getApiHandler("/get-exam-catg");
     if (temp.status === 200) {
       setExams(temp.response);
       setSelectedIndex(temp.response[0]._id);
