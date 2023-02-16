@@ -100,15 +100,16 @@ function Navbar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <NavLink to={page.path} style={{ textDecoration: "none" }}>
+                {pages.map((tabs) => {
+                  return(
+                  <MenuItem  onClick={handleCloseNavMenu}>
+                    <NavLink to={tabs.path} style={{ textDecoration: "none" }}>
                       <Typography textAlign="center" sx={{ color: "black" }}>
-                        {page.name}
+                        {tabs.name}
                       </Typography>
                     </NavLink>
                   </MenuItem>
-                ))}
+)})}
               </Menu>
             </Box>
 
@@ -138,10 +139,11 @@ function Navbar() {
                 marginLeft: "14rem",
               }}
             >
-              {pages.map((page) => (
-                <NavLink to={page.path} style={{ textDecoration: "none" }}>
+              {pages.map((tab) => {
+                return(
+                <NavLink  to={tab.path} style={{ textDecoration: "none" }}>
                   <Button
-                    key={page}
+                   
                     onClick={handleCloseNavMenu}
                     sx={{
                       my: 2,
@@ -151,10 +153,10 @@ function Navbar() {
                       fontFamily: "inherit",
                     }}
                   >
-                    {page.name}
+                    {tab.name}
                   </Button>
                 </NavLink>
-              ))}
+)})}
             </Box>
             {/* /////////.....Buttons.....///////// */}
 

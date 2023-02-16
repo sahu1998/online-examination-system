@@ -1,5 +1,5 @@
 import axios from "axios";
-export const serverURL = "http://localhost:8080/api";
+export const serverURL = "http://localhost:8080/oes";
 export const getApiHandler = async (endpoint) => {
   try {
     const getExamApi = await axios.get(serverURL + endpoint);
