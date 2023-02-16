@@ -10,7 +10,7 @@ const postApiHandler = async (endPoint, value) => {
   }
 };
 
-export const getApiHandler = async (endpoint) => {
+const getApiHandler = async (endpoint) => {
   try {
     const getExamApi = await axios.get(serverURL + endpoint);
     console.log("getExamApi===", getExamApi.data);

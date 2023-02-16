@@ -33,12 +33,7 @@ const {
   deleteUsersController,
   putUsersController,
 } = require("../controller/userscontroller");
-const {
-  uploadSubjectImage,
-  auth,
-  uploadUserImage,
-  uploadFeedbackImage,
-} = require("../middleware");
+const { auth, uploadUserImage, uploadFeedbackImage } = require("../middleware");
 const { uploadSubjectImage, uploadLmsSubImage } = require("../middleware");
 const router = express.Router();
 
