@@ -84,13 +84,16 @@ export default function Footer() {
               Need Help?
             </Typography>
             <br />
-            {pages.map((page) => (
-              <NavLink to={page.path} style={{ textDecoration: "none" }}>
+            {pages.map((pages) => {
+              return(
+               
+              <NavLink  to={pages.path} style={{ textDecoration: "none" }}>
                 <Typography textAlign="start" sx={{ color: "white" }}>
-                  {page.name}
+                  {pages.name}
                 </Typography>
               </NavLink>
-            ))}
+              
+)})}
           </div>
           <div style={{ padding: "5rem" }}>
             <div style={{ display: "flex" }}>

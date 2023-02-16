@@ -1,19 +1,21 @@
 const express = require("express");
 const {
-  postController,
-  getAllExamController,
-  postSubjectController,
-  getAllSubjectController,
-  getRandomSubjController,
   getAboutController,
   PostLmsSubController,
   getLmsSubController,
   PostLmsCatController,
   getLmsCatController,
-  getSubjectByCatgController,
+} = require("../controller/controller");
+const {
+  postExamCatgController,
+  getExamCatgController,
+  postSubjectController,
   postQuesInSubjController,
   pushQuesInSubjController,
-} = require("../controller/controller");
+  getAllSubjectController,
+  getSubjectByCatgController,
+  getRandomSubjController,
+} = require("../controller/practiceExamController");
 const {
   postFeedbackController,
   getFeedbackController,
@@ -42,8 +44,8 @@ const {
 } = require("../middleware");
 const router = express.Router();
 
-router.post("/postexam", postController);
-router.get("/getexam", getAllExamController);
+router.post("/post-exam-catg", postExamCatgController);
+router.get("/get-exam-catg", getExamCatgController);
 router.get("/about", getAboutController);
 
 router.post(
