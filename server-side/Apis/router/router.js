@@ -14,8 +14,11 @@ const {
   postQuesInSubjController,
   pushQuesInSubjController,
 } = require("../controller/controller");
-const { postQueBankController } = require("../controller/queBankController");
-const { uploadSubjectImage, uploadLmsSubImage } = require("../middleware");
+const {
+  uploadSubjectImage,
+  uploadLmsSubImage,
+  uploadLmsCatImage,
+} = require("../middleware");
 const router = express.Router();
 
 router.post("/postexam", postController);
@@ -51,5 +54,4 @@ router.post(
 );
 router.get("/getLmsCat", getLmsCatController);
 
-router.post("/addsubjectque", postQueBankController);
 module.exports = router;
