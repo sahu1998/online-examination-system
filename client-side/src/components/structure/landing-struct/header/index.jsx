@@ -136,7 +136,7 @@ function Navbar() {
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
-                marginLeft: "14rem",
+                justifyContent: "end",
               }}
             >
               {pages.map((tab) => {
@@ -160,7 +160,7 @@ function Navbar() {
             </Box>
             {/* /////////.....Buttons.....///////// */}
 
-            <Link to="/createaccount" style={{ textDecoration: "none" }}>
+            <Link to="/signUp" style={{ textDecoration: "none" }}>
               <Button
                 sx={{
                   fontSize: "13px",
@@ -175,7 +175,7 @@ function Navbar() {
                 Create Account
               </Button>
             </Link>
-            <Link to="/signin" style={{ textDecoration: "none" }}>
+            <Link to="/logIn" style={{ textDecoration: "none" }}>
               <Button
                 sx={{
                   textDecoration: "none",

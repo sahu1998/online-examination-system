@@ -6,6 +6,7 @@ import SubjectCard from "../../../components/landing/practice-exams/SubjectCard"
 import "./home.m.css";
 import LandingLayout from "../../../layouts/landing-layout";
 import Banner from "../../../components/landing/home/Banner";
+import { NavLink } from "react-router-dom";
 function Home() {
   const [subjects, setSubjects] = useState();
   const getPracticeExams = async () => {
@@ -47,13 +48,15 @@ function Home() {
               })}
               <Grid item xs={12} className="text-center py-5">
                 <ChakraProvider>
-                  <Button
-                    colorScheme="blue"
-                    variant="outline"
-                    className="fs-3 p-4"
-                  >
-                    Browse All Exams
-                  </Button>
+                  <NavLink to="/practices">
+                    <Button
+                      colorScheme="blue"
+                      variant="outline"
+                      className="fs-3 p-4"
+                    >
+                      Browse All Exams
+                    </Button>
+                  </NavLink>
                 </ChakraProvider>
               </Grid>
             </Grid>
@@ -77,13 +80,15 @@ function Home() {
               })}
               <Grid item xs={12} className="text-center py-5">
                 <ChakraProvider>
-                  <Button
-                    colorScheme="blue"
-                    variant="outline"
-                    className="fs-3 p-4"
-                  >
-                    Browse All Categories
-                  </Button>
+                  <NavLink to="/lms">
+                    <Button
+                      colorScheme="blue"
+                      variant="outline"
+                      className="fs-3 p-4"
+                    >
+                      Browse All Categories
+                    </Button>
+                  </NavLink>
                 </ChakraProvider>
               </Grid>
             </Grid>

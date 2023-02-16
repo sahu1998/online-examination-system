@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
 const subjectSchema = mongoose.Schema({
+
   image: String,
   subjectName: String,
-  totalItem: Number,
+  title: String,
+  description: String,
+  type: String,
   categoryId: mongoose.Schema.Types.ObjectId,
 });
-const subject = mongoose.model("subject", subjectSchema);
+const lmssubject = mongoose.model("lmssubject", subjectSchema);
 const PostLmsSubData = async (obj) => {
   try {
-    const data = await subject.create(obj);
+    console.log("obj==========", obj);
+    const data = await lmssubject.create(obj);
     return { data: data, message: "data added succesfully", status: 200 };
   } catch (error) {
     return { message: error.message, status: 400 };
@@ -16,7 +20,7 @@ const PostLmsSubData = async (obj) => {
 };
 const getLmsSubData = async () => {
   try {
-    const data = await subject.find();
+    const data = await lmssubject.find();
     return {
       data: data,
       message: "subject  data get succesfully",
@@ -30,7 +34,7 @@ const objectId = mongoose.Types.ObjectId;
 const getLmsSubByCategory = async (id) => {
   console.log("id :================", id);
   try {
-    const data = await subject.aggregate([
+    const data = await lmssubject.aggregate([
       {
         $match: {
           categoryId: objectId(id),
@@ -38,19 +42,19 @@ const getLmsSubByCategory = async (id) => {
       },
       {
         $lookup: {
-          from: "exams",
+          from: "lmscategories",
           localField: "categoryId",
           foreignField: "_id",
           as: "category",
         },
       },
       // {
-      //   $project :{
-      //     _id:1,
-      //     subjectName:1,
-      //     totalItem:1,
-      //     categoryName:{
-      //       $arrayElemAt:["$category.examName",0],
+      //   $project: {
+      //     _id: 1,
+      //     subjectName: 1,
+      //     image: 1,
+      //     categoryName: {
+      //       $arrayElemAt: ["$category.examName", 0],
       //     },
 
       //   },
@@ -59,6 +63,7 @@ const getLmsSubByCategory = async (id) => {
     console.log("data =======", data);
     return { data: data, status: 200, message: "success by id" };
   } catch (error) {
+    console.log("error catch====");
     return { message: error.message, status: 400 };
   }
 };

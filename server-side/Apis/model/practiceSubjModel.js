@@ -1,12 +1,30 @@
 const mongoose = require("mongoose");
 require("../../dbConnection");
 
+const questionSchema = new mongoose.Schema({
+  question: {
+    type: String,
+    required: true,
+  },
+  options: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  answer: {
+    type: String,
+    required: true,
+  },
+});
+
 const subjectSchema = mongoose.Schema({
   subjectName: String,
   marks: Number,
   timeLimit: Number,
   subjectDesc: String,
   subjectImg: String,
+  subjectQues: [questionSchema],
   categoryId: mongoose.Schema.Types.ObjectId,
 });
 
@@ -23,10 +41,37 @@ const postSubjectData = async (values) => {
   }
 };
 
+const postQuesInSubject = async (subj_id, values) => {
+  try {
+    const response = await subjectModel.findByIdAndUpdate(ObjectId(subj_id), {
+      subjectQues: values,
+    });
+    return { response, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
+const pushQuesInSubj = async (subj_id, values) => {
+  console.log("hello: ", values);
+  try {
+    const response = await subjectModel.findByIdAndUpdate(
+      ObjectId(subj_id),
+      {
+        $push: { subjectQues: values },
+      },
+      { safe: true, upsert: true, new: true }
+    );
+    return { response, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
 const getAllSubjectData = async () => {
   try {
-    const result = await subjectModel.find();
-    return { response: result, status: 200, message: "success" };
+    const response = await subjectModel.find({}, { subjectQues: 0 });
+    return { response, status: 200, message: "success" };
   } catch (error) {
     return { error, status: 400, message: "error" };
   }
@@ -56,6 +101,7 @@ const getSubjectByCategory = async (id) => {
           marks: 1,
           subjectImg: 1,
           timeLimit: 1,
+          // subjectQues: 0,
           categoryName: {
             $arrayElemAt: ["$category.examName", 0],
           },
@@ -102,4 +148,6 @@ module.exports = {
   getAllSubjectData,
   getSubjectByCategory,
   getRandomSubjects,
+  postQuesInSubject,
+  pushQuesInSubj,
 };
