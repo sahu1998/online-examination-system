@@ -40,8 +40,8 @@ const Cards = ({ data, setHed }) => {
               <Grid item xs={12} className="d-flex" >
                 <Grid item xs={6}>
                   <h4>{row.subjectName}</h4>
-                  <p>total-item :{row.totalItem}</p>
-                  <p>{setHed(row.category[0].examName)} </p>
+                  
+                  {/* <p>{setHed(row.category[0].examName)} </p> */}
                 </Grid>
                 <Grid item xs={6}  >
                   <button type="button" className="btn btn-warning btn1 mt-4">
