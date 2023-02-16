@@ -5,6 +5,7 @@ const {
   getLmsSubController,
   PostLmsCatController,
   getLmsCatController,
+  getRandomLmsSubController,
 } = require("../controller/controller");
 const {
   postExamCatgController,
@@ -93,5 +94,6 @@ router.post(
   PostLmsCatController
 );
 router.get("/getLmsCat", getLmsCatController);
+router.get("/getRandomLmsSub", getRandomLmsSubController)
 
 module.exports = router;
