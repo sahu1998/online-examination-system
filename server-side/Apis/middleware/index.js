@@ -71,12 +71,6 @@ const uploadFeedback = multer({
 });
 const uploadFeedbackImage = uploadFeedback.single("image");
 
-module.exports = {
-  uploadSubjectImage,
-  auth,
-  uploadUserImage,
-  uploadFeedbackImage,
-};
 const subjectLmsStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log("mahi ===============");
@@ -105,4 +99,12 @@ const uploadLmsCatImage = multer({
   storage: categoryLmsStorage,
   limits: { fileSize: 1000000 },
 });
-module.exports = { uploadSubjectImage, uploadLmsSubImage, uploadLmsCatImage };
+
+module.exports = {
+  uploadSubjectImage,
+  uploadLmsSubImage,
+  uploadLmsCatImage,
+  auth,
+  uploadUserImage,
+  uploadFeedbackImage,
+};
