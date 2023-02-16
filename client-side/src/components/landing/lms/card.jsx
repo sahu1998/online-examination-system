@@ -1,11 +1,8 @@
 import React from "react";
 import {
   Card,
-
   CardBody,
-
   Divider,
-
   Stack,
   ButtonGroup,
   Heading,
@@ -56,17 +53,8 @@ const Cards = ({ data, setHed }) => {
           </Card>
 
         </Grid>
-
-      );
-    })) : (<Grid item xs={12} md={12} sm={12}>
-      <Result
-        status="404"
-        title="404"
-        subTitle="Sorry, No Data Found..."
-      />
-    </Grid>)}
-
-
-  </>);
+      )}
+    </>
+  );
 };
 export default Cards;

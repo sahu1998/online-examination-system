@@ -1,0 +1,99 @@
+.button {
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 600;
+  background: #44a1ef;
+  width: 11rem;
+  border: 1px solid #44a1ef;
+  color: white;
+  border-radius: 3px;
+  height: 37px;
+}
+.button:hover {
+  background-color: white;
+  color: #44a1ef;
+}
+.login {
+  font-weight: 600;
+  color: #44a1ef;
+  position: relative;
+  top: 1rem !important;
+}
+.mainbox {
+  width: 40%;
+  height: 60%;
+  background: #d9edf7;
+  position: relative;
+  left: 4rem;
+  top: 6rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 0rem;
+}
+.signup {
+  cursor: pointe;
+  color: #666666;
+  font-weight: 600;
+  font-size: 14px;
+  position: relative;
+  top: 3rem;
+  left: 22px;
+}
+.forgot-password {
+  color: #666666;
+  font-weight: 600;
+  position: relative;
+
+  top: 3rem;
+  font-size: 14px;
+}
+
+.typo {
+  font-size: 15px;
+
+  position: relative !important;
+  top: 1rem !important;
+
+  text-align: start;
+  color: #777777 !important;
+}
+
+.text {
+  /* border: 1px solid #d5d5d5 !important; */
+  width: 17rem !important;
+}
+.loginn {
+  position: relative;
+  top: 5rem;
+}
+.LOGIN {
+  position: relative;
+  left: 8rem;
+  top: 2rem;
+  font-weight: 600;
+  font-size: 24px;
+}
+.BUTTON {
+  width: 8rem;
+  text-transform: capitalize;
+  font-size: 17px;
+  font-weight: 600 !important;
+  background: #44a1ef;
+}
+.Box {
+  position: relative;
+  right: 11rem;
+
+  box-shadow: 4px 6px 34px -6px grey;
+  width: 48rem;
+  height: 32rem;
+  margin: 32px 0;
+  display: flex;
+}
