@@ -1,8 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./all-routes";
 import "./App.css";
-import Category from "./components/owner/lms/categories/temp";
-import Content from "./components/owner/lms/contents/temp";
+import LmsContent from "./components/owner/lms/contents/temp";
+import BasicSelect from "./components/owner/lms/series/temp";
 
 function App() {
 
@@ -13,8 +13,8 @@ function App() {
       <BrowserRouter>
         <AllRoutes />
       </BrowserRouter>
-      {/* <Category /> */}
-      {/* <Content /> */}
+      {/* <LmsContent/>
+      <BasicSelect/> */}
     </div>
   );
 }

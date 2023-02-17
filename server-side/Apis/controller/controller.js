@@ -21,7 +21,7 @@ const getAboutController = (req, res) => {
 
 const PostLmsSubController = async (req, res) => {
   // const temp=req.body;
-  const files = req.file.path;
+  const files = req?.file?.path;
   const temp = { ...req.body, image: files };
   console.log("temp======", temp);
   const data = await PostLmsSubData(temp);
@@ -29,13 +29,13 @@ const PostLmsSubController = async (req, res) => {
   res.send(data);
 };
 const PostLmsCatController = async (req, res) => {
-  const files = req.file.path;
+  const files = req?.file?.path;
   const temp = { ...req.body, image: files };
   const data = await PostLmsCatData(temp);
   res.send(data);
 };
 const getLmsSubController = async (req, res) => {
-  const id = req.query.id;
+const id=req.query.id;
   const data = id ? await getLmsSubByCategory(id) : await getLmsSubData();
   res.send(data);
 };

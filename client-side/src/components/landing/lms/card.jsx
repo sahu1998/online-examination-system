@@ -16,12 +16,9 @@ const Cards = ({ data, setHed }) => {
   console.log("data===============", data);
   // console.log(`${serverUrl}/lms-image/${data[0].image?.split("\\")[2]}`)
 
+  return (
 
-
-
-
-  return (<>
-    {data.length ? (data.map((row, index) => {
+    data.map((row, index) => {
       return (
 
         <Grid item xs={12} md={4} sm={4} className="shadow-sm" key={index}>
@@ -54,7 +51,8 @@ const Cards = ({ data, setHed }) => {
 
         </Grid>
       )}
-    </>
-  );
-};
+  
+  )
+
+  )}
 export default Cards;
