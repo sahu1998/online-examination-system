@@ -5,6 +5,7 @@ const {
   getLmsSubController,
   PostLmsCatController,
   getLmsCatController,
+  getRandomLmsSubController,
 } = require("../controller/controller");
 const {
   postExamCatgController,
@@ -64,7 +65,7 @@ router.get("/get-login/:token", auth, getloginController);
 
 router.post("/post-signup", postsignupController);
 router.post("/post-login", postloginController);
-router.post("/verify", auth);
+// router.post("/verify", auth);
 router.post("/verificationEmail", verificationEmail);
 router.post("/resetPassword/:id/:token", updatePassword);
 
@@ -93,5 +94,6 @@ router.post(
   PostLmsCatController
 );
 router.get("/getLmsCat", getLmsCatController);
+router.get("/getRandomLmsSub", getRandomLmsSubController)
 
 module.exports = router;

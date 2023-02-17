@@ -4,6 +4,7 @@ const {
   PostLmsSubData,
   getLmsSubByCategory,
   getLmsSubData,
+  getRandomLmsSubData,
 } = require("../model/lmssubmodal");
 
 //////////////////////////////////////////
@@ -43,6 +44,10 @@ const getLmsCatController = async (req, res) => {
   const data = await getLmsCatData();
   res.send(data);
 };
+const getRandomLmsSubController = async (req, res) => {
+  const data = await getRandomLmsSubData();
+  res.send(data);
+}
 
 module.exports = {
   PostLmsSubController,
@@ -50,4 +55,5 @@ module.exports = {
   getLmsSubController,
   getLmsCatController,
   getAboutController,
+  getRandomLmsSubController
 };

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const subjectSchema = mongoose.Schema({
-
   image: String,
   subjectName: String,
   title: String,
@@ -48,17 +47,16 @@ const getLmsSubByCategory = async (id) => {
           as: "category",
         },
       },
-      // {
-      //   $project: {
-      //     _id: 1,
-      //     subjectName: 1,
-      //     image: 1,
-      //     categoryName: {
-      //       $arrayElemAt: ["$category.examName", 0],
-      //     },
-
-      //   },
-      // },
+      {
+        $project: {
+          _id: 1,
+          subjectName: 1,
+          image: 1,
+          categoryName: {
+            $arrayElemAt: ["$category.examName", 0],
+          },
+        },
+      },
     ]);
     console.log("data =======", data);
     return { data: data, status: 200, message: "success by id" };
@@ -67,8 +65,35 @@ const getLmsSubByCategory = async (id) => {
     return { message: error.message, status: 400 };
   }
 };
+
+const getRandomLmsSubData = async (limit = null) => {
+  const data = await lmssubject.aggregate([
+    { $sample: { size: parseInt(limit) || 4 } },
+
+    {
+      $lookup: {
+        from: "lmscategories",
+        localField: "categoryId",
+        foreignField: "_id",
+        as: "category",
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        subjectName: 1,
+        image: 1,
+        categoryName: {
+          $arrayElemAt: ["$category.examName", 0],
+        },
+      },
+    },
+  ]);
+  return { data, status: 200, message: "success" };
+};
 module.exports = {
   PostLmsSubData,
   getLmsSubByCategory,
   getLmsSubData,
+  getRandomLmsSubData,
 };
