@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const subjectSchema = mongoose.Schema({
-
   image: String,
   subjectName: String,
   title: String,
@@ -56,7 +55,6 @@ const getLmsSubByCategory = async (id) => {
           categoryName: {
             $arrayElemAt: ["$category.examName", 0],
           },
-
         },
       },
     ]);
@@ -78,7 +76,7 @@ const getRandomLmsSubData = async (limit = null) => {
         localField: "categoryId",
         foreignField: "_id",
         as: "category",
-      }
+      },
     },
     {
       $project: {
@@ -88,11 +86,8 @@ const getRandomLmsSubData = async (limit = null) => {
         categoryName: {
           $arrayElemAt: ["$category.examName", 0],
         },
-
       },
     },
-
-
   ]);
   return { data, status: 200, message: "success" };
 };
@@ -100,5 +95,5 @@ module.exports = {
   PostLmsSubData,
   getLmsSubByCategory,
   getLmsSubData,
-  getRandomLmsSubData
+  getRandomLmsSubData,
 };

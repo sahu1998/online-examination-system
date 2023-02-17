@@ -35,6 +35,7 @@ const schema = yup
 
 export default function LogIn() {
   const [message, setMessage] = React.useState();
+  const [role, setRole] = React.useState("");
 
   const {
     register,
@@ -52,10 +53,17 @@ export default function LogIn() {
   const onSubmit = async (value) => {
     console.log("Value", value);
     const response = await postApiHandler("/post-login", value);
-    console.log("resss=======>", response);
+    console.log("resss=======>", response.temp);
     if (response.status === 200) {
-      localStorage.setItem("token", response.temp.token);
-      history("/demo");
+      localStorage.setItem("token", response.token);
+      if (response.temp.role === "owner" && role === "owner") {
+        console.log(role, response.temp.role);
+        history("/owner");
+      } else if (response.temp.role === "admin" && role === "admin") {
+        history("/admin");
+      } else if (response.temp.role === "student" && role === "student") {
+        history("/student");
+      }
     } else {
       setMessage(response.message);
     }
@@ -169,12 +177,33 @@ export default function LogIn() {
             </Box>
             <Box class="mainbox">
               <Typography variant="h6" className="login ">
-                Login Us
+                Login As
               </Typography>
               <Box class="box">
-                <Button class="button">Owner</Button>
-                <Button class="button">Admin</Button>
-                <Button class="button">Student</Button>
+                <Button
+                  class="button"
+                  onClick={() => {
+                    setRole("owner");
+                  }}
+                >
+                  Owner
+                </Button>
+                <Button
+                  class="button"
+                  onClick={() => {
+                    setRole("admin");
+                  }}
+                >
+                  Admin
+                </Button>
+                <Button
+                  class="button"
+                  onClick={() => {
+                    setRole("student");
+                  }}
+                >
+                  Student
+                </Button>
                 <Button class="button">parent</Button>
                 <Button class="button">Documentation</Button>
               </Box>
