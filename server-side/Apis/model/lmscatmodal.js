@@ -21,7 +21,19 @@ const PostLmsCatData = async (obj) => {
     return { message: error.message, status: 400 };
   }
 };
+
+const deleteLmsCatData = async (id) => {
+  try {
+    const data = await exam.findByIdAndDelete(id);
+    return { data: data, message: "exam data deleted category", status: 200 };
+  } catch (error) {
+    return { message: error.message, status: 400 };
+
+  }
+}
+
 module.exports = {
   PostLmsCatData,
   getLmsCatData,
+  deleteLmsCatData
 };

@@ -6,6 +6,7 @@ const {
   PostLmsCatController,
   getLmsCatController,
   getRandomLmsSubController,
+  deleteLmsCatController,
 } = require("../controller/controller");
 const {
   postExamCatgController,
@@ -95,5 +96,6 @@ router.post(
 );
 router.get("/getLmsCat", getLmsCatController);
 router.get("/getRandomLmsSub", getRandomLmsSubController)
+router.delete("/deleteLmsCat/:id", deleteLmsCatController)
 
 module.exports = router;

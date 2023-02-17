@@ -28,9 +28,10 @@ const postsignupController = async (req, res) => {
     } else {
       return res.send({ message: "password not match", status: 400 });
     }
-  } catch (err) {}
-  return res.send({ message: "failed", status: 400 });
-};
+  } catch (err) {
+    return res.send({ message: "failed", status: 400 });
+  };
+}
 
 const postloginController = async (req, res) => {
   try {

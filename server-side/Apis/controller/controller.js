@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { PostLmsCatData, getLmsCatData } = require("../model/lmscatmodal");
+const { PostLmsCatData, getLmsCatData, deleteLmsCatData } = require("../model/lmscatmodal");
 const {
   PostLmsSubData,
   getLmsSubByCategory,
@@ -49,11 +49,16 @@ const getRandomLmsSubController = async (req, res) => {
   res.send(data);
 }
 
+const deleteLmsCatController = async (req, res) => {
+  const data = await deleteLmsCatData(req.params.id);
+  res.send(data);
+}
 module.exports = {
   PostLmsSubController,
   PostLmsCatController,
   getLmsSubController,
   getLmsCatController,
   getAboutController,
-  getRandomLmsSubController
+  getRandomLmsSubController,
+  deleteLmsCatController
 };

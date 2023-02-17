@@ -1,8 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./all-routes";
 import "./App.css";
-import Category from "./components/owner/lms/categories/temp";
-import Content from "./components/owner/lms/contents/temp";
+import LmsCategory from "./components/owner/lms/categories/temp";
+
 
 function App() {
 
@@ -10,10 +10,10 @@ function App() {
   return (
     <div>
 
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter>
-      {/* <Category /> */}
+      </BrowserRouter> */}
+      <LmsCategory />
       {/* <Content /> */}
     </div>
   );
