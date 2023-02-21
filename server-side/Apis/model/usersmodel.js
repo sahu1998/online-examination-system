@@ -9,5 +9,5 @@ const users = mongoose.Schema({
   role: String,
   status: Boolean,
 });
-const userSchema = mongoose.model("Users", users);
+const userSchema = mongoose.model("users", users);
 module.exports = userSchema;

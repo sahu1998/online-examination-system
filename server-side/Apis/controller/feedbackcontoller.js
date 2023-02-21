@@ -4,10 +4,8 @@ const date = require("date-and-time");
 
 const postFeedbackController = async (req, res) => {
   try {
-    const { title, desc, subject, name } = req.body;
+    const { title, desc, subject, userId } = req.body;
     console.log("REQ.BODY", req.body);
-    const image = req.file.path;
-    console.log("FILE", image);
 
     const now = new Date();
     const value = date.format(now, "YYYY/MM/DD HH:mm:ss");
@@ -17,8 +15,7 @@ const postFeedbackController = async (req, res) => {
       desc,
       subject,
       postedOn: value,
-      name,
-      image,
+      userId,
     };
     const data = await feedbackModel.create(temp);
 
@@ -37,7 +34,44 @@ const getFeedbackController = async (req, res) => {
   }
 };
 
+const getByIdFeedbackController = async (req, res) => {
+  try {
+    const data = await feedbackModel.aggregate([
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "comments",
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: {
+            $mergeObjects: [{ $arrayElemAt: ["$comments", 0] }, "$$ROOT"],
+          },
+        },
+      },
+      {
+        $project: {
+          title: 1,
+          image: 1,
+          name: 1,
+          subject: 1,
+          desc: 1,
+          postedOn: 1,
+          status: 1,
+        },
+      },
+    ]);
+    res.send({ data, message: "success", status: 200 });
+  } catch (err) {
+    res.send({ message: "faild", status: 400 });
+  }
+};
+
 module.exports = {
   postFeedbackController,
   getFeedbackController,
+  getByIdFeedbackController,
 };

@@ -20,6 +20,7 @@ const {
 const {
   postFeedbackController,
   getFeedbackController,
+  getByIdFeedbackController,
 } = require("../controller/feedbackcontoller");
 const {
   getloginController,
@@ -81,6 +82,7 @@ router.put("/put-users/:id", uploadUserImage, putUsersController);
 router.post("/post-feedback", uploadFeedbackImage, postFeedbackController);
 router.get("/get-feedback", getFeedbackController);
 router.get("/getByUserId/:id", getByIdUserController);
+router.get("/get-feedbackaggregate", getByIdFeedbackController);
 
 router.use("/lms-sub", express.static("storage/lmssubject"));
 router.use("/lms-cat", express.static("storage/lmscategory"));
