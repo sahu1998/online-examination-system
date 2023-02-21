@@ -1,8 +1,10 @@
-import React from "react";
-import SideNav from "../../components/structure/admin-struct/sidenav";
+import React from 'react';
+import AdminSideBar from '../../components/structure/admin-struct/sidenav';
 
-function MainLayout({ children }) {
-  return <SideNav>{children}</SideNav>;
+export default function AdminLayout({children}) {
+  return (
+    <>
+    <AdminSideBar>{children}</AdminSideBar>
+    </>
+  )
 }
-
-export default MainLayout;

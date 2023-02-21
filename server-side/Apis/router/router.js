@@ -19,6 +19,8 @@ const {
   getAllSubjectController,
   getSubjectByCatgController,
   getRandomSubjController,
+  getPracticeQuesController,
+  deleteExamCatgController,
 } = require("../controller/practiceExamController");
 const {
   postFeedbackController,
@@ -39,6 +41,8 @@ const {
   getUsersController,
   deleteUsersController,
   putUsersController,
+
+  getByIdUserController,
 } = require("../controller/userscontroller");
 const { auth, uploadUserImage, uploadFeedbackImage } = require("../middleware");
 const {
@@ -50,6 +54,7 @@ const router = express.Router();
 
 router.post("/post-exam-catg", postExamCatgController);
 router.get("/get-exam-catg", getExamCatgController);
+router.delete("/del-practice-catg/:id", deleteExamCatgController);
 router.get("/about", getAboutController);
 
 router.post(
@@ -59,7 +64,7 @@ router.post(
 );
 router.post("/postques/:id", postQuesInSubjController);
 router.put("/add-que-in-subj/:id", pushQuesInSubjController);
-
+router.get("/get-practice-ques/:id", getPracticeQuesController);
 router.get("/getsubject", getAllSubjectController);
 router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
@@ -73,7 +78,6 @@ router.post("/verificationEmail", verificationEmail);
 router.post("/resetPassword/:id/:token", updatePassword);
 
 router.use("/subject", express.static("storage/subjects"));
-router.use("/users", express.static("storage/userImages"));
 router.use("/feedback", express.static("storage/feedbackImages"));
 
 router.post("/post-users", uploadUserImage, postUsersController);
@@ -82,9 +86,12 @@ router.delete("/delete-users/:id", deleteUsersController);
 router.put("/put-users/:id", uploadUserImage, putUsersController);
 router.post("/post-feedback", uploadFeedbackImage, postFeedbackController);
 router.get("/get-feedback", getFeedbackController);
+router.get("/getByUserId/:id", getByIdUserController);
 
 router.use("/lms-sub", express.static("storage/lmssubject"));
 router.use("/lms-cat", express.static("storage/lmscategory"));
+router.use("/storage/userImages", express.static("storage/userImages"));
+
 router.post(
   "/postLmsSub",
   uploadLmsSubImage.single("image"),

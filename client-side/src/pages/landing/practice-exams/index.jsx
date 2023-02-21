@@ -28,10 +28,10 @@ export default function PracticeExam() {
   const getExamCategory = async () => {
     const temp = await getApiHandler("/get-exam-catg");
     if (temp.status === 200) {
-      setExams(temp.response);
-      setSelectedIndex(temp.response[0]._id);
-      setSelectedExam(temp.response[0].examName);
-      await getSubjectByCategory(temp.response[0]._id);
+      setExams(temp.data);
+      setSelectedIndex(temp.data[0]._id);
+      setSelectedExam(temp.data[0].examName);
+      await getSubjectByCategory(temp.data[0]._id);
     }
   };
 
@@ -88,8 +88,10 @@ export default function PracticeExam() {
                       >
                         <SubjectCard
                           subject={sub}
-                          url={`${serverURL}/subject`}
-                          image={sub.subjectImg?.split("\\")[2]}
+                          img={`${serverURL}/subject/${
+                            sub.subjectImg?.split("\\")[2]
+                          }`}
+                          // image={sub.subjectImg?.split("\\")[2]}
                         />
                       </Grid>
                     );

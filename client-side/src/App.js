@@ -5,8 +5,6 @@ import LmsCategory from "./components/owner/lms/categories/temp";
 
 
 function App() {
-
-
   return (
     <div>
 

@@ -13,9 +13,11 @@ import AboutUs from "../components/landing/about-us/temp";
 import Pattern from "../components/landing/pattern/temp";
 import Pricing from "../components/landing/pricing/temp";
 import Syllabus from "../components/landing/syllabus/temp";
+import Quiz from "../pages/student/exams/quiz";
 import AdminDashboard from "../pages/admin/dashboard";
-import OwnerDashboard from "../pages/owner/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
+import OwnerDasboad from "../pages/owner/dashboard";
+import CategoryTable from "../pages/owner/exams/categories";
 
 export default function AllRoutes() {
   return (
@@ -36,9 +38,12 @@ export default function AllRoutes() {
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/syllabus" element={<Syllabus />} />
       <Route path="about" element={<AboutUs />} />
-      <Route path="/owner" element={<OwnerDashboard />} />
+      <Route path="/quiz/:id" element={<Quiz />} />
+      <Route path="/owner" element={<OwnerDasboad />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/student" element={<StudentDashboard />} />
+
+      <Route path="/practice-exam-catg" element={<CategoryTable />} />
     </Routes>
   );
 }
