@@ -88,8 +88,10 @@ export default function PracticeExam() {
                       >
                         <SubjectCard
                           subject={sub}
-                          url={`${serverURL}/subject`}
-                          image={sub.subjectImg?.split("\\")[2]}
+                          img={`${serverURL}/subject/${
+                            sub.subjectImg?.split("\\")[2]
+                          }`}
+                          // image={sub.subjectImg?.split("\\")[2]}
                         />
                       </Grid>
                     );

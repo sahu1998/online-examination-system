@@ -13,7 +13,7 @@ const questionSchema = new mongoose.Schema({
     },
   ],
   answer: {
-    type: String,
+    type: Number,
     required: true,
   },
 });
@@ -142,6 +142,15 @@ const getRandomSubjects = async () => {
   return { response, status: 200, message: "success" };
 };
 
+const getPracticeQues = async (id) => {
+  try {
+    const response = await subjectModel.findById(id, { subjectQues: 1 });
+    return { response, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
 module.exports = {
   // postModel,
   postSubjectData,
@@ -150,4 +159,5 @@ module.exports = {
   getRandomSubjects,
   postQuesInSubject,
   pushQuesInSubj,
+  getPracticeQues,
 };

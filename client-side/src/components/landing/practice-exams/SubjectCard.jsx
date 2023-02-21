@@ -4,19 +4,19 @@ import { ChakraProvider } from "@chakra-ui/react";
 import CardMedia from "@mui/material/CardMedia";
 import { Card, CardBody, CardFooter, Stack, Button } from "@chakra-ui/react";
 import quizAlternateImg from "../../../assets/images/landing/quizAlternate.png";
+import { NavLink } from "react-router-dom";
 
-const SubjectCard = ({ subject, url, image }) => {
+const SubjectCard = ({ subject, img }) => {
+  console.log("subject id: ", subject._id);
   return (
     <Card className="rounded shadow p-2 bg-white">
       <CardBody>
         <CardMedia
           className="rounded"
           component="img"
-          height="194"
+          // height="194"
           image={
-            image
-              ? `${url}/${image}`
-              : "assets/images/landing/quizAlternate.png"
+            subject.subjectImg ? img : "assets/images/landing/quizAlternate.png"
           }
           alt="Paella dish"
           style={{
@@ -39,7 +39,9 @@ const SubjectCard = ({ subject, url, image }) => {
           </div>
           <div className="flex-shrink-0">
             <ChakraProvider>
-              <Button colorScheme="blue">Start Exam</Button>
+              <NavLink to={`/quiz/${subject._id}`}>
+                <Button colorScheme="blue">Start Exam</Button>
+              </NavLink>
             </ChakraProvider>
           </div>
         </div>

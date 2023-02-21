@@ -13,6 +13,7 @@ import AboutUs from "../components/landing/about-us/temp";
 import Pattern from "../components/landing/pattern/temp";
 import Pricing from "../components/landing/pricing/temp";
 import Syllabus from "../components/landing/syllabus/temp";
+import Quiz from "../pages/student/exams/quiz";
 
 export default function AllRoutes() {
   return (
@@ -33,6 +34,7 @@ export default function AllRoutes() {
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/syllabus" element={<Syllabus />} />
       <Route path="about" element={<AboutUs />} />
+      <Route path="/quiz/:id" element={<Quiz />} />
     </Routes>
   );
 }

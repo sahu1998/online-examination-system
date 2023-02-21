@@ -7,16 +7,25 @@ import "./home.m.css";
 import LandingLayout from "../../../layouts/landing-layout";
 import Banner from "../../../components/landing/home/Banner";
 import { NavLink } from "react-router-dom";
+import Cards from "../../../components/landing/lms/card";
 function Home() {
   const [subjects, setSubjects] = useState();
+  const [lmsSubjects, setLmsSubjects] = useState([]);
   const getPracticeExams = async () => {
     const temp = await getApiHandler("/get-random-subjects");
-    console.log("qwerty: ", temp);
+    console.log("practice exam random: ", temp);
     setSubjects(temp.response);
+  };
+
+  const getLmsData = async () => {
+    const temp = await getApiHandler("/getRandomLmsSub");
+    console.log("lms random: ", temp.data);
+    setLmsSubjects(temp.data);
   };
 
   useEffect(() => {
     getPracticeExams();
+    getLmsData();
   }, []);
   return (
     <>
@@ -40,8 +49,9 @@ function Home() {
                   >
                     <SubjectCard
                       subject={sub}
-                      url={`${serverURL}/subject`}
-                      image={sub.subjectImg?.split("\\")[2]}
+                      img={`${serverURL}/subject/${
+                        sub.subjectImg?.split("\\")[2]
+                      }`}
                     />
                   </Grid>
                 );
@@ -67,17 +77,7 @@ function Home() {
               <Grid item xs={12} className="py-5 fw-bold fs-1 text-center ">
                 LMS
               </Grid>
-              {subjects?.map((sub, index) => {
-                return (
-                  <Grid key={`catg-${index}`} item xs={12} md={3} sm={6}>
-                    <SubjectCard
-                      subject={sub}
-                      url={`${serverURL}/subject`}
-                      image={sub.subjectImg?.split("\\")[2]}
-                    />
-                  </Grid>
-                );
-              })}
+              <Cards data={lmsSubjects} />
               <Grid item xs={12} className="text-center py-5">
                 <ChakraProvider>
                   <NavLink to="/lms">
