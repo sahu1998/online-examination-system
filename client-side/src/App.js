@@ -8,12 +8,11 @@ import UsersTable from "./components/owner/users/temp";
 function App() {
   return (
     <div>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter> */}
-      {/* <Category /> */}
-      {/* <Content /> */}
-      <UsersTable />
+      </BrowserRouter>
+      
+      
     </div>
   );
 }
