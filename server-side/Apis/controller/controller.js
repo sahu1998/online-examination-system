@@ -5,7 +5,11 @@ const {
   getLmsSubByCategory,
   getLmsSubData,
   getRandomLmsSubData,
+  deleteLmsSubData,
+  putLmsSubData,
+  getByIdLmsSubData,
 } = require("../model/lmssubmodal");
+const { postLmsViewData, getLmsViewData, getLmsByIdViewData } = require("../model/lmsviewmodal");
 
 //////////////////////////////////////////
 const getAboutController = (req, res) => {
@@ -36,10 +40,19 @@ const PostLmsCatController = async (req, res) => {
   res.send(data);
 };
 const getLmsSubController = async (req, res) => {
-const id=req.query.id;
-  const data = id ? await getLmsSubByCategory(id) : await getLmsSubData();
+  const id=req.query.id;
+  const data = id? await getLmsSubByCategory(id):await getLmsSubData();
+  console.log("get lms sub data",data);
   res.send(data);
 };
+ const getByIdLmsSubController1=async(req,res)=>{
+  const id=req.params.id;
+  const data= await getByIdLmsSubData(id);
+  console.log("id",id);
+  console.log("data by id=====",data);
+
+  res.send(data);
+ }
 const getLmsCatController = async (req, res) => {
   const data = await getLmsCatData();
   res.send(data);
@@ -48,12 +61,37 @@ const getRandomLmsSubController = async (req, res) => {
   const data = await getRandomLmsSubData();
   res.send(data);
 }
-
+const deleteLmsSubController=async(req,res)=>{
+  
+  const data=await deleteLmsSubData(req.params.id);
+  res.send(data);
+}
+const putLmsSubController = async (req, res) => {
+  const files = req?.file?.path;
+  const temp = { ...req.body, image: files };
+  const data = await putLmsSubData(req.params.id,temp);
+  res.send(data);
+};
+const PostLmsViewController=async(req,res)=>{
+  const data=await postLmsViewData(req.body);
+  res.send(data)
+}
+const getLmsViewController=async(req,res)=>{
+  const id=req.query.id;
+  const data = id? await getLmsByIdViewData(id):await getLmsViewData();
+  console.log("get lms sub data",data);
+  res.send(data);
+}
 module.exports = {
+  getLmsViewController,
+  putLmsSubController,
   PostLmsSubController,
   PostLmsCatController,
   getLmsSubController,
   getLmsCatController,
   getAboutController,
-  getRandomLmsSubController
+  getRandomLmsSubController,
+  deleteLmsSubController,
+  getByIdLmsSubController1,
+  PostLmsViewController
 };

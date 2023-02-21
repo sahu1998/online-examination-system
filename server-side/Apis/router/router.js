@@ -6,6 +6,12 @@ const {
   PostLmsCatController,
   getLmsCatController,
   getRandomLmsSubController,
+  deleteLmsSubController,
+  putLmsSubController,
+  getByIdLmsSubController,
+  getByIdLmsSubController1,
+  PostLmsViewController,
+  getLmsViewController,
 } = require("../controller/controller");
 const {
   postExamCatgController,
@@ -88,6 +94,7 @@ router.post(
   PostLmsSubController
 );
 router.get("/getLmsSub", getLmsSubController);
+ router.get("/getLmsSub/:id", getByIdLmsSubController1);
 router.post(
   "/postLmsCat",
   uploadLmsCatImage.single("image"),
@@ -95,5 +102,9 @@ router.post(
 );
 router.get("/getLmsCat", getLmsCatController);
 router.get("/getRandomLmsSub", getRandomLmsSubController)
-
+router.delete("/deleteLmsSub/:id",deleteLmsSubController)
+router.put("/putLmsSub/:id", uploadLmsSubImage.single("image"),putLmsSubController);
+router.post("/postLmsView",PostLmsViewController);
+router.get("/getLmsView", getLmsViewController);
+// uploadLmsViewFile.single("view"),
 module.exports = router;

@@ -1,23 +1,28 @@
 import { Modal, Input, Table, Button, Text, Dropdown } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import {
+  deleteApiHandler,
   getApiHandler,
   postApiHandler,
+  putApiHandler,
   serverURL,
 } from "../../../../apiHandler";
+import { Divider } from "@mui/material";
 
 export default function LmsContent() {
-  const { register, handleSubmit, reset, setValue,watch } = useForm();
+  const { register, handleSubmit, reset, setValue, watch } = useForm();
   const [selected, setSelected] = useState();
   const [content, setContent] = useState([]);
-  const [category,setCategory]=useState([]);
-  const [id,setId]=useState();
+  const [category, setCategory] = useState([]);
+  const [did, setDid] = useState();
+  const [id, setId] = useState();
+  console.log("id--0000",id);
   const file = watch("image");
   const getData = async () => {
     const temp = await getApiHandler("/getLmsSub");
@@ -27,7 +32,7 @@ export default function LmsContent() {
     console.log("categorydata", temp1.data);
 
     setContent(temp.data);
-    setCategory(temp1.data)
+    setCategory(temp1.data);
   };
   useEffect(() => {
     getData();
@@ -39,25 +44,57 @@ export default function LmsContent() {
   };
   const onSubmit = async (values) => {
     console.log("values=>", file[0]);
-    const {title,subjectName,type,categoryId}=values;
+    const { title, subjectName, type, categoryId } = values;
     const formData = new FormData();
     formData.append("title", title);
     formData.append("image", file[0]);
     formData.append("subjectName", subjectName);
-    formData.append("type",type);
-    formData.append("categoryId",id);
+    formData.append("type", type);
+    formData.append("categoryId", id);
+console.log(" post id==",id);
+    const data1 = did
+      ? await putApiHandler(`/putLmsSub/${did}`, formData)
+      : await postApiHandler("/postLmsSub", formData)
 
-
-    const data1 = await postApiHandler("/postLmsSub", formData);
-    console.log("data=>", data1);
+    console.log("data1=>", data1);
     reset();
   };
-  const data = [
-    { key: "new", name: "New File" },
-    { key: "copy", name: "Copy Link" },
-    { key: "edit", name: "Edit File" },
-    { key: "delete", name: "Delete File" },
-  ];
+
+  const deleteData = async (delete1) => {
+    console.log("did====", Divider);
+    const deleteId = await deleteApiHandler(`/deleteLmsSub/${delete1}`);
+    console.log("deleteId=====================", deleteId);
+  };
+  // const selectedValue = React.useMemo(
+  //   () => Array.from(selected).join(", ").replaceAll("_", " "),
+  //   [selected]
+  // );
+
+  const getById = async () => {
+    const idData = await getApiHandler(`/getLmsSub/${did}`);
+    console.log("idData====================", idData.data);
+
+    const { subjectName, title, type } = idData.data;
+    setValue("subjectName", subjectName);
+    console.log("subjectName=========", subjectName);
+    setValue("title", title);
+    console.log("title===============", title);
+    setValue("type ", type);
+    console.log("type ===============", type);
+  };
+  useEffect(() => {
+    if (did) {
+     
+      getById(did);
+    }
+  }, [did]);
+  useEffect(() => {
+    if (selected) {
+      console.log("selected.currentKey",selected.currentKey);
+      setId(category[selected.currentKey]?._id);
+    }
+    // category
+  }, [selected]);
   return (
     <>
       {/* <Button color="neutral" auto onPress={handler}>
@@ -139,8 +176,30 @@ export default function LmsContent() {
                     Action
                   </Dropdown.Button>
                   <Dropdown.Menu aria-label="Static Actions">
-                    <Dropdown.Item key="new">New file</Dropdown.Item>
-                  
+                    <Dropdown.Item key="new">
+                      <button
+                        onClick={async() => {
+                          deleteData(a._id);
+                           await getApiHandler("/getLmsSub");
+
+                        }}
+                      >
+                        delete
+                      </button>
+                    </Dropdown.Item>
+                    <Dropdown.Item key="new">
+                      <button
+                        onClick={ async() => {
+                          setDid(a._id);
+                          handler()
+                           
+
+                        }}
+                      >
+                        {" "}
+                        update
+                      </button>
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </Table.Cell>
@@ -154,7 +213,7 @@ export default function LmsContent() {
           align="center"
           color="neutral"
           rowsPerPage={5}
-          onPageChange={() => console.log({ })}
+          onPageChange={() => console.log({})}
         />
       </Table>
 
@@ -176,7 +235,7 @@ export default function LmsContent() {
         <Modal.Body>
           <form
             style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-             onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <Input
               clearable
@@ -215,31 +274,34 @@ export default function LmsContent() {
               placeholder="type"
               {...register("type")}
             />
- 
- <Dropdown>
-      <Dropdown.Button flat color="secondary" css={{ tt: "capitalize" }}>
-        {selected}
-      </Dropdown.Button>
-      <Dropdown.Menu
-        aria-label="Single selection actions"
-        color="secondary"
-        disallowEmptySelection
-        selectionMode="single"
-        selectedKeys={selected}
-        onSelectionChange={setSelected}
-      >
-        {category.map((row,index)=>{
-          return  <Dropdown.Item key={index} onClick={()=>setId(row._id)}> {row.examName}
-          
-          </Dropdown.Item>
-        })}
-        {/* <Dropdown.Item key="text">Text</Dropdown.Item>
+            <Dropdown>
+              <Dropdown.Button
+                flat
+                color="secondary"
+                css={{ tt: "capitalize" }}
+              >
+               category {selected}
+              </Dropdown.Button>
+              <Dropdown.Menu
+                aria-label="Single selection actions"
+                color="secondary"
+                disallowEmptySelection
+                selectionMode="single"
+                selectedKeys={selected}
+                onSelectionChange={setSelected}
+              >
+                {category.map((row, index) => {
+                  return (
+                    <Dropdown.Item key={index}>{row.examName}</Dropdown.Item>
+                  );
+                })}
+                {/* <Dropdown.Item key="text">Text</Dropdown.Item>
         <Dropdown.Item key="number">Number</Dropdown.Item>
         <Dropdown.Item key="date">Date</Dropdown.Item>
         <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
         <Dropdown.Item key="iteration">Iteration</Dropdown.Item> */}
-      </Dropdown.Menu>
-    </Dropdown>
+              </Dropdown.Menu>
+            </Dropdown>
             <Button type="submit" color="neutral" onPress={closeHandler}>
               CREATE
             </Button>

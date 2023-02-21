@@ -13,8 +13,7 @@ function App() {
       <BrowserRouter>
         <AllRoutes />
       </BrowserRouter>
-      {/* <LmsContent/>
-      <BasicSelect/> */}
+       {/* <LmsContent/> */}
     </div>
   );
 }
