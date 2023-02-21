@@ -2,6 +2,7 @@ const {
   // postModel,
   postExamData,
   getAllExamData,
+  deleteExamCatgData,
 } = require("../model/practiceCatgModel");
 const {
   postSubjectData,
@@ -10,6 +11,7 @@ const {
   getRandomSubjects,
   postQuesInSubject,
   pushQuesInSubj,
+  getPracticeQues,
 } = require("../model/practiceSubjModel");
 
 //////////////////////////////////////////////////////////////////////
@@ -24,6 +26,11 @@ const postExamCatgController = async (req, res) => {
   res.send(data);
 };
 
+const deleteExamCatgController = async (req, res) => {
+  const id = req.params.id;
+  const data = await deleteExamCatgData(id);
+  res.send(data);
+};
 const getExamCatgController = async (req, res) => {
   const data = await getAllExamData();
   res.send(data);
@@ -40,18 +47,6 @@ const postSubjectController = async (req, res) => {
   console.log("postExamCatgController: ", subject);
   const data = await postSubjectData(subject);
   res.send(data);
-};
-
-const postQuesInSubjController = async (req, res) => {
-  console.log("subject id: ", req.params.id);
-  const data = await postQuesInSubject(req.params.id, req.body);
-  res.send(data);
-};
-
-const pushQuesInSubjController = async (req, res) => {
-  console.log("question: ", req.params.id);
-  const result = await pushQuesInSubj(req.params.id, req.body);
-  res.send(result);
 };
 
 const getAllSubjectController = async (req, res) => {
@@ -71,8 +66,32 @@ const getRandomSubjController = async (req, res) => {
   res.send(data);
 };
 
+///////////////////////////////////////////////////////////////////////
+///////////////////- Practice Exam Questions -/////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+const postQuesInSubjController = async (req, res) => {
+  console.log("subject id: ", req.params.id);
+  const data = await postQuesInSubject(req.params.id, req.body);
+  res.send(data);
+};
+
+const pushQuesInSubjController = async (req, res) => {
+  console.log("question: ", req.params.id);
+  const result = await pushQuesInSubj(req.params.id, req.body);
+  res.send(result);
+};
+
+const getPracticeQuesController = async (req, res) => {
+  console.log("subj id: ", req.params.id);
+  const result = await getPracticeQues(req.params.id);
+
+  res.send(result);
+};
+
 module.exports = {
   postExamCatgController,
+  deleteExamCatgController,
   postSubjectController,
   postQuesInSubjController,
   pushQuesInSubjController,
@@ -80,4 +99,5 @@ module.exports = {
   getAllSubjectController,
   getSubjectByCatgController,
   getRandomSubjController,
+  getPracticeQuesController,
 };
