@@ -2,6 +2,7 @@ const {
   // postModel,
   postExamData,
   getAllExamData,
+  deleteExamCatgData,
 } = require("../model/practiceCatgModel");
 const {
   postSubjectData,
@@ -25,6 +26,11 @@ const postExamCatgController = async (req, res) => {
   res.send(data);
 };
 
+const deleteExamCatgController = async (req, res) => {
+  const id = req.params.id;
+  const data = await deleteExamCatgData(id);
+  res.send(data);
+};
 const getExamCatgController = async (req, res) => {
   const data = await getAllExamData();
   res.send(data);
@@ -85,6 +91,7 @@ const getPracticeQuesController = async (req, res) => {
 
 module.exports = {
   postExamCatgController,
+  deleteExamCatgController,
   postSubjectController,
   postQuesInSubjController,
   pushQuesInSubjController,

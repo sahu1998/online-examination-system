@@ -17,6 +17,7 @@ const {
   getSubjectByCatgController,
   getRandomSubjController,
   getPracticeQuesController,
+  deleteExamCatgController,
 } = require("../controller/practiceExamController");
 const {
   postFeedbackController,
@@ -50,6 +51,7 @@ const router = express.Router();
 
 router.post("/post-exam-catg", postExamCatgController);
 router.get("/get-exam-catg", getExamCatgController);
+router.delete("/del-practice-catg/:id", deleteExamCatgController);
 router.get("/about", getAboutController);
 
 router.post(

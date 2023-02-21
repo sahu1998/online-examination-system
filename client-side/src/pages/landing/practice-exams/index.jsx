@@ -28,10 +28,10 @@ export default function PracticeExam() {
   const getExamCategory = async () => {
     const temp = await getApiHandler("/get-exam-catg");
     if (temp.status === 200) {
-      setExams(temp.response);
-      setSelectedIndex(temp.response[0]._id);
-      setSelectedExam(temp.response[0].examName);
-      await getSubjectByCategory(temp.response[0]._id);
+      setExams(temp.data);
+      setSelectedIndex(temp.data[0]._id);
+      setSelectedExam(temp.data[0].examName);
+      await getSubjectByCategory(temp.data[0]._id);
     }
   };
 
