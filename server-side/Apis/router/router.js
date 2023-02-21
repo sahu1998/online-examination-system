@@ -5,6 +5,7 @@ const {
   getLmsSubController,
   PostLmsCatController,
   getLmsCatController,
+  getRandomLmsSubController,
 } = require("../controller/controller");
 const {
   postExamCatgController,
@@ -35,6 +36,8 @@ const {
   getUsersController,
   deleteUsersController,
   putUsersController,
+
+  getByIdUserController,
 } = require("../controller/userscontroller");
 const { auth, uploadUserImage, uploadFeedbackImage } = require("../middleware");
 const {
@@ -69,7 +72,6 @@ router.post("/verificationEmail", verificationEmail);
 router.post("/resetPassword/:id/:token", updatePassword);
 
 router.use("/subject", express.static("storage/subjects"));
-router.use("/users", express.static("storage/userImages"));
 router.use("/feedback", express.static("storage/feedbackImages"));
 
 router.post("/post-users", uploadUserImage, postUsersController);
@@ -78,9 +80,12 @@ router.delete("/delete-users/:id", deleteUsersController);
 router.put("/put-users/:id", uploadUserImage, putUsersController);
 router.post("/post-feedback", uploadFeedbackImage, postFeedbackController);
 router.get("/get-feedback", getFeedbackController);
+router.get("/getByUserId/:id", getByIdUserController);
 
 router.use("/lms-sub", express.static("storage/lmssubject"));
 router.use("/lms-cat", express.static("storage/lmscategory"));
+router.use("/storage/userImages", express.static("storage/userImages"));
+
 router.post(
   "/postLmsSub",
   uploadLmsSubImage.single("image"),
@@ -93,5 +98,6 @@ router.post(
   PostLmsCatController
 );
 router.get("/getLmsCat", getLmsCatController);
+router.get("/getRandomLmsSub", getRandomLmsSubController);
 
 module.exports = router;

@@ -23,12 +23,12 @@ const postsignupController = async (req, res) => {
         password: hashpass,
       };
       console.log("==========>", temp);
-      const data = await loginSchema.create(temp);
+      const data = await loginSchema.create({ ...temp, role: "student" });
       return res.send({ data, message: "success", status: 200 });
     } else {
       return res.send({ message: "password not match", status: 400 });
     }
-  } catch (err) {
+  } catch (err) {}
   return res.send({ message: "failed", status: 400 });
 };
 }
@@ -36,7 +36,7 @@ const postsignupController = async (req, res) => {
 const postloginController = async (req, res) => {
   console.log("body",req.body);
   try {
-    const { name, userName, email, password } = req.body;
+    const { email, password } = req.body;
     if (email && password) {
       const data = await loginSchema.findOne({
         email,
@@ -54,15 +54,13 @@ const postloginController = async (req, res) => {
       }
 
       if (data) {
-
         const { email, password, _id } = data;
         const token = jwt.sign({ userId: _id }, process.env.SECRET_KEY, {
           expiresIn: "3h",
         });
-        const temp = { email, password, _id };
+        const temp = { email, password, _id, role };
         temp.token = token;
         console.log("TOKEN", token);
-
         return res.send({ temp, message: "success", status: 200 });
       } else {
         return res.send({ message: "invalid email and password", status: 400 });

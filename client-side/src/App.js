@@ -3,18 +3,17 @@ import AllRoutes from "./all-routes";
 import "./App.css";
 import Category from "./components/owner/lms/categories/temp";
 import Content from "./components/owner/lms/contents/temp";
+import UsersTable from "./components/owner/users/temp";
 
 function App() {
-
-
   return (
     <div>
-
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter>
+      </BrowserRouter> */}
       {/* <Category /> */}
       {/* <Content /> */}
+      <UsersTable />
     </div>
   );
 }
