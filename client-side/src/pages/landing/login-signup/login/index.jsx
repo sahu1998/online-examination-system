@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
+import swal from "sweetalert";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -35,6 +36,7 @@ const schema = yup
 
 export default function LogIn() {
   const [message, setMessage] = React.useState();
+  const [role, setRole] = React.useState("");
 
   const {
     register,
@@ -50,12 +52,27 @@ export default function LogIn() {
   const history = useNavigate();
 
   const onSubmit = async (value) => {
-    console.log("Value", value);
-    const response = await postApiHandler("/post-login", value);
-    console.log("resss=======>", response);
+    const { email, password } = value;
+    const a = { email, password, role };
+    console.log("Value", a);
+    const response = await postApiHandler("/post-login", a);
+    console.log("resss=======>", response.temp);
     if (response.status === 200) {
       localStorage.setItem("token", response.temp.token);
-      history("/demo");
+
+      if (response.temp.role === "owner" && role === "owner") {
+        console.log(role, response.temp.role);
+        swal("Login successfully!", "You clicked the button!", "success");
+        history("/owner");
+      } else if (response.temp.role === "admin" && role === "admin") {
+        swal("Login  successfully!", "You clicked the button!", "success");
+
+        history("/admin");
+      } else if (response.temp.role === "student" && role === "student") {
+        swal("Login successfully!", "You clicked the button!", "success");
+
+        history("/student");
+      }
     } else {
       setMessage(response.message);
     }
@@ -169,12 +186,33 @@ export default function LogIn() {
             </Box>
             <Box class="mainbox">
               <Typography variant="h6" className="login ">
-                Login Us
+                Login As
               </Typography>
               <Box class="box">
-                <Button class="button">Owner</Button>
-                <Button class="button">Admin</Button>
-                <Button class="button">Student</Button>
+                <Button
+                  class="button"
+                  onClick={() => {
+                    setRole("owner");
+                  }}
+                >
+                  Owner
+                </Button>
+                <Button
+                  class="button"
+                  onClick={() => {
+                    setRole("admin");
+                  }}
+                >
+                  Admin
+                </Button>
+                <Button
+                  class="button"
+                  onClick={() => {
+                    setRole("student");
+                  }}
+                >
+                  Student
+                </Button>
                 <Button class="button">parent</Button>
                 <Button class="button">Documentation</Button>
               </Box>

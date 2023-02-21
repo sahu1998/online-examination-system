@@ -16,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
 import { postApiHandler } from "../../../../apiHandler";
 import LandingLayout from "../../../../layouts/landing-layout";
+import swal from "sweetalert";
 
 const theme = createTheme();
 
@@ -69,6 +70,8 @@ export default function SignUp() {
     const response = await postApiHandler("/post-signup", value);
     console.log("res!!!=======>", response);
     if (response.status === 200) {
+      swal("Registration successfully!", "You clicked the button!", "success");
+
       history("/logIn");
     } else {
       setMessage(response.message);

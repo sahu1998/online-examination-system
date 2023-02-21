@@ -14,6 +14,9 @@ import Pattern from "../components/landing/pattern/temp";
 import Pricing from "../components/landing/pricing/temp";
 import Syllabus from "../components/landing/syllabus/temp";
 import Quiz from "../pages/student/exams/quiz";
+import AdminDashboard from "../pages/admin/dashboard";
+import StudentDashboard from "../pages/student/dashboard";
+import OwnerDasboad from "../pages/owner/dashboard";
 
 export default function AllRoutes() {
   return (
@@ -35,6 +38,9 @@ export default function AllRoutes() {
       <Route path="/syllabus" element={<Syllabus />} />
       <Route path="about" element={<AboutUs />} />
       <Route path="/quiz/:id" element={<Quiz />} />
+      <Route path="/owner" element={<OwnerDasboad />} />
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/student" element={<StudentDashboard />} />
     </Routes>
   );
 }
