@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
+import swal from "sweetalert";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -51,17 +52,25 @@ export default function LogIn() {
   const history = useNavigate();
 
   const onSubmit = async (value) => {
-    console.log("Value", value);
-    const response = await postApiHandler("/post-login", value);
+    const { email, password } = value;
+    const a = { email, password, role };
+    console.log("Value", a);
+    const response = await postApiHandler("/post-login", a);
     console.log("resss=======>", response.temp);
     if (response.status === 200) {
-      localStorage.setItem("token", response.token);
+      localStorage.setItem("token", response.temp.token);
+
       if (response.temp.role === "owner" && role === "owner") {
         console.log(role, response.temp.role);
+        swal("Login successfully!", "You clicked the button!", "success");
         history("/owner");
       } else if (response.temp.role === "admin" && role === "admin") {
+        swal("Login  successfully!", "You clicked the button!", "success");
+
         history("/admin");
       } else if (response.temp.role === "student" && role === "student") {
+        swal("Login successfully!", "You clicked the button!", "success");
+
         history("/student");
       }
     } else {

@@ -35,7 +35,7 @@ const postsignupController = async (req, res) => {
 
 const postloginController = async (req, res) => {
   try {
-    const { name, userName, email, password } = req.body;
+    const { email, password } = req.body;
     if (email && password) {
       const data = await loginSchema.findOne({
         email,
@@ -59,7 +59,11 @@ const postloginController = async (req, res) => {
         const temp = { email, password, _id, role };
         temp.token = token;
         console.log("TOKEN", token);
-        return res.send({ temp, message: "success", status: 200 });
+        if (temp.role == req.body.role) {
+          return res.send({ temp, message: "success", status: 200 });
+        } else {
+          return res.send({ message: "invalid user", status: 400 });
+        }
       } else {
         return res.send({ message: "invalid email and password", status: 400 });
       }
