@@ -32,6 +32,7 @@ const deleteApiHandler = async (endPoint) => {
   }
 };
 const putApiHandler = async (endPoint, value) => {
+  console.log("v===>", value);
   try {
     console.log("value put------",value);
     const res = await axios.put(serverURL + endPoint, value);

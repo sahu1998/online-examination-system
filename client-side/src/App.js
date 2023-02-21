@@ -1,19 +1,17 @@
 import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./all-routes";
 import "./App.css";
-import LmsContent from "./components/owner/lms/contents/temp";
-import BasicSelect from "./components/owner/lms/series/temp";
+import Category from "./components/owner/lms/categories/temp";
+import Content from "./components/owner/lms/contents/temp";
 
 function App() {
-
-
   return (
     <div>
-
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <AllRoutes />
       </BrowserRouter>
-       {/* <LmsContent/> */}
+      {/* <Category /> */}
+      {/* <Content /> */}
     </div>
   );
 }
