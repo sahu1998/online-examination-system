@@ -1,5 +1,6 @@
+const { Console } = require("console");
 const fs = require("fs");
-const { PostLmsCatData, getLmsCatData, deleteLmsCatData } = require("../model/lmscatmodal");
+const { PostLmsCatData, getLmsCatData, deleteLmsCatData, getByIdLmsCatData, updateLmsCatData } = require("../model/lmscatmodal");
 const {
   PostLmsSubData,
   getLmsSubByCategory,
@@ -30,7 +31,7 @@ const PostLmsSubController = async (req, res) => {
   res.send(data);
 };
 const PostLmsCatController = async (req, res) => {
-  const files = req.file.path;
+  const files = req?.file?.path;
   const temp = { ...req.body, image: files };
   const data = await PostLmsCatData(temp);
   res.send(data);
@@ -48,9 +49,18 @@ const getRandomLmsSubController = async (req, res) => {
   const data = await getRandomLmsSubData();
   res.send(data);
 }
+const getByIdLmsCatController = async (req, res) => {
+  const data = await getByIdLmsCatData(req.params.id);
+  res.send(data);
+}
 
 const deleteLmsCatController = async (req, res) => {
   const data = await deleteLmsCatData(req.params.id);
+  res.send(data);
+}
+const updateLmsCatController = async (req, res) => {
+  const data = await updateLmsCatData(req.params.id, req.body);
+  console.log("dataupdate", data)
   res.send(data);
 }
 module.exports = {
@@ -60,5 +70,7 @@ module.exports = {
   getLmsCatController,
   getAboutController,
   getRandomLmsSubController,
-  deleteLmsCatController
+  deleteLmsCatController,
+  getByIdLmsCatController,
+  updateLmsCatController
 };

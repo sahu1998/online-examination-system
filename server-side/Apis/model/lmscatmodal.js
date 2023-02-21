@@ -7,7 +7,12 @@ const examSchema = mongoose.Schema({
 const exam = mongoose.model("lmscategories", examSchema);
 const getLmsCatData = async () => {
   try {
-    const data = await exam.find();
+    const data = await exam.find({}, {}, {
+      sort:
+      {
+        _id: -1
+      }
+    });
     return { data: data, message: "get data succesfully", status: 200 };
   } catch (error) {
     return { message: error.message, status: 400 };
@@ -16,11 +21,20 @@ const getLmsCatData = async () => {
 const PostLmsCatData = async (obj) => {
   try {
     const data = await exam.create(obj);
-    return { data: data, message: "exam  data added succesfully", status: 200 };
+    return { data: data, message: "exam  data added successfully", status: 200 };
   } catch (error) {
     return { message: error.message, status: 400 };
   }
 };
+const getByIdLmsCatData = async (id) => {
+  try {
+    const data = await exam.findById(id);
+    return { data: data, message: "get data successfully", status: 200 };
+  }
+  catch (error) {
+    return { message: error.message, status: 400 };
+  }
+}
 
 const deleteLmsCatData = async (id) => {
   try {
@@ -31,9 +45,20 @@ const deleteLmsCatData = async (id) => {
 
   }
 }
+const updateLmsCatData = async (id, body) => {
+  console.log("updatr", body)
+  try {
+    const data = await exam.findByIdAndUpdate(id, { $set: body });
+    return { data: data, message: "exam data updated successfully", status: 200 };
+  } catch (error) {
+    return { message: error.message, status: 400 };
+  }
+}
 
 module.exports = {
   PostLmsCatData,
   getLmsCatData,
-  deleteLmsCatData
+  deleteLmsCatData,
+  getByIdLmsCatData,
+  updateLmsCatData
 };
