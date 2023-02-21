@@ -18,6 +18,8 @@ import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 import CategoryTable from "../pages/owner/exams/categories";
+import UsersTable from "../components/owner/users/temp";
+import FeedbackForm from "../components/student/feedback/temp";
 
 export default function AllRoutes() {
   return (
@@ -42,6 +44,9 @@ export default function AllRoutes() {
       <Route path="/owner" element={<OwnerDasboad />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/student" element={<StudentDashboard />} />
+      <Route path="/users" element={<UsersTable />} />
+      <Route path="/feedback" element={<FeedbackForm />} />
+      <Route path="/feedbacktable" element={<FeedbackTable />} />
 
       <Route path="/practice-exam-catg" element={<CategoryTable />} />
     </Routes>

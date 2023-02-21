@@ -1,10 +1,10 @@
 import { Modal, Input, Table, Button, Text, Dropdown } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import "./index.css";
-import { getApiHandler, serverURL } from "../../../apiHandler";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
+import { getApiHandler } from "../../../apiHandler";
+import FeedbackForm from "../../student/feedback/temp";
 
 export default function FeedbackTable() {
   const [data, setData] = useState([]);
@@ -99,6 +99,7 @@ export default function FeedbackTable() {
           onPageChange={(page) => console.log({ page })}
         />
       </Table>
+      <FeedbackForm getData={getData} />
     </>
   );
 }
