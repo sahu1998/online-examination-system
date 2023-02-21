@@ -14,50 +14,38 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ComputerIcon from '@mui/icons-material/Computer';
-import SellIcon from '@mui/icons-material/Sell';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
-import WysiwygIcon from '@mui/icons-material/Wysiwyg';
-import PaymentIcon from '@mui/icons-material/Payment';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import MailIcon from '@mui/icons-material/Mail';
 import SmsIcon from '@mui/icons-material/Sms';
-import FeedbackIcon from '@mui/icons-material/Feedback';
-import SettingsIcon from '@mui/icons-material/Settings';
-import GTranslateIcon from '@mui/icons-material/GTranslate';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import ArticleIcon from '@mui/icons-material/Article';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 const drawerWidth = 240;
 const ProfileArray = [
+    {name:"My Bookmarks"},
     {name:"My Profile"},
-    {name:"Theams"},
-    {name:"Language"},
-    {name:"Send Push Notification"},
     {name:"Change Password"},
+    {name:"Settings"},
+    {name:"Feedback"},
     {name:"Logout"},
 ]
 const Array = [
-    {name:"Dashboard",path:"/admin",icon:<DashboardIcon/>},
-    {name:"Language",path:"/ownerlanguage",icon:<GTranslateIcon/>},
-    {name:"User",path:"/owneruser",icon:<AccountCircleIcon/>},
-    {name:"Exam",path:"/ownerexam",icon:<ComputerIcon/>},
-    {name:"Coupons",path:"/ownercoupon",icon:<SellIcon/>},
-    {name:"LMS",path:"/ownerlms",icon:<DesktopWindowsIcon/>},
-    {name:"Resume Templates",path:"/ownerresume",icon:<WysiwygIcon/>},
-    {name:"Payment Report",path:"/ownerpayment",icon:<PaymentIcon/>},
-    {name:"Notification",path:"/ownernotification",icon:<NotificationsActiveIcon/>},
-    {name:"SMS",path:"/ownersms",icon:<MailIcon/>},
-    {name:"Message",path:"/ownermessage",icon:<SmsIcon/>},
-    {name:"Feedback",path:"/ownerfeedback",icon:<FeedbackIcon/>},
-    {name:"Master Settings",path:"/ownersettings",icon:<SettingsIcon/>},
+    {name:"Dashboard",path:"/student",icon:<DashboardIcon/>},
+    {name:"Exam",path:"/studentexam",icon:<ComputerIcon/>},
+    {name:"Analysis",path:"/studentAnalysis",icon:<AnalyticsIcon/>},
+    {name:"LMS",path:"/studentlms",icon:<DesktopWindowsIcon/>},
+    {name:"Build Resume",path:"/studentresume",icon:<ArticleIcon/>},
+    {name:"Message",path:"/studentmessage",icon:<SmsIcon/>},
+    {name:"Notification",path:"/studentnotification",icon:<NotificationsActiveIcon/>},
 ]
 
-function AdminSideBar({children}) {
+function StudentSideBar({children}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -104,7 +92,7 @@ function AdminSideBar({children}) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar  position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1,background:"linear-gradient(162deg, #ffc107, #e8d1058c)"}}>
+      <AppBar  position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1,background:"linear-gradient(22deg, #0089f5, #f49e838f)"}}>
         <Toolbar>
             
           <IconButton
@@ -136,7 +124,7 @@ function AdminSideBar({children}) {
               Online Exam..
             </Typography>  
            
-            <Typography sx={{color:"black"}}>Admin<Button onClick={handleClick}><Avatar  src="/broken-image.jpg" /><ArrowDropDownIcon sx={{fontSize:"2rem",color:"black"}}/></Button></Typography>
+            <Typography sx={{color:"black"}}>Student<Button onClick={handleClick}><Avatar  src="/broken-image.jpg" /><ArrowDropDownIcon sx={{fontSize:"2rem",color:"black"}}/></Button></Typography>
            
             <Popover
         id={id}
@@ -198,4 +186,4 @@ function AdminSideBar({children}) {
     </Box>
   );
 }
-export default AdminSideBar ;
+export default StudentSideBar ;

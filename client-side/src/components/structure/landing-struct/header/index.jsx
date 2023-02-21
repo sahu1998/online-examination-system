@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink, Link } from "react-router-dom";
+import './header.css'
 
 const pages = [
   { name: "Home", path: "/" },
@@ -141,16 +142,18 @@ function Navbar() {
             >
               {pages.map((tab) => {
                 return(
-                <NavLink  to={tab.path} style={{ textDecoration: "none" }}>
+                <NavLink  to={tab.path}  >
                   <Button
                    
                     onClick={handleCloseNavMenu}
+                    className="nav-link"
                     sx={{
                       my: 2,
                       color: "black",
                       display: "block",
                       fontSize: "13px",
                       fontFamily: "inherit",
+                      textDecoration:"none"
                     }}
                   >
                     {tab.name}
@@ -164,11 +167,12 @@ function Navbar() {
               <Button
                 sx={{
                   fontSize: "13px",
-                  backgroundColor: "ghostwhite",
+                  backgroundColor: "white",
                   color: "black",
                   fontFamily: "inherit",
                   border: "ridge",
                   marginRight: "6px",
+                  borderRadius:"18px",
                 }}
                 variant=""
               >
@@ -180,10 +184,11 @@ function Navbar() {
                 sx={{
                   textDecoration: "none",
                   fontSize: "13px",
-                  backgroundColor: "ghostwhite",
+                  backgroundColor: "white",
                   color: "black",
                   fontFamily: "inherit",
                   border: "solid",
+                  borderRadius:"18px",
                 }}
                 variant=""
               >

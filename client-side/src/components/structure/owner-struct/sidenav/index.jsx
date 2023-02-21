@@ -42,22 +42,22 @@ const ProfileArray = [
     {name:"Logout"},
 ]
 const Array = [
-    {name:"Dashboard",path:"/admin",icon:<DashboardIcon/>},
-    {name:"Language",path:"/ownerlanguage",icon:<GTranslateIcon/>},
-    {name:"User",path:"/owneruser",icon:<AccountCircleIcon/>},
-    {name:"Exam",path:"/ownerexam",icon:<ComputerIcon/>},
-    {name:"Coupons",path:"/ownercoupon",icon:<SellIcon/>},
-    {name:"LMS",path:"/ownerlms",icon:<DesktopWindowsIcon/>},
-    {name:"Resume Templates",path:"/ownerresume",icon:<WysiwygIcon/>},
-    {name:"Payment Report",path:"/ownerpayment",icon:<PaymentIcon/>},
-    {name:"Notification",path:"/ownernotification",icon:<NotificationsActiveIcon/>},
-    {name:"SMS",path:"/ownersms",icon:<MailIcon/>},
-    {name:"Message",path:"/ownermessage",icon:<SmsIcon/>},
-    {name:"Feedback",path:"/ownerfeedback",icon:<FeedbackIcon/>},
-    {name:"Master Settings",path:"/ownersettings",icon:<SettingsIcon/>},
+    {name:"Dashboard",path:"/owner",icon:<DashboardIcon/>},
+    {name:"Language",path:"/adminlanguage",icon:<GTranslateIcon/>},
+    {name:"User",path:"/adminuser",icon:<AccountCircleIcon/>},
+    {name:"Exam",path:"/adminexam",icon:<ComputerIcon/>},
+    {name:"Coupons",path:"/admincoupon",icon:<SellIcon/>},
+    {name:"LMS",path:"/adminlms",icon:<DesktopWindowsIcon/>},
+    {name:"Resume Templates",path:"/adminresume",icon:<WysiwygIcon/>},
+    {name:"Payment Report",path:"/adminpayment",icon:<PaymentIcon/>},
+    {name:"Notification",path:"/adminnotification",icon:<NotificationsActiveIcon/>},
+    {name:"SMS",path:"/adminsms",icon:<MailIcon/>},
+    {name:"Message",path:"/adminmessage",icon:<SmsIcon/>},
+    {name:"Feedback",path:"/adminfeedback",icon:<FeedbackIcon/>},
+    {name:"Master Settings",path:"/adminsettings",icon:<SettingsIcon/>},
 ]
 
-function AdminSideBar({children}) {
+function OwnerSideBar({children}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -104,7 +104,7 @@ function AdminSideBar({children}) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar  position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1,background:"linear-gradient(162deg, #ffc107, #e8d1058c)"}}>
+      <AppBar  position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1,background: "linear-gradient(45deg, #7500d1, #b26ddc)"}}>
         <Toolbar>
             
           <IconButton
@@ -136,7 +136,7 @@ function AdminSideBar({children}) {
               Online Exam..
             </Typography>  
            
-            <Typography sx={{color:"black"}}>Admin<Button onClick={handleClick}><Avatar  src="/broken-image.jpg" /><ArrowDropDownIcon sx={{fontSize:"2rem",color:"black"}}/></Button></Typography>
+            <Typography>Owner <Button onClick={handleClick}><Avatar  src="/broken-image.jpg" /><ArrowDropDownIcon sx={{fontSize:"2rem",color:"white"}}/></Button></Typography>
            
             <Popover
         id={id}
@@ -198,4 +198,4 @@ function AdminSideBar({children}) {
     </Box>
   );
 }
-export default AdminSideBar ;
+export default OwnerSideBar ;

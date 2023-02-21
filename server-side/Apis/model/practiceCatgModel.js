@@ -40,10 +40,19 @@ const postExamData = async (values) => {
   }
 };
 
+const deleteExamCatgData = async (id) => {
+  try {
+    const result = await examModel.findByIdAndDelete(id);
+    return { data: result, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
 const getAllExamData = async () => {
   try {
     const result = await examModel.find();
-    return { response: result, status: 200, message: "success" };
+    return { data: result, status: 200, message: "success" };
   } catch (error) {
     return { error, status: 400, message: "error" };
   }
@@ -53,4 +62,5 @@ module.exports = {
   // postModel,
   postExamData,
   getAllExamData,
+  deleteExamCatgData,
 };

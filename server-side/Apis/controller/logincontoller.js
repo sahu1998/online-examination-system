@@ -32,14 +32,15 @@ const postsignupController = async (req, res) => {
     return res.send({ message: "failed", status: 400 });
   }
 };
-
 const postloginController = async (req, res) => {
+  console.log("body", req.body);
   try {
     const { email, password } = req.body;
     if (email && password) {
       const data = await loginSchema.findOne({
         email,
       });
+
       console.log("data", data);
       if (!data) {
         return res.send({ message: "email not found", status: 400 });
@@ -59,7 +60,7 @@ const postloginController = async (req, res) => {
         const temp = { email, password, _id, role };
         temp.token = token;
         console.log("TOKEN", token);
-        if (temp.role == req.body.role) {
+        if (temp.role === req.body.role) {
           return res.send({ temp, message: "success", status: 200 });
         } else {
           return res.send({ message: "invalid user", status: 400 });

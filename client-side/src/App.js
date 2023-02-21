@@ -9,9 +9,10 @@ import FeedbackForm from "./components/Feedback";
 function App() {
   return (
     <div>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter> */}
+      </BrowserRouter>{" "}
+      */}
       {/* <Category /> */}
       {/* <Content /> */}
       {/* <UsersTable /> */}
