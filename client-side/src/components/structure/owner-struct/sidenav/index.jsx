@@ -42,19 +42,19 @@ const ProfileArray = [
     {name:"Logout"},
 ]
 const Array = [
-    {name:"Dashboard",path:"/",icon:<DashboardIcon/>},
-    {name:"Language",path:"/ownerlanguage",icon:<GTranslateIcon/>},
-    {name:"User",path:"/owneruser",icon:<AccountCircleIcon/>},
-    {name:"Exam",path:"/ownerexam",icon:<ComputerIcon/>},
-    {name:"Coupons",path:"/ownercoupon",icon:<SellIcon/>},
-    {name:"LMS",path:"/ownerlms",icon:<DesktopWindowsIcon/>},
-    {name:"Resume Templates",path:"/ownerresume",icon:<WysiwygIcon/>},
-    {name:"Payment Report",path:"/ownerpayment",icon:<PaymentIcon/>},
-    {name:"Notification",path:"/ownernotification",icon:<NotificationsActiveIcon/>},
-    {name:"SMS",path:"/ownersms",icon:<MailIcon/>},
-    {name:"Message",path:"/ownermessage",icon:<SmsIcon/>},
-    {name:"Feedback",path:"/ownerfeedback",icon:<FeedbackIcon/>},
-    {name:"Master Settings",path:"/ownersettings",icon:<SettingsIcon/>},
+    {name:"Dashboard",path:"/owner",icon:<DashboardIcon/>},
+    {name:"Language",path:"/adminlanguage",icon:<GTranslateIcon/>},
+    {name:"User",path:"/adminuser",icon:<AccountCircleIcon/>},
+    {name:"Exam",path:"/adminexam",icon:<ComputerIcon/>},
+    {name:"Coupons",path:"/admincoupon",icon:<SellIcon/>},
+    {name:"LMS",path:"/adminlms",icon:<DesktopWindowsIcon/>},
+    {name:"Resume Templates",path:"/adminresume",icon:<WysiwygIcon/>},
+    {name:"Payment Report",path:"/adminpayment",icon:<PaymentIcon/>},
+    {name:"Notification",path:"/adminnotification",icon:<NotificationsActiveIcon/>},
+    {name:"SMS",path:"/adminsms",icon:<MailIcon/>},
+    {name:"Message",path:"/adminmessage",icon:<SmsIcon/>},
+    {name:"Feedback",path:"/adminfeedback",icon:<FeedbackIcon/>},
+    {name:"Master Settings",path:"/adminsettings",icon:<SettingsIcon/>},
 ]
 
 function OwnerSideBar({children}) {
@@ -84,13 +84,13 @@ function OwnerSideBar({children}) {
       <Divider />
       <List>
         {Array.map((text) => (
-            <NavLink to={text.path}>
+            <NavLink to={text.path} style={{textDecoration:"none"}}>
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 {text.icon}
               </ListItemIcon>
-              <ListItemText sx={{color:'black',fontFamily:'initial',fontSize:'20px',textDecoration:"none"}} primary={text.name} />
+              <ListItemText sx={{color:'black',fontFamily:'initial',fontSize:'20px'}} primary={text.name} />
             </ListItemButton>
           </ListItem>
           </NavLink>
