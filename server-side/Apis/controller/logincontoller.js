@@ -28,22 +28,25 @@ const postsignupController = async (req, res) => {
     } else {
       return res.send({ message: "password not match", status: 400 });
     }
-  } catch (err) {}
+  } catch (err) {
   return res.send({ message: "failed", status: 400 });
 };
+}
 
 const postloginController = async (req, res) => {
+  console.log("body",req.body);
   try {
     const { name, userName, email, password } = req.body;
     if (email && password) {
       const data = await loginSchema.findOne({
         email,
       });
+
       console.log("data", data);
       if (!data) {
         return res.send({ message: "email not found", status: 400 });
       }
-
+      
       const checkPass = bcrypt.compareSync(password, data.password);
       console.log("check=====>", checkPass);
       if (!checkPass) {
@@ -51,6 +54,7 @@ const postloginController = async (req, res) => {
       }
 
       if (data) {
+
         const { email, password, _id } = data;
         const token = jwt.sign({ userId: _id }, process.env.SECRET_KEY, {
           expiresIn: "3h",
@@ -58,6 +62,7 @@ const postloginController = async (req, res) => {
         const temp = { email, password, _id };
         temp.token = token;
         console.log("TOKEN", token);
+
         return res.send({ temp, message: "success", status: 200 });
       } else {
         return res.send({ message: "invalid email and password", status: 400 });
