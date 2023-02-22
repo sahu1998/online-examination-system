@@ -7,11 +7,16 @@ import {
   ButtonGroup,
   Heading,
   color,
+  CardFooter,
+  ChakraProvider,
+  Button,
 } from "@chakra-ui/react";
 import "./lms.css";
 import Grid from "@mui/material/Grid";
 import { getApiHandler, serverURL } from "../../../apiHandler";
 import { Result } from "antd";
+import { CardMedia } from "@mui/material";
+
 const Cards = ({ data, setViewId }) => {
   console.log("data===============", data);
   // console.log(`${serverUrl}/lms-image/${data[0].image?.split("\\")[2]}`)
@@ -51,6 +56,13 @@ const Cards = ({ data, setViewId }) => {
               </Grid>
             </CardBody>
             <Divider />
+            <CardFooter>
+              <div className="text-end w-100 text-end">
+                <ChakraProvider>
+                  <Button colorScheme="green">View</Button>
+                </ChakraProvider>
+              </div>
+            </CardFooter>
           </Card>
         </Grid>
       );

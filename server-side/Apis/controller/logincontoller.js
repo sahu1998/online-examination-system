@@ -28,13 +28,14 @@ const postsignupController = async (req, res) => {
     } else {
       return res.send({ message: "password not match", status: 400 });
     }
-  } catch (err) {}
-  return res.send({ message: "failed", status: 400 });
+  } catch (err) {
+    return res.send({ message: "failed", status: 400 });
+  }
 };
 
 
 const postloginController = async (req, res) => {
-  console.log("body",req.body);
+  console.log("body", req.body);
   try {
     const { email, password } = req.body;
     if (email && password) {
@@ -46,7 +47,7 @@ const postloginController = async (req, res) => {
       if (!data) {
         return res.send({ message: "email not found", status: 400 });
       }
-      
+
       const checkPass = bcrypt.compareSync(password, data.password);
       console.log("check=====>", checkPass);
       if (!checkPass) {
@@ -54,14 +55,18 @@ const postloginController = async (req, res) => {
       }
 
       if (data) {
-        const { email, password, _id } = data;
+        const { email, password, _id, role } = data;
         const token = jwt.sign({ userId: _id }, process.env.SECRET_KEY, {
           expiresIn: "3h",
         });
         const temp = { email, password, _id, role };
         temp.token = token;
         console.log("TOKEN", token);
-        return res.send({ temp, message: "success", status: 200 });
+        if (temp.role === req.body.role) {
+          return res.send({ temp, message: "success", status: 200 });
+        } else {
+          return res.send({ message: "invalid user", status: 400 });
+        }
       } else {
         return res.send({ message: "invalid email and password", status: 400 });
       }
