@@ -34,27 +34,21 @@ import { Button } from '@mui/material';
 
 const drawerWidth = 240;
 const ProfileArray = [
-    {name:"My Profile"},
-    {name:"Theams"},
-    {name:"Language"},
-    {name:"Send Push Notification"},
-    {name:"Change Password"},
-    {name:"Logout"},
+  {name:"My Profile",path:"/adminprofile"},
+  {name:"Theams",path:"/admintheam"},
+  {name:"Language",path:"/adminlanguage"},
+  {name:"Send Push Notification",path:"/adminnotification"},
+  {name:"Change Password",path:"/adminpassword"},
+  {name:"Logout",path:"/adminlogout"},
 ]
 const Array = [
     {name:"Dashboard",path:"/admin",icon:<DashboardIcon/>},
-    {name:"Language",path:"/ownerlanguage",icon:<GTranslateIcon/>},
-    {name:"User",path:"/owneruser",icon:<AccountCircleIcon/>},
-    {name:"Exam",path:"/ownerexam",icon:<ComputerIcon/>},
-    {name:"Coupons",path:"/ownercoupon",icon:<SellIcon/>},
-    {name:"LMS",path:"/ownerlms",icon:<DesktopWindowsIcon/>},
-    {name:"Resume Templates",path:"/ownerresume",icon:<WysiwygIcon/>},
-    {name:"Payment Report",path:"/ownerpayment",icon:<PaymentIcon/>},
-    {name:"Notification",path:"/ownernotification",icon:<NotificationsActiveIcon/>},
-    {name:"SMS",path:"/ownersms",icon:<MailIcon/>},
-    {name:"Message",path:"/ownermessage",icon:<SmsIcon/>},
-    {name:"Feedback",path:"/ownerfeedback",icon:<FeedbackIcon/>},
-    {name:"Master Settings",path:"/ownersettings",icon:<SettingsIcon/>},
+    {name:"Language",path:"/adminlanguage",icon:<GTranslateIcon/>},
+    {name:"User",path:"/adminuser",icon:<AccountCircleIcon/>},
+    {name:"Exam",path:"/adminexam",icon:<ComputerIcon/>},
+    {name:"LMS",path:"/adminlms",icon:<DesktopWindowsIcon/>},
+    {name:"Notification",path:"/adminnotification",icon:<NotificationsActiveIcon/>},
+    {name:"Feedback",path:"/adminfeedback",icon:<FeedbackIcon/>},
 ]
 
 function AdminSideBar({children}) {
@@ -149,7 +143,7 @@ function AdminSideBar({children}) {
         }}
       >
         {ProfileArray.map((info)=>(
-            <Typography sx={{padding:"5px",fontSize:"inherit"}}>{info.name}</Typography>
+            <NavLink to={info.path} style={{textDecoration:"none",color:"black"}}><Typography sx={{padding:"5px",fontSize:"inherit"}}>{info.name}</Typography></NavLink>
         ))}
       </Popover>
             </div> 

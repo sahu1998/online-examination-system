@@ -1,4 +1,12 @@
-import { Modal, Input, Table, Button, Text, Dropdown } from "@nextui-org/react";
+import {
+  Modal,
+  Input,
+  Table,
+  Button,
+  Text,
+  Dropdown,
+  Textarea,
+} from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import {
@@ -92,7 +100,9 @@ export default function CategoryTable() {
           {data.map((a) => (
             <Table.Row>
               <Table.Cell>{a.examName}</Table.Cell>
-              <Table.Cell>{a.examDesc}</Table.Cell>
+              {/* <Table.Cell>{a.examDesc}</Table.Cell> */}
+              <Table.Cell>sdfjkdsljfdsjkfjsk</Table.Cell>
+
               <Table.Cell>
                 <Dropdown>
                   <Dropdown.Button
@@ -115,9 +125,9 @@ export default function CategoryTable() {
                     <Dropdown.Item aria-label="delete-action" key="delete">
                       <button
                         className="catg-btn-desing"
-                        onPress={() => {
-                          deleteData(a._id);
-                        }}
+                        // onPress={() => {
+                        //   deleteData(a._id);
+                        // }}
                       >
                         Delete
                       </button>
@@ -168,7 +178,7 @@ export default function CategoryTable() {
               placeholder="Title"
               {...register("examName")}
             />
-            <Input
+            <Textarea
               clearable
               bordered
               fullWidth
@@ -177,6 +187,15 @@ export default function CategoryTable() {
               placeholder="Description"
               {...register("examDesc")}
             />
+            {/* <Input
+              clearable
+              bordered
+              fullWidth
+              color="gradient"
+              size="lg"
+              placeholder="Description"
+              {...register("examDesc")}
+            /> */}
             <Button type="submit" color="neutral" onPress={closeHandler}>
               Add
             </Button>

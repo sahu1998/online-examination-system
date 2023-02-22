@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ComputerIcon from "@mui/icons-material/Computer";
+<<<<<<< HEAD
 import SellIcon from "@mui/icons-material/Sell";
 import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
 import WysiwygIcon from "@mui/icons-material/Wysiwyg";
@@ -23,12 +24,17 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import MailIcon from "@mui/icons-material/Mail";
 import SmsIcon from "@mui/icons-material/Sms";
+=======
+import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+>>>>>>> e250df70e3976331e706d50474fb97fb80044e7d
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import SettingsIcon from "@mui/icons-material/Settings";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+<<<<<<< HEAD
 import { NavLink } from "react-router-dom";
 import { Button } from "@mui/material";
 
@@ -59,6 +65,47 @@ const Array = [
   { name: "Message", path: "/adminmessage", icon: <SmsIcon /> },
   { name: "Feedback", path: "/feedbacktable", icon: <FeedbackIcon /> },
   { name: "Master Settings", path: "/adminsettings", icon: <SettingsIcon /> },
+=======
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { NavLink } from "react-router-dom";
+import { Button } from "@mui/material";
+
+
+const drawerWidth = 240;
+const ProfileArray = [
+  { name: "My Profile", path: "/ownerprofile" },
+  { name: "Theams", path: "/ownertheam" },
+  { name: "Language", path: "/ownerlanguage" },
+  { name: "Send Push Notification", path: "/ownernotification" },
+  { name: "Change Password", path: "/ownerpassword" },
+  { name: "Logout", path: "/ownerlogout" },
+];
+const Array = [
+  { name: "Dashboard", path: "/owner", icon: <DashboardIcon /> },
+  { name: "Language", path: "/ownerlanguage", icon: <GTranslateIcon /> },
+  { name: "User", path: "/owneruser", icon: <AccountCircleIcon /> },
+  {
+    name: "Exam",
+    path: "",
+    icon: <ComputerIcon />,
+    subcatg: [
+      { name: "Categories", url: "/ownercategories" },
+      { name: "Question Bank", url: "/ownerquestion" },
+      { name: "Exam Type", url: "/ownerexamtype" },
+      { name: "Instructions", url: "/ownerinstruct" },
+      { name: "Subject Type", url: "/ownersubject" },
+    ],
+  },
+  { name: "LMS", path: "/ownerlms", icon: <DesktopWindowsIcon /> },
+  {
+    name: "Notification",
+    path: "/ownernotification",
+    icon: <NotificationsActiveIcon />,
+  },
+  { name: "Feedback", path: "/ownerfeedback", icon: <FeedbackIcon /> },
+  { name: "Master Settings", path: "/ownersettings", icon: <SettingsIcon /> },
+>>>>>>> e250df70e3976331e706d50474fb97fb80044e7d
 ];
 
 function OwnerSideBar({ children }) {
@@ -87,6 +134,7 @@ function OwnerSideBar({ children }) {
       <Divider />
       <List>
         {Array.map((text) => (
+<<<<<<< HEAD
           <NavLink to={text.path} style={{ textDecoration: "none" }}>
             <ListItem key={text} disablePadding>
               <ListItemButton>
@@ -102,6 +150,26 @@ function OwnerSideBar({ children }) {
               </ListItemButton>
             </ListItem>
           </NavLink>
+=======
+          <>
+            <NavLink to={text.path} style={{ textDecoration: "none" }}>
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{text.icon}</ListItemIcon>
+                  <ListItemText
+                    sx={{
+                      color: "black",
+                      fontFamily: "initial",
+                      fontSize: "20px",
+                    }}
+                    primary={text.name}
+                  />
+                  
+                </ListItemButton>
+              </ListItem>
+            </NavLink>        
+          </>
+>>>>>>> e250df70e3976331e706d50474fb97fb80044e7d
         ))}
       </List>
     </div>
@@ -171,9 +239,20 @@ function OwnerSideBar({ children }) {
               }}
             >
               {ProfileArray.map((info) => (
+<<<<<<< HEAD
                 <Typography sx={{ padding: "5px", fontSize: "inherit" }}>
                   {info.name}
                 </Typography>
+=======
+                <NavLink
+                  to={info.path}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Typography sx={{ padding: "5px", fontSize: "inherit" }}>
+                    {info.name}
+                  </Typography>
+                </NavLink>
+>>>>>>> e250df70e3976331e706d50474fb97fb80044e7d
               ))}
             </Popover>
           </div>
