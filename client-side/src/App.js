@@ -8,10 +8,10 @@ function App() {
   return (
     <div>
 
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter> */}
-      <LmsCategory />
+      </BrowserRouter>
+      {/* <LmsCategory /> */}
       {/* <Content /> */}
     </div>
   );
