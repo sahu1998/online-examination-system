@@ -31,7 +31,7 @@ const postsignupController = async (req, res) => {
   } catch (err) {}
   return res.send({ message: "failed", status: 400 });
 };
-}
+
 
 const postloginController = async (req, res) => {
   console.log("body",req.body);

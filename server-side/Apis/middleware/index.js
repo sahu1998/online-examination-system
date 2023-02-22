@@ -37,7 +37,6 @@ const subjectStorage = multer.diskStorage({
     callback(null, file.originalname);
   },
 });
-
 const uploadSubjectImage = multer({
   storage: subjectStorage,
   limits: { fileSize: 1000000 },

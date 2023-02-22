@@ -51,6 +51,10 @@ const {
   uploadLmsSubImage,
   uploadLmsCatImage,
 } = require("../middleware");
+const {
+  postSitSettingController, getSiteSettingController, putSiteSettingController,
+} = require("../controller/mastersettingcontroller");
+const { uploadSiteSettingImage } = require("../middleware/mastersetting");
 const router = express.Router();
 
 router.post("/post-exam-catg", postExamCatgController);
@@ -98,18 +102,34 @@ router.post(
   PostLmsSubController
 );
 router.get("/getLmsSub", getLmsSubController);
- router.get("/getLmsSub/:id", getByIdLmsSubController1);
+router.get("/getLmsSub/:id", getByIdLmsSubController1);
 router.post(
   "/postLmsCat",
   uploadLmsCatImage.single("image"),
   PostLmsCatController
 );
 router.get("/getLmsCat", getLmsCatController);
-router.get("/getRandomLmsSub", getRandomLmsSubController)
-router.delete("/deleteLmsSub/:id",deleteLmsSubController)
-router.put("/putLmsSub/:id", uploadLmsSubImage.single("image"),putLmsSubController);
-router.post("/postLmsView",PostLmsViewController);
+router.get("/getRandomLmsSub", getRandomLmsSubController);
+router.delete("/deleteLmsSub/:id", deleteLmsSubController);
+router.put(
+  "/putLmsSub/:id",
+  uploadLmsSubImage.single("image"),
+  putLmsSubController
+);
+router.post("/postLmsView", PostLmsViewController);
 router.get("/getLmsView", getLmsViewController);
 router.get("/getRandomLmsSub", getRandomLmsSubController);
 // uploadLmsViewFile.single("view"),
+
+router.use("/lms-settingImage", express.static("storage/setting"));
+
+router.post(
+  "/site-setting",
+   uploadSiteSettingImage.array('siteLogo'),
+ 
+  postSitSettingController
+);
+router.get("/get-Site-setting",getSiteSettingController);
+router.put('/put-site-setting/:id',uploadSiteSettingImage.array('siteLogo'),putSiteSettingController);
 module.exports = router;
+// uploadSiteSettingImage.single('siteLogo'),
