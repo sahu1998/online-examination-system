@@ -1,4 +1,3 @@
-const loginSchema = require("../Model/loginmodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
@@ -7,7 +6,7 @@ const postsignupController = async (req, res) => {
   console.log("req.body==>", req.body);
   try {
     const { name, userName, email, password, confirmPassword } = req.body;
-    const isExist = await loginSchema.findOne({
+    const isExist = await userSchema.findOne({
       email,
     });
     if (isExist) {
@@ -23,7 +22,7 @@ const postsignupController = async (req, res) => {
         password: hashpass,
       };
       console.log("==========>", temp);
-      const data = await loginSchema.create({ ...temp, role: "student" });
+      const data = await userSchema.create({ ...temp, role: "student" });
       return res.send({ data, message: "success", status: 200 });
     } else {
       return res.send({ message: "password not match", status: 400 });
@@ -37,7 +36,7 @@ const postloginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (email && password) {
-      const data = await loginSchema.findOne({
+      const data = await userSchema.findOne({
         email,
       });
 
@@ -77,7 +76,7 @@ const postloginController = async (req, res) => {
 };
 
 const getloginController = async (req, res) => {
-  const data = await loginSchema.find();
+  const data = await userSchema.find();
   res.send(data);
 };
 

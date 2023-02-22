@@ -4,7 +4,7 @@ const date = require("date-and-time");
 
 const postFeedbackController = async (req, res) => {
   try {
-    const { title, desc, subject, userId } = req.body;
+    const { title, desc, subject, id } = req.body;
     console.log("REQ.BODY", req.body);
 
     const now = new Date();
@@ -15,7 +15,7 @@ const postFeedbackController = async (req, res) => {
       desc,
       subject,
       postedOn: value,
-      userId,
+      userId: id,
     };
     const data = await feedbackModel.create(temp);
 
@@ -28,6 +28,16 @@ const postFeedbackController = async (req, res) => {
 const getFeedbackController = async (req, res) => {
   try {
     const data = await feedbackModel.find();
+    res.send({ data, message: "success", status: 200 });
+  } catch (err) {
+    res.send({ message: "failed", status: 400 });
+  }
+};
+const deleteFeedbackController = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const data = await feedbackModel.findByIdAndDelete(id);
     res.send({ data, message: "success", status: 200 });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
@@ -73,5 +83,7 @@ const getByIdFeedbackController = async (req, res) => {
 module.exports = {
   postFeedbackController,
   getFeedbackController,
+  deleteFeedbackController,
+
   getByIdFeedbackController,
 };

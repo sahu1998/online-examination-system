@@ -1,25 +1,39 @@
 import { Modal, Input, Table, Button, Text, Dropdown } from "@nextui-org/react";
-import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import {
+  deleteApiHandler,
+  getApiHandler,
+  postApiHandler,
+  serverURL,
+} from "../../../apiHandler";
 import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
-import { getApiHandler } from "../../../apiHandler";
 import FeedbackForm from "../../student/feedback/temp";
+import * as React from "react";
+import OwnerLayout from "../../../layouts/owner-layout";
 
 export default function FeedbackTable() {
-  const [data, setData] = useState([]);
+  const [data, setData] = React.useState([]);
+  const token = localStorage.getItem("token");
 
   const getData = async () => {
-    const res = await getApiHandler("/get-feedbackaggregate");
-    console.log("aaaaaaaaa=?", res);
-    // setData(res.data);
+    const res = await getApiHandler(`/get-feedbackaggregate/${token}`);
+    console.log("Aggregate", res.data);
+    setData(res.data);
   };
   useEffect(() => {
     getData();
   }, []);
 
+  const deleteData = async (id) => {
+    const response = await deleteApiHandler(`/delete-feedback/${token}/${id}`);
+    console.log("DELETE", response);
+
+    getData();
+  };
+
   return (
-    <>
+    <OwnerLayout>
       <Table
         bordered
         css={{
@@ -28,23 +42,20 @@ export default function FeedbackTable() {
         }}
       >
         <Table.Header>
-          <Table.Column>Name</Table.Column>
-
-          <Table.Column>Email</Table.Column>
-
-          <Table.Column>Image</Table.Column>
-          <Table.Column>Role</Table.Column>
-          <Table.Column>Status</Table.Column>
+          <Table.Column>TITLEW</Table.Column>
+          <Table.Column>IMAGE</Table.Column>
+          <Table.Column>NAME</Table.Column>
+          <Table.Column>SUBJECT</Table.Column>
+          <Table.Column>DESCRIPTION</Table.Column>
+          <Table.Column>POSTED ON</Table.Column>
+          <Table.Column>STATUS</Table.Column>
           <Table.Column></Table.Column>
         </Table.Header>
 
         <Table.Body>
           {data.map((row) => (
             <Table.Row>
-              <Table.Cell>{row.name}</Table.Cell>
-
-              <Table.Cell>{row.email}</Table.Cell>
-
+              <Table.Cell>{row.title}</Table.Cell>
               <Table.Cell>
                 {row.image ? (
                   <img
@@ -60,7 +71,11 @@ export default function FeedbackTable() {
                   />
                 )}
               </Table.Cell>
-              <Table.Cell>{row.role}</Table.Cell>
+
+              <Table.Cell>{row.name}</Table.Cell>
+              <Table.Cell>{row.subject}</Table.Cell>
+              <Table.Cell>{row.desc}</Table.Cell>
+              <Table.Cell>{row.postedOn}</Table.Cell>
               <Table.Cell>
                 {row.status ? (
                   <CheckIcon style={{ background: "darkgray" }} />
@@ -68,7 +83,6 @@ export default function FeedbackTable() {
                   <ClearIcon style={{ background: "darkgray" }} />
                 )}
               </Table.Cell>
-
               <Table.Cell>
                 <Dropdown>
                   <Dropdown.Button
@@ -81,8 +95,16 @@ export default function FeedbackTable() {
                     Action
                   </Dropdown.Button>
                   <Dropdown.Menu aria-label="Static Actions">
-                    <Dropdown.Item key="edit"></Dropdown.Item>
-                    <Dropdown.Item key="delete"></Dropdown.Item>
+                    <Dropdown.Item key="delete">
+                      <Button
+                        onClick={() => {
+                          deleteData(row._id);
+                        }}
+                        className="btn"
+                      >
+                        Delete
+                      </Button>
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </Table.Cell>
@@ -99,7 +121,6 @@ export default function FeedbackTable() {
           onPageChange={(page) => console.log({ page })}
         />
       </Table>
-      <FeedbackForm getData={getData} />
-    </>
+    </OwnerLayout>
   );
 }

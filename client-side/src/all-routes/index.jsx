@@ -20,7 +20,7 @@ import OwnerDasboad from "../pages/owner/dashboard";
 import CategoryTable from "../pages/owner/exams/categories";
 import UsersTable from "../components/owner/users/temp";
 import FeedbackForm from "../components/student/feedback/temp";
-
+import FeedbackTable from "../components/owner/feedbackTable";
 export default function AllRoutes() {
   return (
     <Routes>

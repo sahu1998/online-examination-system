@@ -59,6 +59,7 @@ export default function LogIn() {
     console.log("resss=======>", response.temp);
     if (response.status === 200) {
       localStorage.setItem("token", response.temp.token);
+      localStorage.setItem("id", response.temp._id);
 
       if (response.temp.role === "owner" && role === "owner") {
         console.log(role, response.temp.role);

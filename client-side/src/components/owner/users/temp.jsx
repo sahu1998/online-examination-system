@@ -16,6 +16,7 @@ export default function UsersTable() {
   const { register, handleSubmit, watch, reset, setValue } = useForm();
   const [data, setData] = useState([]);
   const [id, setId] = useState();
+  const token = localStorage.getItem("token");
 
   // console.log("dataviikas=>", data);
   const [visible, setVisible] = useState(false);
@@ -41,8 +42,8 @@ export default function UsersTable() {
     formData.append("status", status);
     console.log("id==>", id);
     const data = id
-      ? await putApiHandler(`/put-users/${id}`, formData)
-      : await postApiHandler("/post-users", formData);
+      ? await putApiHandler(`/put-users/${id}/${token}`, formData)
+      : await postApiHandler(`/post-users/${token}`, formData);
 
     console.log("data=>", data.data);
     getData();
@@ -51,7 +52,7 @@ export default function UsersTable() {
     reset();
   };
   const getData = async () => {
-    const res = await getApiHandler("/get-users");
+    const res = await getApiHandler(`/get-users/${token}`);
     console.log("aaaaaaaaa=?", res);
     setData(res.data);
   };
@@ -63,14 +64,14 @@ export default function UsersTable() {
   }, [id]);
 
   const deleteData = async (id) => {
-    const response = await deleteApiHandler(`/delete-users/${id}`);
+    const response = await deleteApiHandler(`/delete-users/${token}/${id}`);
     console.log("DELETE", response);
 
     getData();
   };
 
   const getDataById = async () => {
-    const response = await getApiHandler(`/getByUserId/${id}`);
+    const response = await getApiHandler(`/getByUserId/${token}/${id}`);
     console.log("RESS", response.data);
     const { name, userName, email, password, image, role, status } =
       response.data;
@@ -302,6 +303,15 @@ export default function UsersTable() {
               size="lg"
               placeholder="Status"
               {...register("status")}
+            />
+            <Input
+              clearable
+              bordered
+              fullWidth
+              color="gradient"
+              size="lg"
+              placeholder="Please Enter 10 Digit Mobile Number"
+              {...register("phone")}
             />
             <Button type="submit" color="neutral" onPress={closeHandler}>
               CREATE
