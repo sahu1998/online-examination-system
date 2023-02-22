@@ -28,12 +28,12 @@ import { Button } from '@mui/material';
 
 const drawerWidth = 240;
 const ProfileArray = [
-    {name:"My Bookmarks"},
-    {name:"My Profile"},
-    {name:"Change Password"},
-    {name:"Settings"},
-    {name:"Feedback"},
-    {name:"Logout"},
+    {name:"My Bookmarks", path:"/studentbookmarks"},
+    {name:"My Profile",path:"/studentprofile"},
+    {name:"Change Password",path:"/studentpassword"},
+    {name:"Settings",path:"/studentsettings"},
+    {name:"Feedback",path:"/studentfeedback"},
+    {name:"Logout",path:"/studentlogout"},
 ]
 const Array = [
     {name:"Dashboard",path:"/student",icon:<DashboardIcon/>},
@@ -137,7 +137,7 @@ function StudentSideBar({children}) {
         }}
       >
         {ProfileArray.map((info)=>(
-            <Typography sx={{padding:"5px",fontSize:"inherit"}}>{info.name}</Typography>
+            <NavLink to={info.path} style={{textDecoration:"none",color:"black"}}><Typography sx={{padding:"5px",fontSize:"inherit"}}>{info.name}</Typography></NavLink>
         ))}
       </Popover>
             </div> 
