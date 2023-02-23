@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+
 import {
   Modal,
   Input,
@@ -6,29 +8,55 @@ import {
   Text,
   Dropdown,
   Textarea,
+  Grid,
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import {
   deleteApiHandler,
   getApiHandler,
   postApiHandler,
+  putApiHandler,
 } from "../../../../apiHandler";
 
 import "./category.m.css";
 
-export default function CategoryTable() {
-  const { register, handleSubmit, reset, setValue } = useForm();
+const schema = yup.object().shape({
+  examName: yup.string().required("*Category Name is required"),
+  // .matches(/^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$/, "*Use only alphabats"),
+  examDesc: yup.string().required("*Category Description is required"),
+});
+
+export default function PracticeCatg() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const [data, setData] = useState([]);
+  const [catgId, setCatgId] = useState();
   const [visible, setVisible] = useState(false);
-  const handler = () => setVisible(true);
-  const closeHandler = () => {
-    setVisible(false);
-  };
   const onSubmit = async (values) => {
     console.log("values=>", values);
-    const data = await postApiHandler("/post-exam-catg", values);
-    console.log("data=>", data.data);
+    if (catgId) {
+      console.log("updating... ", values);
+      const result = await putApiHandler(
+        `/update-practice-catg/${catgId}`,
+        values
+      );
+      console.log("updated.....", result);
+      setCatgId(null);
+    } else {
+      const result = await postApiHandler("/post-exam-catg", values);
+      console.log("data=>", result.data);
+    }
+    setVisible(false);
     await getData();
     reset();
   };
@@ -42,21 +70,23 @@ export default function CategoryTable() {
     await getData();
   };
 
-  const updateData = async (value) => {
+  const prefilledForm = async (value) => {
     console.log(value);
+    setValue("examName", value.examName);
+    setValue("examDesc", value.examDesc);
   };
+
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <div className="my-5">
-      {/* <Button color="neutral" auto onPress={handler}>
-        CREATE
-      </Button> */}
       <Button
-        onPress={handler}
+        onPress={() => {
+          setVisible(true);
+        }}
         auto
-        as="a"
         rel="noopener noreferrer"
         target="_blank"
         css={{
@@ -115,8 +145,10 @@ export default function CategoryTable() {
                     <Dropdown.Item aria-label="edit-action" key="edit">
                       <button
                         className="catg-btn-desing"
-                        onClick={() => {
-                          updateData(a);
+                        onClick={async () => {
+                          setCatgId(a._id);
+                          await prefilledForm(a);
+                          setVisible(true);
                         }}
                       >
                         Edit
@@ -150,57 +182,79 @@ export default function CategoryTable() {
       </Table>
 
       <Modal
-        closeButton
         blur
+        preventClose
         open={visible}
-        onClose={closeHandler}
-        width={500}
+        onClose={() => {
+          setVisible(false);
+        }}
+        aria-labelledby="modal-title"
+        width={750}
         height={500}
       >
-        <Modal.Header>
+        <Modal.Header aria-labelledby="modal-header">
           <Text id="modal-title" size={18}>
             <Text b size={18}>
-              Add Category
+              {catgId ? "Update Category" : "Add Category"}
             </Text>
           </Text>
         </Modal.Header>
-        <Modal.Body>
-          <form
-            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <Input
-              clearable
-              bordered
-              fullWidth
-              color="gradient"
-              size="lg"
-              placeholder="Title"
-              {...register("examName")}
-            />
-            <Textarea
-              clearable
-              bordered
-              fullWidth
-              color="gradient"
-              size="lg"
-              placeholder="Description"
-              {...register("examDesc")}
-            />
-            {/* <Input
-              clearable
-              bordered
-              fullWidth
-              color="gradient"
-              size="lg"
-              placeholder="Description"
-              {...register("examDesc")}
-            /> */}
-            <Button type="submit" color="neutral" onPress={closeHandler}>
-              Add
+        <form
+          style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Modal.Body aria-labelledby="modal-body">
+            <Grid.Container gap={4}>
+              <Grid xs={12}>
+                <Input
+                  clearable
+                  bordered
+                  fullWidth
+                  color={errors?.examName ? "error" : "primary"}
+                  size="lg"
+                  placeholder="Title"
+                  error={!!errors?.examName}
+                  helperText={errors?.examName?.message}
+                  helperColor="error"
+                  {...register("examName")}
+                  aria-labelledby="practiceCatgTitleName"
+                />
+              </Grid>
+              <Grid xs={12}>
+                <Textarea
+                  clearable
+                  bordered
+                  fullWidth
+                  color={errors?.examDesc ? "error" : "primary"}
+                  size="lg"
+                  placeholder="Description"
+                  error={!!errors?.examDesc}
+                  helperText={errors?.examDesc?.message}
+                  helperColor="error"
+                  {...register("examDesc")}
+                  aria-labelledby="practiceCatgDisc"
+                />
+              </Grid>
+            </Grid.Container>
+          </Modal.Body>
+          <Modal.Footer aria-labelledby="modal-footer">
+            <Button
+              auto
+              flat
+              color="warning"
+              onPress={() => {
+                setVisible(false);
+                reset();
+                setCatgId(null);
+              }}
+            >
+              Close
             </Button>
-          </form>
-        </Modal.Body>
+            <Button type="submit" color="success">
+              {catgId ? "Update" : "Add"}
+            </Button>
+          </Modal.Footer>
+        </form>
       </Modal>
     </div>
   );
