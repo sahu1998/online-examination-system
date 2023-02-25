@@ -99,6 +99,21 @@ const uploadLmsCatImage = multer({
   limits: { fileSize: 1000000 },
 });
 
+const viewLmsStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    console.log("mahi ===============");
+    cb(null, "./storage/viewpdf");
+  },
+  filename: (req, file, cb) => {
+    console.log("file.....", file);
+    cb(null, file.originalname);
+    console.log("null",file.originalname);
+  },
+});
+const uploadLmsViewPdf = multer({
+  storage:viewLmsStorage,
+  // limits: { fileSize: 1000000 },
+});
 module.exports = {
   uploadSubjectImage,
   uploadLmsSubImage,
@@ -106,4 +121,5 @@ module.exports = {
   auth,
   uploadUserImage,
   uploadFeedbackImage,
+  uploadLmsViewPdf, 
 };

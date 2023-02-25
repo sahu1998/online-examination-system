@@ -59,6 +59,7 @@ export default function IconMenu() {
       getByIdView(viewId);
     }
   }, [viewId]);
+
   return (
     <Container className="my-5">
       <Grid container spacing={3}>
@@ -74,6 +75,7 @@ export default function IconMenu() {
                           onClick={() => {
                             setHed(row.examName);
                             setId(row._id);
+                            setViewId("");
                           }}
                         >
                           {row.examName}

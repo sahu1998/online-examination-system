@@ -47,7 +47,7 @@ const {
 
   getByIdUserController,
 } = require("../controller/userscontroller");
-const { auth, uploadUserImage, uploadFeedbackImage } = require("../middleware");
+const { auth, uploadUserImage, uploadFeedbackImage, uploadLmsViewPdf } = require("../middleware");
 const {
   uploadSubjectImage,
   uploadLmsSubImage,
@@ -119,12 +119,13 @@ router.put(
   uploadLmsSubImage.single("image"),
   putLmsSubController
 );
-router.post("/postLmsView", PostLmsViewController);
+router.post("/postLmsView",uploadLmsViewPdf.single('pdf'), PostLmsViewController);
 router.get("/getLmsView", getLmsViewController);
 router.get("/getRandomLmsSub", getRandomLmsSubController);
 // uploadLmsViewFile.single("view"),
 
 router.use("/lms-settingImage", express.static("storage/setting"));
+router.use("/view", express.static("storage/viewpdf"));
 
 router.post(
   "/site-setting",

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const viewSchema = mongoose.Schema({
   viewName: String,
+  viewImage:String,
   viewId: mongoose.Schema.Types.ObjectId,
   
 });
@@ -9,9 +10,11 @@ const view = mongoose.model("views", viewSchema);
 
 const postLmsViewData = async (obj) => {
   try {
+    console.log("obj=====>",obj);
     const result = await view.create(obj);
+    console.log("result====>",result);
     return {
-      DataView: result,
+      data: result,
       message: "view data addesd succesfullhy",
       status: 200,
     };

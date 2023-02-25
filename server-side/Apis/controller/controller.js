@@ -73,7 +73,11 @@ const putLmsSubController = async (req, res) => {
   res.send(data);
 };
 const PostLmsViewController=async(req,res)=>{
-  const data=await postLmsViewData(req.body);
+  const file=req.file.path;
+  console.log("file====>",file);
+  const temp={...req.body,viewImage:file}
+  const data=await postLmsViewData(temp);
+  console.log("data=====>",data);
   res.send(data)
 }
 const getLmsViewController=async(req,res)=>{
