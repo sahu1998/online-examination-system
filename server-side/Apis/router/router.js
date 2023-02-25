@@ -20,6 +20,8 @@ const {
   deleteExamCatgController,
   putExamCatgController,
   deletePracticeSubjController,
+  putPracticeSubjController,
+  temp,
 } = require("../controller/practiceExamController");
 const {
   postFeedbackController,
@@ -43,7 +45,14 @@ const {
 
   getByIdUserController,
 } = require("../controller/userscontroller");
-const { auth, uploadUserImage, uploadFeedbackImage } = require("../middleware");
+const {
+  auth,
+  uploadUserImage,
+  uploadFeedbackImage,
+  uploadQuiz,
+  convertExcelToJson,
+  convertExcelToJson2,
+} = require("../middleware");
 const {
   uploadSubjectImage,
   uploadLmsSubImage,
@@ -63,8 +72,13 @@ router.post(
   postSubjectController
 );
 router.delete("/delete-practice-subj/:id", deletePracticeSubjController);
-
-router.post("/postques/:id", postQuesInSubjController);
+router.put("/update-practice-subj/:id", putPracticeSubjController);
+router.post(
+  "/postques/:id",
+  uploadQuiz.single("quiz"),
+  convertExcelToJson,
+  postQuesInSubjController
+);
 router.put("/add-que-in-subj/:id", pushQuesInSubjController);
 router.get("/get-practice-ques/:id", getPracticeQuesController);
 router.get("/getsubject", getAllSubjectController);
@@ -107,5 +121,21 @@ router.post(
 );
 router.get("/getLmsCat", getLmsCatController);
 router.get("/getRandomLmsSub", getRandomLmsSubController);
+
+router.post(
+  "/exceltojson",
+  uploadQuiz.single("quiz"),
+  convertExcelToJson,
+  (req, res) => {
+    const data = req.quiz.map((obj) => {
+      return {
+        question: obj.question,
+        options: obj.options.split(";"),
+        answer: parseInt(obj.answer),
+      };
+    });
+    res.send(data);
+  }
+);
 
 module.exports = router;

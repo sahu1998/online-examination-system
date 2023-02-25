@@ -14,6 +14,7 @@ const {
   pushQuesInSubj,
   getPracticeQues,
   deletePracticeExamData,
+  putPracticeSubjData,
 } = require("../model/practiceSubjModel");
 
 //////////////////////////////////////////////////////////////////////
@@ -56,6 +57,12 @@ const postSubjectController = async (req, res) => {
   res.send(data);
 };
 
+const putPracticeSubjController = async (req, res) => {
+  const subject = { ...req.body, subjectImg: req.file?.path };
+  const data = await putPracticeSubjData(req.params.id, req.body);
+  res.send(data);
+};
+
 const deletePracticeSubjController = async (req, res) => {
   const id = req.params.id;
   console.log("sfdkdsjfksjfdskf: ", id);
@@ -86,7 +93,14 @@ const getRandomSubjController = async (req, res) => {
 
 const postQuesInSubjController = async (req, res) => {
   console.log("subject id: ", req.params.id);
-  const data = await postQuesInSubject(req.params.id, req.body);
+  const practiceQues = req.quiz.map((obj) => {
+    return {
+      question: obj.question,
+      options: obj.options.split(";"),
+      answer: parseInt(obj.answer),
+    };
+  });
+  const data = await postQuesInSubject(req.params.id, practiceQues);
   res.send(data);
 };
 
@@ -116,4 +130,5 @@ module.exports = {
   getPracticeQuesController,
   putExamCatgController,
   deletePracticeSubjController,
+  putPracticeSubjController,
 };
