@@ -3,6 +3,7 @@ const {
   postExamData,
   getAllExamData,
   deleteExamCatgData,
+  putExamData,
 } = require("../model/practiceCatgModel");
 const {
   postSubjectData,
@@ -12,6 +13,7 @@ const {
   postQuesInSubject,
   pushQuesInSubj,
   getPracticeQues,
+  deletePracticeExamData,
 } = require("../model/practiceSubjModel");
 
 //////////////////////////////////////////////////////////////////////
@@ -23,6 +25,11 @@ const postExamCatgController = async (req, res) => {
   // console.log("POST CONTROLLER Data===>", data);
   console.log("postExamCatgController: ", req.body);
   const data = await postExamData(req.body);
+  res.send(data);
+};
+
+const putExamCatgController = async (req, res) => {
+  const data = await putExamData(req.params.id, req.body);
   res.send(data);
 };
 
@@ -46,6 +53,13 @@ const postSubjectController = async (req, res) => {
   const subject = { ...req.body, subjectImg: req.file?.path };
   console.log("postExamCatgController: ", subject);
   const data = await postSubjectData(subject);
+  res.send(data);
+};
+
+const deletePracticeSubjController = async (req, res) => {
+  const id = req.params.id;
+  console.log("sfdkdsjfksjfdskf: ", id);
+  const data = await deletePracticeExamData(id);
   res.send(data);
 };
 
@@ -100,4 +114,6 @@ module.exports = {
   getSubjectByCatgController,
   getRandomSubjController,
   getPracticeQuesController,
+  putExamCatgController,
+  deletePracticeSubjController,
 };

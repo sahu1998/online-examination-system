@@ -21,6 +21,8 @@ const {
   getRandomSubjController,
   getPracticeQuesController,
   deleteExamCatgController,
+  putExamCatgController,
+  deletePracticeSubjController,
 } = require("../controller/practiceExamController");
 const {
   postFeedbackController,
@@ -55,6 +57,7 @@ const router = express.Router();
 router.post("/post-exam-catg", postExamCatgController);
 router.get("/get-exam-catg", getExamCatgController);
 router.delete("/del-practice-catg/:id", deleteExamCatgController);
+router.put("/update-practice-catg/:id", putExamCatgController);
 router.get("/about", getAboutController);
 
 router.post(
@@ -62,6 +65,8 @@ router.post(
   uploadSubjectImage.single("image"),
   postSubjectController
 );
+router.delete("/delete-practice-subj/:id", deletePracticeSubjController);
+
 router.post("/postques/:id", postQuesInSubjController);
 router.put("/add-que-in-subj/:id", pushQuesInSubjController);
 router.get("/get-practice-ques/:id", getPracticeQuesController);
