@@ -185,6 +185,15 @@ const deletePracticeExamData = async (id) => {
   }
 };
 
+const putPracticeSubjData = async (id, values) => {
+  try {
+    const result = await subjectModel.findByIdAndUpdate(id, values);
+    return { data: result, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
 module.exports = {
   // postModel,
   postSubjectData,
@@ -195,4 +204,5 @@ module.exports = {
   pushQuesInSubj,
   getPracticeQues,
   deletePracticeExamData,
+  putPracticeSubjData,
 };

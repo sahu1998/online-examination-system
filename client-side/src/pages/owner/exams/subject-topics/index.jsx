@@ -36,48 +36,6 @@ const schema = yup.object().shape({
     .required("*Time limit is required"),
 });
 
-const CatgoryDropdown = ({ categories, setSelectedCatg, selectedCatg }) => {
-  const [selected, setSelected] = useState("select");
-  console.log("asdfdsfds: ", categories);
-
-  console.log(selectedCatg);
-  return (
-    <Dropdown>
-      <Dropdown.Button
-        className="w-100 item-start"
-        bordered
-        color="primary"
-        css={{ tt: "capitalize" }}
-      >
-        {selected}
-      </Dropdown.Button>
-      <Dropdown.Menu
-        aria-label="Single selection actions"
-        color="secondary"
-        disallowEmptySelection
-        selectionMode="single"
-        selectedKeys={selected}
-        onSelectionChange={setSelected}
-      >
-        {categories.map((catg) => {
-          return (
-            <Dropdown.Item key={catg.examName}>
-              <div
-                className="w-100"
-                onClick={() => {
-                  setSelectedCatg(catg._id);
-                }}
-              >
-                {catg.examName}
-              </div>
-            </Dropdown.Item>
-          );
-        })}
-      </Dropdown.Menu>
-    </Dropdown>
-  );
-};
-
 export default function PracticeSubjects() {
   const {
     register,
@@ -107,7 +65,7 @@ export default function PracticeSubjects() {
     if (subjectId) {
       console.log("updating... ", values);
       const result = await putApiHandler(
-        `/update-practice-catg/${subjectId}`,
+        `/update-practice-subj/${subjectId}`,
         values
       );
       console.log("updated.....", result);
