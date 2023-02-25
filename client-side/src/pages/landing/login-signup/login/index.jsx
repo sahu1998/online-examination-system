@@ -144,6 +144,7 @@ export default function LogIn() {
                     : ""}
                 </h6>
               </div>
+
               <Button
                 type="submit"
                 variant="contained"
@@ -166,7 +167,7 @@ export default function LogIn() {
                     style={{
                       textDecoration: "none",
                     }}
-                    // onClick={handleOpen}
+                  // onClick={handleOpen}
                   >
                     Forgot password
                   </Link>

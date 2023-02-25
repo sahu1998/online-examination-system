@@ -18,6 +18,7 @@ import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 import CategoryTable from "../pages/owner/exams/categories";
+import MasterSetting from "../components/owner/master-settings/temp";
 
 export default function AllRoutes() {
   return (
@@ -44,6 +45,7 @@ export default function AllRoutes() {
       <Route path="/student" element={<StudentDashboard />} />
 
       <Route path="/practice-exam-catg" element={<CategoryTable />} />
+
     </Routes>
   );
 }
