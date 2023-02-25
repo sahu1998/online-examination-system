@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import ReCAPTCHA from "react-google-recaptcha";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -48,6 +48,8 @@ const schema = yup
 
 export default function SignUp() {
   const [message, setMessage] = React.useState();
+  const [reCaptcha, SetRecaptcha] = React.useState('');
+  const captchaRef = React.useRef();
 
   const {
     register,
@@ -66,8 +68,9 @@ export default function SignUp() {
   const history = useNavigate();
 
   const onSubmit = async (value) => {
-    console.log("Value", value);
-    const response = await postApiHandler("/post-signup", value);
+    console.log("Value", { ...value, reCaptcha });
+
+    const response = await postApiHandler("/post-signup", { ...value, reCaptcha });
     console.log("res!!!=======>", response);
     if (response.status === 200) {
       swal("Registration successfully!", "You clicked the button!", "success");
@@ -77,6 +80,10 @@ export default function SignUp() {
       setMessage(response.message);
     }
   };
+  const onChange = (value) => {
+    console.log("Captcha value:", value);
+    SetRecaptcha(value);
+  }
 
   return (
     <LandingLayout>
@@ -134,13 +141,13 @@ export default function SignUp() {
                 error={!!errors?.email}
                 helperText={errors?.email?.message}
               />
-              <h6 class="message">
+              {/* <h6 class="message">
                 {message
                   ? message === "password not match"
                     ? ""
                     : message
                   : ""}
-              </h6>
+              </h6> */}
               <Typography className="typography">Password*</Typography>
               <TextField
                 className="textfeild"
@@ -175,7 +182,11 @@ export default function SignUp() {
                     : ""
                   : ""}
               </h6>
-
+              <ReCAPTCHA
+                sitekey="6LeHNZokAAAAAC5sRNYDUeqWL8Asc4KW_lCKP-5N"
+                onChange={onChange}
+                ref={captchaRef}
+              />
               <Button
                 type="submit"
                 variant="contained"

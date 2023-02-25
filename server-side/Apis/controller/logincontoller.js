@@ -2,11 +2,14 @@ const loginSchema = require("../Model/loginmodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
+const axios = require('axios')
+const secret_key = '6LeHNZokAAAAADpDro3y7rWF0E0cxtDUc90-zLLt'
 
 const postsignupController = async (req, res) => {
   console.log("req.body==>", req.body);
   try {
-    const { name, userName, email, password, confirmPassword } = req.body;
+    const { name, userName, email, password, confirmPassword, reCaptcha } = req.body;
+    const recaptchaData = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${reCaptcha}`)
     const isExist = await loginSchema.findOne({
       email,
     });
@@ -23,8 +26,14 @@ const postsignupController = async (req, res) => {
         password: hashpass,
       };
       console.log("==========>", temp);
-      const data = await loginSchema.create({ ...temp, role: "student" });
-      return res.send({ data, message: "success", status: 200 });
+      if (recaptchaData.data.success) {
+        const data = await loginSchema.create({ ...temp, role: "student" });
+        return res.send({ data, message: " recaptcha is valid", status: 200 });
+      }
+      else {
+        return res.send({ message: "recaptcha is not valid", status: 400 })
+      }
+
     } else {
       return res.send({ message: "password not match", status: 400 });
     }
