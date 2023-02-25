@@ -17,7 +17,8 @@ import Quiz from "../pages/student/exams/quiz";
 import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
-import CategoryTable from "../pages/owner/exams/categories";
+import PracticeCatg from "../pages/owner/exams/categories";
+import PracticeSubjects from "../pages/owner/exams/subject-topics";
 
 export default function AllRoutes() {
   return (
@@ -43,7 +44,8 @@ export default function AllRoutes() {
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/student" element={<StudentDashboard />} />
 
-      <Route path="/practice-exam-catg" element={<CategoryTable />} />
+      <Route path="/practice-exam-catg" element={<PracticeCatg />} />
+      <Route path="/practice-exam-subjects" element={<PracticeSubjects />} />
     </Routes>
   );
 }
