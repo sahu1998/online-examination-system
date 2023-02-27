@@ -29,6 +29,7 @@ const auth = (req, res, next) => {
       if (err) {
         return res.send({ status: 400, auth: false });
       }
+
       next();
     }
   );

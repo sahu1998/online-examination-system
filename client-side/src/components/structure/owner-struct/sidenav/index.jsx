@@ -24,17 +24,44 @@ import GTranslateIcon from "@mui/icons-material/GTranslate";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
-import { Button, Container } from "@mui/material";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 const ProfileArray = [
-  { name: "My Profile", path: "/ownerprofile" },
+  { name: "My Profile", path: "/myprofileOwner" },
   { name: "Theams", path: "/ownertheam" },
   { name: "Language", path: "/ownerlanguage" },
   { name: "Send Push Notification", path: "/ownernotification" },
-  { name: "Change Password", path: "/ownerpassword" },
+  { name: "Change Password", path: "/ownerPassword" },
   { name: "Logout", path: "/ownerlogout" },
+];
+const Array = [
+  { name: "Dashboard", path: "/owner", icon: <DashboardIcon /> },
+  { name: "Language", path: "/ownerlanguage", icon: <GTranslateIcon /> },
+  { name: "User", path: "/users", icon: <AccountCircleIcon /> },
+  {
+    name: "Exam",
+    path: "",
+    icon: <ComputerIcon />,
+    subcatg: [
+      { name: "Categories", url: "/ownercategories" },
+      { name: "Question Bank", url: "/ownerquestion" },
+      { name: "Exam Type", url: "/ownerexamtype" },
+      { name: "Instructions", url: "/ownerinstruct" },
+      { name: "Subject Type", url: "/ownersubject" },
+    ],
+  },
+  { name: "LMS", path: "/ownerlms", icon: <DesktopWindowsIcon /> },
+  {
+    name: "Notification",
+    path: "/ownernotification",
+    icon: <NotificationsActiveIcon />,
+  },
+  { name: "Feedback", path: "/ownerfeedback", icon: <FeedbackIcon /> },
+  { name: "Master Settings", path: "/ownersettings", icon: <SettingsIcon /> },
 ];
 const Exam = [
   { name: "Categories", url: "/ownercategories" },
