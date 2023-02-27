@@ -23,11 +23,11 @@ import PracticeSubjects from "../pages/owner/exams/subject-topics";
 export default function AllRoutes() {
   return (
     <Routes>
-      {/* //////////.....Home.....////////// */}
+       {/* //////////.....Home.....////////// */}
       <Route path="/" element={<Home />} />
       <Route path="/practices" element={<PracticeExam />} />
       {/* //////////////.......Owner.....///////////// */}
-      <Route path="/logIn" element={<LogIn />} />
+       <Route path="/logIn" element={<LogIn />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/forgotPass" element={<ForgotPass />} />
 
