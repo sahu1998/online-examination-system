@@ -18,6 +18,10 @@ const {
   getRandomSubjController,
   getPracticeQuesController,
   deleteExamCatgController,
+  putExamCatgController,
+  deletePracticeSubjController,
+  putPracticeSubjController,
+  temp,
 } = require("../controller/practiceExamController");
 const {
   postFeedbackController,
@@ -43,7 +47,14 @@ const {
   postloginController,
   postsignupController,
 } = require("../controller/userscontroller");
-const { auth, uploadUserImage, uploadFeedbackImage } = require("../middleware");
+const {
+  auth,
+  uploadUserImage,
+  uploadFeedbackImage,
+  uploadQuiz,
+  convertExcelToJson,
+  convertExcelToJson2,
+} = require("../middleware");
 const {
   uploadSubjectImage,
   uploadLmsSubImage,
@@ -64,6 +75,7 @@ const router = express.Router();
 router.post("/post-exam-catg", postExamCatgController);
 router.get("/get-exam-catg", getExamCatgController);
 router.delete("/del-practice-catg/:id", deleteExamCatgController);
+router.put("/update-practice-catg/:id", putExamCatgController);
 router.get("/about", getAboutController);
 
 router.post(
@@ -71,7 +83,14 @@ router.post(
   uploadSubjectImage.single("image"),
   postSubjectController
 );
-router.post("/postques/:id", postQuesInSubjController);
+router.delete("/delete-practice-subj/:id", deletePracticeSubjController);
+router.put("/update-practice-subj/:id", putPracticeSubjController);
+router.post(
+  "/postques/:id",
+  uploadQuiz.single("quiz"),
+  convertExcelToJson,
+  postQuesInSubjController
+);
 router.put("/add-que-in-subj/:id", pushQuesInSubjController);
 router.get("/get-practice-ques/:id", getPracticeQuesController);
 router.get("/getsubject", getAllSubjectController);
@@ -128,5 +147,21 @@ router.post(
 );
 router.get("/getLmsCat", getLmsCatController);
 router.get("/getRandomLmsSub", getRandomLmsSubController);
+
+router.post(
+  "/exceltojson",
+  uploadQuiz.single("quiz"),
+  convertExcelToJson,
+  (req, res) => {
+    const data = req.quiz.map((obj) => {
+      return {
+        question: obj.question,
+        options: obj.options.split(";"),
+        answer: parseInt(obj.answer),
+      };
+    });
+    res.send(data);
+  }
+);
 
 module.exports = router;

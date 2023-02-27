@@ -7,7 +7,7 @@ function App() {
     <div>
       <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter>{" "}
+      </BrowserRouter>
     </div>
   );
 }

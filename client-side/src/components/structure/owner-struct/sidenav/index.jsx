@@ -41,7 +41,7 @@ const ProfileArray = [
 const Array = [
   { name: "Dashboard", path: "/owner", icon: <DashboardIcon /> },
   { name: "Language", path: "/ownerlanguage", icon: <GTranslateIcon /> },
-  { name: "User", path: "/users", icon: <AccountCircleIcon /> },
+  { name: "User", path: "/owneruser", icon: <AccountCircleIcon /> },
   {
     name: "Exam",
     path: "",
@@ -57,14 +57,56 @@ const Array = [
   { name: "LMS", path: "/ownerlms", icon: <DesktopWindowsIcon /> },
   {
     name: "Notification",
-    path: "/notification",
+    path: "/ownernotification",
     icon: <NotificationsActiveIcon />,
   },
-  { name: "Feedback", path: "/feedbacktable", icon: <FeedbackIcon /> },
+  { name: "Feedback", path: "/ownerfeedback", icon: <FeedbackIcon /> },
   { name: "Master Settings", path: "/ownersettings", icon: <SettingsIcon /> },
 ];
+const settings = [{ name: "Settings", url: "/ownercategories" }];
 
 function OwnerSideBar({ children }) {
+  const [settingsdata, setSettingsdata] = React.useState(null);
+
+  const handleClick4 = (event) => {
+    setSettingsdata(event.currentTarget);
+  };
+
+  const handleClose4 = () => {
+    setSettingsdata(null);
+  };
+
+  const open4 = Boolean(settingsdata);
+  const id4 = open4 ? "simple-popover" : undefined;
+
+  //.............................................................................................
+  const [lmsdata, setLmsdata] = React.useState(null);
+
+  const handleClick3 = (event) => {
+    setLmsdata(event.currentTarget);
+  };
+
+  const handleClose3 = () => {
+    setLmsdata(null);
+  };
+
+  const open3 = Boolean(lmsdata);
+  const id3 = open3 ? "simple-popover" : undefined;
+
+  //...........................................................................................
+  const [examdata, setExamdata] = React.useState(null);
+
+  const handleClick2 = (event) => {
+    setExamdata(event.currentTarget);
+  };
+
+  const handleClose2 = () => {
+    setExamdata(null);
+  };
+
+  const open2 = Boolean(examdata);
+  const id2 = open2 ? "simple-popover" : undefined;
+  // .......................................................................................
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -85,7 +127,7 @@ function OwnerSideBar({ children }) {
   };
 
   const drawer = (
-    <div>
+    <div style={{}}>
       <Toolbar />
       <Divider />
       <List>
@@ -218,6 +260,7 @@ function OwnerSideBar({ children }) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              background: "#e8cef582",
             },
           }}
           open
@@ -233,7 +276,6 @@ function OwnerSideBar({ children }) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        <Toolbar />
         {children}
       </Box>
     </Box>

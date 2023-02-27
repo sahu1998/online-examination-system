@@ -17,19 +17,9 @@ import Quiz from "../pages/student/exams/quiz";
 import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
-import CategoryTable from "../pages/owner/exams/categories";
-import UsersTable from "../components/owner/users/temp";
-import FeedbackForm from "../components/student/feedback/temp";
-import FeedbackTable from "../components/owner/feedbackTable";
-import NotificationTable from "../components/owner/notification";
-import MyProfile from "../components/student/myProfileStudent";
-import MyProfileAdmin from "../components/admin/myprofileAdmin";
-import MyProfileOwner from "../components/owner/myprofileOwner";
-import NotificationMsg from "../components/student/notification";
-import ChangePasswordStudent from "../components/student/changePassword";
-import ChangePasswordOwner from "../components/owner/changePassword";
-import ChangePasswordAdmin from "../components/admin/changePassword";
-import ContactUs from "../components/landing/contact-us";
+import PracticeCatg from "../pages/owner/exams/categories";
+import PracticeSubjects from "../pages/owner/exams/subject-topics";
+
 export default function AllRoutes() {
   return (
     <Routes>
@@ -66,7 +56,8 @@ export default function AllRoutes() {
       <Route path="/adminPassword" element={<ChangePasswordAdmin />} />
       <Route path="/contactUs" element={<ContactUs />} />
 
-      <Route path="/practice-exam-catg" element={<CategoryTable />} />
+      <Route path="/practice-exam-catg" element={<PracticeCatg />} />
+      <Route path="/practice-exam-subjects" element={<PracticeSubjects />} />
     </Routes>
   );
 }
