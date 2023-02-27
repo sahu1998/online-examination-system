@@ -11,12 +11,12 @@ function App() {
   return (
     <div>
 
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter>
+      </BrowserRouter> */}
       {/* <LmsCategory /> */}
       {/* <Content /> */}
-      {/* <Recaptcha /> */}
+      <Recaptcha />
     </div>
   );
 }
