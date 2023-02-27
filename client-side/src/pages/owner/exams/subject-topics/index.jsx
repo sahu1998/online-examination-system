@@ -214,7 +214,7 @@ export default function PracticeSubjects() {
           align="center"
           color="neutral"
           rowsPerPage={5}
-          //   onPageChange={(page) => console.log({ page })}
+        //   onPageChange={(page) => console.log({ page })}
         />
       </Table>
 
