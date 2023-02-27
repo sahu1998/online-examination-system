@@ -18,24 +18,27 @@ import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 
-import MasterSetting from "../components/owner/master-settings/temp";
+
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
-
+import LmsCategory from "../pages/owner/lms/categories";
+import RecaptchaSetting from "../pages/owner/master-settings/google-recaptcha"
 export default function AllRoutes() {
   return (
     <Routes>
-       {/* //////////.....Home.....////////// */}
+      {/* //////////.....Home.....////////// */}
       <Route path="/" element={<Home />} />
       <Route path="/practices" element={<PracticeExam />} />
       {/* //////////////.......Owner.....///////////// */}
-       <Route path="/logIn" element={<LogIn />} />
+      <Route path="/logIn" element={<LogIn />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/forgotPass" element={<ForgotPass />} />
 
       <Route path="/resetPassword/:id/:token" element={<ResetPassword />} />
 
       <Route path="/lms" element={<Lms />} />
+      <Route path="/lms/category" element={<LmsCategory />} />
+      <Route path="/mastersetting/recaptcha-setting" element={<RecaptchaSetting />} />
       {/* //////////.....Home.....////////// */}
       <Route path="/pattern" element={<Pattern />} />
       <Route path="/pricing" element={<Pricing />} />
@@ -48,6 +51,8 @@ export default function AllRoutes() {
 
       <Route path="/practice-exam-catg" element={<PracticeCatg />} />
       <Route path="/practice-exam-subjects" element={<PracticeSubjects />} />
+
+
     </Routes>
   );
 }

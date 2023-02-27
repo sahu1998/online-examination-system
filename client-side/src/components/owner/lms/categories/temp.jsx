@@ -4,7 +4,7 @@ import { deleteApiHandler, getApiHandler, postApiHandler, putApiHandler, serverU
 import { Modal, Input, Table, Button, Text, Dropdown } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 
-const LmsCategory = () => {
+const LmsCat = () => {
     const { register, handleSubmit, reset, setValue, watch } = useForm();
     const [visible, setVisible] = useState(false);
     const [category, setCategory] = useState([]);
@@ -217,4 +217,4 @@ const LmsCategory = () => {
         </>
     );
 }
-export default LmsCategory;
+export default LmsCat;

@@ -44,12 +44,13 @@ const Exam = [
   { name: "Subject Type", url: "/ownersubject" },
 ];
 const lms = [
-  { name: "Categories", url: "/ownercategories" },
+  { name: "Categories", url: "/lms/category" },
   { name: "Contacts", url: "/ownerquestion" },
   { name: "Series", url: "/ownerexamtype" },
 ];
 const settings = [
-  { name: "Settings", url: "/ownercategories" }
+  { name: "Settings", url: "/ownercategories" },
+  { name: "Recaptcha Setting", url: "/mastersetting/recaptcha-setting" }
 ]
 
 function OwnerSideBar({ children }) {
@@ -80,7 +81,7 @@ function OwnerSideBar({ children }) {
   const open3 = Boolean(lmsdata);
   const id3 = open3 ? "simple-popover" : undefined;
 
-//...........................................................................................
+  //...........................................................................................
   const [examdata, setExamdata] = React.useState(null);
 
   const handleClick2 = (event) => {
@@ -135,7 +136,7 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-{/* .......................................................................................................................... */}
+        {/* .......................................................................................................................... */}
         <NavLink to="/ownerlanguage" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
@@ -153,12 +154,12 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-{/* .......................................................................................................................... */}
+        {/* .......................................................................................................................... */}
         <NavLink to="/owneruser" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
               <ListItemIcon>
-              <AccountCircleIcon />
+                <AccountCircleIcon />
               </ListItemIcon>
               <ListItemText
                 sx={{
@@ -171,8 +172,8 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-{/* .......................................................................................................................... */}
-         <ListItem>
+        {/* .......................................................................................................................... */}
+        <ListItem>
           <ListItemButton onClick={handleClick2}>
             <ListItemIcon>
               <ComputerIcon />
@@ -206,12 +207,12 @@ function OwnerSideBar({ children }) {
               );
             })}
           </Popover>
-        </ListItem> 
-{/* .......................................................................................................................... */}
+        </ListItem>
+        {/* .......................................................................................................................... */}
         <ListItem>
           <ListItemButton onClick={handleClick3}>
             <ListItemIcon>
-            <DesktopWindowsIcon />
+              <DesktopWindowsIcon />
             </ListItemIcon>
             <ListItemText
               sx={{
@@ -243,7 +244,7 @@ function OwnerSideBar({ children }) {
             })}
           </Popover>
         </ListItem>
-{/* .......................................................................................................................... */}
+        {/* .......................................................................................................................... */}
         <NavLink to="/ownernotification" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
@@ -261,7 +262,7 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-{/* .......................................................................................................................... */}
+        {/* .......................................................................................................................... */}
         <NavLink to="/ownerfeedback" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
@@ -279,11 +280,11 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-{/* .......................................................................................................................... */}
-<ListItem>
+        {/* .......................................................................................................................... */}
+        <ListItem>
           <ListItemButton onClick={handleClick4}>
             <ListItemIcon>
-            <SettingsIcon />
+              <SettingsIcon />
             </ListItemIcon>
             <ListItemText
               sx={{
@@ -315,7 +316,7 @@ function OwnerSideBar({ children }) {
             })}
           </Popover>
         </ListItem>
-{/* .......................................................................................................................... */}
+        {/* .......................................................................................................................... */}
       </List>
     </div>
   );
