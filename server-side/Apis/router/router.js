@@ -35,8 +35,6 @@ const {
   updatePassword,
 } = require("../controller/sendmailcontroller");
 const {
-  postUsersController,
-
   getUsersController,
   deleteUsersController,
   putUsersController,
@@ -51,6 +49,16 @@ const {
   uploadLmsSubImage,
   uploadLmsCatImage,
 } = require("../middleware");
+const {
+  postnotification,
+  getnotification,
+  deletenotification,
+  updatenotification,
+  getnotificationById,
+} = require("../controller/notificationcontoller");
+const {
+  changePasswordController,
+} = require("../controller/changePasswordcontroller");
 const router = express.Router();
 
 router.post("/post-exam-catg", postExamCatgController);
@@ -81,20 +89,27 @@ router.post("/resetPassword/:id/:token", updatePassword);
 router.use("/subject", express.static("storage/subjects"));
 router.use("/feedback", express.static("storage/feedbackImages"));
 
-router.post("/post-users/:token", uploadUserImage, postUsersController);
-router.get("/get-users/:token", getUsersController);
-router.delete("/delete-users/:token/:id", deleteUsersController);
-router.put("/put-users/:token/:id", uploadUserImage, putUsersController);
+router.get("/get-users/:token", auth, getUsersController);
+router.delete("/delete-users/:token/:id", auth, deleteUsersController);
+router.put("/put-users/:token/:id", auth, uploadUserImage, putUsersController);
+router.put("/put-changePassword/:id/:token", auth, changePasswordController);
+
 router.post(
   "/post-feedback/:token",
+  auth,
   uploadFeedbackImage,
   postFeedbackController
 );
-router.get("/get-feedback/:token", getFeedbackController);
-router.delete("/delete-feedback/:token/:id", deleteFeedbackController);
+router.get("/get-feedback/:token", auth, getFeedbackController);
+router.delete("/delete-feedback/:token/:id", auth, deleteFeedbackController);
+router.post("/post-notification/:token", postnotification);
+router.get("/get-notification/:token", auth, getnotification);
+router.delete("/delete-notification/:token/:id", auth, deletenotification);
+router.put("/put-notification/:token/:id", auth, updatenotification);
+router.get("/get-notificationById/:token/:id", auth, getnotificationById);
 
-router.get("/getByUserId/:id", getByIdUserController);
-router.get("/get-feedbackaggregate/:token", getByIdFeedbackController);
+router.get("/getByUserId/:token/:id", auth, getByIdUserController);
+router.get("/get-feedbackaggregate/:token", auth, getByIdFeedbackController);
 
 router.use("/lms-sub", express.static("storage/lmssubject"));
 router.use("/lms-cat", express.static("storage/lmscategory"));

@@ -42,6 +42,7 @@ export default function LogIn() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm({
     resolver: yupResolver(schema),
     default: {
@@ -79,6 +80,16 @@ export default function LogIn() {
     }
   };
 
+  React.useEffect(() => {
+    {
+      message
+        ? message === "password not match"
+          ? setError("password", { type: "custom", message: message ?? "" })
+          : setError("email", { type: "custom", message: message ?? "" })
+        : null;
+    }
+  }, [message]);
+
   return (
     <LandingLayout>
       <ThemeProvider theme={theme}>
@@ -112,13 +123,13 @@ export default function LogIn() {
                   error={!!errors?.email}
                   helperText={errors?.email?.message}
                 />
-                <h6 class="message">
+                {/* <h6 class="message">
                   {message
                     ? message === "password not match"
                       ? ""
                       : message
                     : ""}
-                </h6>
+                </h6> */}
               </div>
 
               <div>
@@ -137,13 +148,6 @@ export default function LogIn() {
                   error={!!errors?.password}
                   helperText={errors?.password?.message}
                 />
-                <h6 class="message">
-                  {message
-                    ? message === "password not match"
-                      ? message
-                      : ""
-                    : ""}
-                </h6>
               </div>
               <Button
                 type="submit"
@@ -189,7 +193,7 @@ export default function LogIn() {
               <Typography variant="h6" className="login ">
                 Login As
               </Typography>
-              <Box class="box">
+              <Box className="box">
                 <Button
                   class="button"
                   onClick={() => {

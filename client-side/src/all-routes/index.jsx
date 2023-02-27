@@ -21,6 +21,15 @@ import CategoryTable from "../pages/owner/exams/categories";
 import UsersTable from "../components/owner/users/temp";
 import FeedbackForm from "../components/student/feedback/temp";
 import FeedbackTable from "../components/owner/feedbackTable";
+import NotificationTable from "../components/owner/notification";
+import MyProfile from "../components/student/myProfileStudent";
+import MyProfileAdmin from "../components/admin/myprofileAdmin";
+import MyProfileOwner from "../components/owner/myprofileOwner";
+import NotificationMsg from "../components/student/notification";
+import ChangePasswordStudent from "../components/student/changePassword";
+import ChangePasswordOwner from "../components/owner/changePassword";
+import ChangePasswordAdmin from "../components/admin/changePassword";
+import ContactUs from "../components/landing/contact-us";
 export default function AllRoutes() {
   return (
     <Routes>
@@ -47,6 +56,15 @@ export default function AllRoutes() {
       <Route path="/users" element={<UsersTable />} />
       <Route path="/feedback" element={<FeedbackForm />} />
       <Route path="/feedbacktable" element={<FeedbackTable />} />
+      <Route path="/myprofileStudent" element={<MyProfile />} />
+      <Route path="/notification" element={<NotificationTable />} />
+      <Route path="/myprofileAdmin" element={<MyProfileAdmin />} />
+      <Route path="/myprofileOwner" element={<MyProfileOwner />} />
+      <Route path="/studentNotification" element={<NotificationMsg />} />
+      <Route path="/studentPassword" element={<ChangePasswordStudent />} />
+      <Route path="/ownerPassword" element={<ChangePasswordOwner />} />
+      <Route path="/adminPassword" element={<ChangePasswordAdmin />} />
+      <Route path="/contactUs" element={<ContactUs />} />
 
       <Route path="/practice-exam-catg" element={<CategoryTable />} />
     </Routes>

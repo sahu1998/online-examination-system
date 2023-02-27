@@ -28,23 +28,13 @@ import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 const ProfileArray = [
-<<<<<<< HEAD
-  { name: "My Bookmarks" },
-  { name: "My Profile" },
-  { name: "Change Password" },
-  { name: "Settings" },
+  { name: "My Bookmarks", path: "/studentbookmarks" },
+  { name: "My Profile", path: "/myprofileStudent" },
+  { name: "Change Password", path: "/studentPassword" },
+  { name: "Settings", path: "/studentsettings" },
   { name: "Feedback", path: "/feedback" },
-  { name: "Logout" },
+  { name: "Logout", path: "/studentlogout" },
 ];
-=======
-    {name:"My Bookmarks", path:"/studentbookmarks"},
-    {name:"My Profile",path:"/studentprofile"},
-    {name:"Change Password",path:"/studentpassword"},
-    {name:"Settings",path:"/studentsettings"},
-    {name:"Feedback",path:"/studentfeedback"},
-    {name:"Logout",path:"/studentlogout"},
-]
->>>>>>> e250df70e3976331e706d50474fb97fb80044e7d
 const Array = [
   { name: "Dashboard", path: "/student", icon: <DashboardIcon /> },
   { name: "Exam", path: "/studentexam", icon: <ComputerIcon /> },
@@ -54,7 +44,7 @@ const Array = [
   { name: "Message", path: "/studentmessage", icon: <SmsIcon /> },
   {
     name: "Notification",
-    path: "/studentnotification",
+    path: "/studentNotification",
     icon: <NotificationsActiveIcon />,
   },
 ];
@@ -159,7 +149,6 @@ function StudentSideBar({ children }) {
             </Typography>
 
             <Popover
-<<<<<<< HEAD
               id={id}
               open={open}
               anchorEl={anchorEl}
@@ -170,7 +159,10 @@ function StudentSideBar({ children }) {
               }}
             >
               {ProfileArray.map((info) => (
-                <NavLink to={info.path}>
+                <NavLink
+                  to={info.path}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <Typography sx={{ padding: "5px", fontSize: "inherit" }}>
                     {info.name}
                   </Typography>
@@ -178,22 +170,6 @@ function StudentSideBar({ children }) {
               ))}
             </Popover>
           </div>
-=======
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}   
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        {ProfileArray.map((info)=>(
-            <NavLink to={info.path} style={{textDecoration:"none",color:"black"}}><Typography sx={{padding:"5px",fontSize:"inherit"}}>{info.name}</Typography></NavLink>
-        ))}
-      </Popover>
-            </div> 
->>>>>>> e250df70e3976331e706d50474fb97fb80044e7d
         </Toolbar>
       </AppBar>
       <Box

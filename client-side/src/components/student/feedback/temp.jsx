@@ -16,8 +16,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
 import swal from "sweetalert";
 import { getApiHandler, postApiHandler } from "../../../apiHandler";
-import LandingLayout from "../../../layouts/landing-layout";
 import { Grid } from "@mui/material";
+import StudentLayout from "../../../layouts/student-layout";
 
 const theme = createTheme();
 
@@ -45,6 +45,7 @@ export default function FeedbackForm() {
       desc: "",
     },
   });
+  const history = useNavigate();
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
 
@@ -54,10 +55,14 @@ export default function FeedbackForm() {
     const temp = { title, subject, desc, id };
     const response = await postApiHandler(`/post-feedback/${token}`, temp);
     console.log("res!!!=======>", response.data);
+    if (response.status === 200) {
+      swal("added  successfully!", "You clicked the button!", "success");
+      history("/student");
+    }
   };
 
   return (
-    <LandingLayout>
+    <StudentLayout>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -133,6 +138,6 @@ export default function FeedbackForm() {
           </Box>
         </Container>
       </ThemeProvider>
-    </LandingLayout>
+    </StudentLayout>
   );
 }

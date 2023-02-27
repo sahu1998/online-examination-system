@@ -8,6 +8,11 @@ const users = mongoose.Schema({
   image: String,
   role: String,
   status: Boolean,
+  phone: String,
+  role: {
+    type: String,
+    enum: ["owner", "admin", "student"],
+  },
 });
 const userSchema = mongoose.model("users", users);
 module.exports = userSchema;

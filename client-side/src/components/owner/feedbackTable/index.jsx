@@ -42,7 +42,7 @@ export default function FeedbackTable() {
         }}
       >
         <Table.Header>
-          <Table.Column>TITLEW</Table.Column>
+          <Table.Column>TITLE</Table.Column>
           <Table.Column>IMAGE</Table.Column>
           <Table.Column>NAME</Table.Column>
           <Table.Column>SUBJECT</Table.Column>
