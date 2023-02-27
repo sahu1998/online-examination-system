@@ -15,9 +15,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
 import swal from "sweetalert";
-import { getApiHandler, postApiHandler } from "../../../apiHandler";
 import { Grid } from "@mui/material";
 import StudentLayout from "../../../layouts/student-layout";
+import { postApiHandler } from "../../../apiHandler";
 
 const theme = createTheme();
 

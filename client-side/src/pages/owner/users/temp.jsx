@@ -17,7 +17,8 @@ export default function UsersTable() {
   const token = localStorage.getItem("token");
 
   const getData = async () => {
-    const res = await getApiHandler(`/get-users/${token}`);
+    const res = await getApiHandler;
+    z(`/get-users/${token}`);
     console.log("aaaaaaaaa=?", res);
     setData(res.data);
   };

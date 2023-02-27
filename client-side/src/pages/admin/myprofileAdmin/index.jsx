@@ -1,19 +1,19 @@
 import { Input, Button, Text } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { getApiHandler, putApiHandler } from "../../../apiHandler";
 import { Box } from "@mui/material";
-import StudentLayout from "../../../layouts/student-layout";
 import { Typography } from "antd";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import AdminLayout from "../../../layouts/admin-layout";
+import { getApiHandler, putApiHandler } from "../../../apiHandler";
 
-export default function MyProfile() {
+export default function MyProfileAdmin() {
   const { register, handleSubmit, watch, reset, setValue } = useForm();
-  const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const history = useNavigate();
+  const [data, setData] = useState([]);
 
   const file = watch("file");
 
@@ -38,7 +38,7 @@ export default function MyProfile() {
     console.log("RESSSSS=>", res.data);
     if (res.status === 200) {
       swal("updated  successfully!", "You clicked the button!", "success");
-      history("/student");
+      history("/owner");
     }
     // setId("");
 
@@ -48,12 +48,10 @@ export default function MyProfile() {
   const getDataById = async () => {
     const response = await getApiHandler(`/getByUserId/${token}/${id}`);
     console.log("RESS", response.data);
-    const { name, userName, email, password, image, role, status, phone } =
-      response.data;
+    const { name, userName, email, image, role, status, phone } = response.data;
     setValue("name", name);
     setValue("userName", userName);
     setValue("email", email);
-    setValue("password", password);
     setValue("image", image);
     setValue("role", role);
     setValue("status", status);
@@ -65,8 +63,9 @@ export default function MyProfile() {
       getDataById();
     }
   }, [data]);
+
   return (
-    <StudentLayout>
+    <AdminLayout>
       <Box
         style={{
           width: "50%",
@@ -166,6 +165,6 @@ export default function MyProfile() {
           </Button>
         </form>
       </Box>
-    </StudentLayout>
+    </AdminLayout>
   );
 }

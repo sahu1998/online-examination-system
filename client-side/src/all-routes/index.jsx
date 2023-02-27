@@ -19,6 +19,18 @@ import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
+import ChangePasswordAdmin from "../pages/admin/changePassword";
+import ChangePasswordOwner from "../pages/owner/changePassword";
+import ChangePasswordStudent from "../pages/student/changePassword";
+import NotificationMsg from "../pages/student/notification";
+import MyProfileOwner from "../pages/owner/myprofileOwner";
+import MyProfileAdmin from "../pages/admin/myprofileAdmin";
+import NotificationTable from "../pages/owner/notification";
+import MyProfileStudent from "../pages/student/myProfileStudent";
+import FeedbackTable from "../pages/owner/feedbackTable";
+import FeedbackForm from "../pages/student/feedback/temp";
+import UsersTable from "../pages/owner/users/temp";
+import ContactUs from "../pages/landing/contact-us";
 
 export default function AllRoutes() {
   return (
@@ -46,7 +58,7 @@ export default function AllRoutes() {
       <Route path="/users" element={<UsersTable />} />
       <Route path="/feedback" element={<FeedbackForm />} />
       <Route path="/feedbacktable" element={<FeedbackTable />} />
-      <Route path="/myprofileStudent" element={<MyProfile />} />
+      <Route path="/myprofileStudent" element={<MyProfileStudent />} />
       <Route path="/notification" element={<NotificationTable />} />
       <Route path="/myprofileAdmin" element={<MyProfileAdmin />} />
       <Route path="/myprofileOwner" element={<MyProfileOwner />} />

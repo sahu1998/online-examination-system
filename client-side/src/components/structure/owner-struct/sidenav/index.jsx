@@ -41,7 +41,7 @@ const ProfileArray = [
 const Array = [
   { name: "Dashboard", path: "/owner", icon: <DashboardIcon /> },
   { name: "Language", path: "/ownerlanguage", icon: <GTranslateIcon /> },
-  { name: "User", path: "/owneruser", icon: <AccountCircleIcon /> },
+  { name: "User", path: "/users", icon: <AccountCircleIcon /> },
   {
     name: "Exam",
     path: "",

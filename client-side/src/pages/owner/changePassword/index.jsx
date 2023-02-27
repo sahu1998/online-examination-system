@@ -13,8 +13,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
-import { putApiHandler } from "../../../apiHandler";
 import OwnerLayout from "../../../layouts/owner-layout";
+import { putApiHandler } from "../../../apiHandler";
 
 const theme = createTheme();
 
@@ -43,9 +43,8 @@ export default function ChangePasswordOwner() {
   const {
     register,
     handleSubmit,
-    setError,
-
     reset,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -99,7 +98,6 @@ export default function ChangePasswordOwner() {
         : null;
     }
   }, [message]);
-
   return (
     <OwnerLayout>
       <ThemeProvider theme={theme}>
@@ -177,9 +175,9 @@ export default function ChangePasswordOwner() {
                 helperText={errors?.retypePassword?.message}
               />
 
-              <h6 style={{ color: "red", textAlign: "initial" }}>
+              {/* <h6 style={{ color: "red", textAlign: "initial" }}>
                 {message ? message : ""}
-              </h6>
+              </h6> */}
 
               <Button
                 type="submit"

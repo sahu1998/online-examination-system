@@ -2,18 +2,18 @@ import { Input, Button, Text } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
+import StudentLayout from "../../../layouts/student-layout";
 import { Typography } from "antd";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import { getApiHandler, putApiHandler } from "../../../apiHandler";
-import AdminLayout from "../../../layouts/admin-layout";
 
-export default function MyProfileOwner() {
+export default function MyProfileStudent() {
   const { register, handleSubmit, watch, reset, setValue } = useForm();
+  const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const history = useNavigate();
-  const [data, setData] = useState([]);
 
   const file = watch("file");
 
@@ -38,7 +38,7 @@ export default function MyProfileOwner() {
     console.log("RESSSSS=>", res.data);
     if (res.status === 200) {
       swal("updated  successfully!", "You clicked the button!", "success");
-      history("/owner");
+      history("/student");
     }
     // setId("");
 
@@ -48,10 +48,12 @@ export default function MyProfileOwner() {
   const getDataById = async () => {
     const response = await getApiHandler(`/getByUserId/${token}/${id}`);
     console.log("RESS", response.data);
-    const { name, userName, email, image, role, status, phone } = response.data;
+    const { name, userName, email, password, image, role, status, phone } =
+      response.data;
     setValue("name", name);
     setValue("userName", userName);
     setValue("email", email);
+    setValue("password", password);
     setValue("image", image);
     setValue("role", role);
     setValue("status", status);
@@ -63,9 +65,8 @@ export default function MyProfileOwner() {
       getDataById();
     }
   }, [data]);
-
   return (
-    <AdminLayout>
+    <StudentLayout>
       <Box
         style={{
           width: "50%",
@@ -165,6 +166,6 @@ export default function MyProfileOwner() {
           </Button>
         </form>
       </Box>
-    </AdminLayout>
+    </StudentLayout>
   );
 }

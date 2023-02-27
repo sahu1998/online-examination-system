@@ -8,8 +8,8 @@
   top: 17px !important;
 }
 .reset {
-  margin-top: 4rem;
-  margin-left: 2rem;
+  margin-top: 4rem !important;
+  margin-left: 4rem !important;
 }
 .Button {
   font-weight: 600 !important;

@@ -13,8 +13,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
-import { putApiHandler } from "../../../apiHandler";
 import AdminLayout from "../../../layouts/admin-layout";
+import { putApiHandler } from "../../../apiHandler";
 
 const theme = createTheme();
 
@@ -45,7 +45,6 @@ export default function ChangePasswordAdmin() {
     handleSubmit,
     reset,
     setError,
-
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -87,7 +86,6 @@ export default function ChangePasswordAdmin() {
     //   setMessage(res.message);
     // }
   };
-
   React.useEffect(() => {
     {
       message
@@ -121,7 +119,7 @@ export default function ChangePasswordAdmin() {
               component="form"
               noValidate
               sx={{ mt: 1 }}
-              class="reset"
+              className="reset"
               onSubmit={handleSubmit(onSubmit)}
             >
               <Typography>CHANGE PASSWORD</Typography>
@@ -177,9 +175,9 @@ export default function ChangePasswordAdmin() {
                 helperText={errors?.retypePassword?.message}
               />
 
-              <h6 style={{ color: "red", textAlign: "initial" }}>
+              {/* <h6 style={{ color: "red", textAlign: "initial" }}>
                 {message ? message : ""}
-              </h6>
+              </h6> */}
 
               <Button
                 type="submit"
