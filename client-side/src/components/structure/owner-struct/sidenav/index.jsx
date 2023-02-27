@@ -24,11 +24,8 @@ import GTranslateIcon from "@mui/icons-material/GTranslate";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from "react-router-dom";
-import { Button } from "@mui/material";
-
+import { Button, Container } from "@mui/material";
 
 const drawerWidth = 240;
 const ProfileArray = [
@@ -39,33 +36,64 @@ const ProfileArray = [
   { name: "Change Password", path: "/ownerpassword" },
   { name: "Logout", path: "/ownerlogout" },
 ];
-const Array = [
-  { name: "Dashboard", path: "/owner", icon: <DashboardIcon /> },
-  { name: "Language", path: "/ownerlanguage", icon: <GTranslateIcon /> },
-  { name: "User", path: "/owneruser", icon: <AccountCircleIcon /> },
-  {
-    name: "Exam",
-    path: "",
-    icon: <ComputerIcon />,
-    subcatg: [
-      { name: "Categories", url: "/ownercategories" },
-      { name: "Question Bank", url: "/ownerquestion" },
-      { name: "Exam Type", url: "/ownerexamtype" },
-      { name: "Instructions", url: "/ownerinstruct" },
-      { name: "Subject Type", url: "/ownersubject" },
-    ],
-  },
-  { name: "LMS", path: "/ownerlms", icon: <DesktopWindowsIcon /> },
-  {
-    name: "Notification",
-    path: "/ownernotification",
-    icon: <NotificationsActiveIcon />,
-  },
-  { name: "Feedback", path: "/ownerfeedback", icon: <FeedbackIcon /> },
-  { name: "Master Settings", path: "/ownersettings", icon: <SettingsIcon /> },
+const Exam = [
+  { name: "Categories", url: "/ownercategories" },
+  { name: "Question Bank", url: "/ownerquestion" },
+  { name: "Exam Type", url: "/ownerexamtype" },
+  { name: "Instructions", url: "/ownerinstruct" },
+  { name: "Subject Type", url: "/ownersubject" },
 ];
+const lms = [
+  { name: "Categories", url: "/ownercategories" },
+  { name: "Contacts", url: "/ownerquestion" },
+  { name: "Series", url: "/ownerexamtype" },
+];
+const settings = [
+  { name: "Settings", url: "/ownercategories" }
+]
 
 function OwnerSideBar({ children }) {
+  const [settingsdata, setSettingsdata] = React.useState(null);
+
+  const handleClick4 = (event) => {
+    setSettingsdata(event.currentTarget);
+  };
+
+  const handleClose4 = () => {
+    setSettingsdata(null);
+  };
+
+  const open4 = Boolean(settingsdata);
+  const id4 = open4 ? "simple-popover" : undefined;
+
+  //.............................................................................................
+  const [lmsdata, setLmsdata] = React.useState(null);
+
+  const handleClick3 = (event) => {
+    setLmsdata(event.currentTarget);
+  };
+
+  const handleClose3 = () => {
+    setLmsdata(null);
+  };
+
+  const open3 = Boolean(lmsdata);
+  const id3 = open3 ? "simple-popover" : undefined;
+
+//...........................................................................................
+  const [examdata, setExamdata] = React.useState(null);
+
+  const handleClick2 = (event) => {
+    setExamdata(event.currentTarget);
+  };
+
+  const handleClose2 = () => {
+    setExamdata(null);
+  };
+
+  const open2 = Boolean(examdata);
+  const id2 = open2 ? "simple-popover" : undefined;
+  // .......................................................................................
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -86,30 +114,208 @@ function OwnerSideBar({ children }) {
   };
 
   const drawer = (
-    <div>
+    <div style={{}}>
       <Toolbar />
       <Divider />
       <List>
-        {Array.map((text) => (
-          <>
-            <NavLink to={text.path} style={{ textDecoration: "none" }}>
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{text.icon}</ListItemIcon>
-                  <ListItemText
-                    sx={{
-                      color: "black",
-                      fontFamily: "initial",
-                      fontSize: "20px",
-                    }}
-                    primary={text.name}
-                  />
-                  
-                </ListItemButton>
-              </ListItem>
-            </NavLink>        
-          </>
-        ))}
+        <NavLink to="/owner" style={{ textDecoration: "none" }}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{
+                  color: "black",
+                  fontFamily: "initial",
+                  fontSize: "20px",
+                }}
+                primary="Dashboard"
+              />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+{/* .......................................................................................................................... */}
+        <NavLink to="/ownerlanguage" style={{ textDecoration: "none" }}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <GTranslateIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{
+                  color: "black",
+                  fontFamily: "initial",
+                  fontSize: "20px",
+                }}
+                primary="Languages"
+              />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+{/* .......................................................................................................................... */}
+        <NavLink to="/owneruser" style={{ textDecoration: "none" }}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+              <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{
+                  color: "black",
+                  fontFamily: "initial",
+                  fontSize: "20px",
+                }}
+                primary="User"
+              />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+{/* .......................................................................................................................... */}
+         <ListItem>
+          <ListItemButton onClick={handleClick2}>
+            <ListItemIcon>
+              <ComputerIcon />
+            </ListItemIcon>
+            <ListItemText
+              sx={{
+                color: "black",
+                fontFamily: "initial",
+                fontSize: "20px",
+              }}
+              primary="Exams"
+            />
+          </ListItemButton>
+          <Popover
+            id={id2}
+            open={open2}
+            anchorEl={examdata}
+            onClose={handleClose2}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            {Exam.map((cat) => {
+              return (
+                <NavLink to={cat.url} style={{ textDecoration: "none" }}>
+                  <Typography sx={{ p: 1, color: "black" }}>
+                    {cat.name}
+                  </Typography>
+                </NavLink>
+              );
+            })}
+          </Popover>
+        </ListItem> 
+{/* .......................................................................................................................... */}
+        <ListItem>
+          <ListItemButton onClick={handleClick3}>
+            <ListItemIcon>
+            <DesktopWindowsIcon />
+            </ListItemIcon>
+            <ListItemText
+              sx={{
+                color: "black",
+                fontFamily: "initial",
+                fontSize: "20px",
+              }}
+              primary="LMS"
+            />
+          </ListItemButton>
+          <Popover
+            id={id3}
+            open={open3}
+            anchorEl={lmsdata}
+            onClose={handleClose3}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            {lms.map((cat) => {
+              return (
+                <NavLink to={cat.url} style={{ textDecoration: "none" }}>
+                  <Typography sx={{ p: 1, color: "black" }}>
+                    {cat.name}
+                  </Typography>
+                </NavLink>
+              );
+            })}
+          </Popover>
+        </ListItem>
+{/* .......................................................................................................................... */}
+        <NavLink to="/ownernotification" style={{ textDecoration: "none" }}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <NotificationsActiveIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{
+                  color: "black",
+                  fontFamily: "initial",
+                  fontSize: "20px",
+                }}
+                primary="Notification"
+              />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+{/* .......................................................................................................................... */}
+        <NavLink to="/ownerfeedback" style={{ textDecoration: "none" }}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <FeedbackIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{
+                  color: "black",
+                  fontFamily: "initial",
+                  fontSize: "20px",
+                }}
+                primary="Feedback"
+              />
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+{/* .......................................................................................................................... */}
+<ListItem>
+          <ListItemButton onClick={handleClick4}>
+            <ListItemIcon>
+            <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText
+              sx={{
+                color: "black",
+                fontFamily: "initial",
+                fontSize: "20px",
+              }}
+              primary="Master Settings"
+            />
+          </ListItemButton>
+          <Popover
+            id={id4}
+            open={open4}
+            anchorEl={settingsdata}
+            onClose={handleClose4}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            {settings.map((cat) => {
+              return (
+                <NavLink to={cat.url} style={{ textDecoration: "none" }}>
+                  <Typography sx={{ p: 1, color: "black" }}>
+                    {cat.name}
+                  </Typography>
+                </NavLink>
+              );
+            })}
+          </Popover>
+        </ListItem>
+{/* .......................................................................................................................... */}
       </List>
     </div>
   );
@@ -220,6 +426,7 @@ function OwnerSideBar({ children }) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              background: "#e8cef582",
             },
           }}
           open
@@ -235,7 +442,6 @@ function OwnerSideBar({ children }) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        <Toolbar />
         {children}
       </Box>
     </Box>

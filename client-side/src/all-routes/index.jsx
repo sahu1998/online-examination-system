@@ -18,15 +18,16 @@ import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 import CategoryTable from "../pages/owner/exams/categories";
+import MasterSettings from "../pages/owner/master-settings";
 
 export default function AllRoutes() {
   return (
     <Routes>
-      {/* //////////.....Home.....////////// */}
+       {/* //////////.....Home.....////////// */}
       <Route path="/" element={<Home />} />
       <Route path="/practices" element={<PracticeExam />} />
       {/* //////////////.......Owner.....///////////// */}
-      <Route path="/logIn" element={<LogIn />} />
+       <Route path="/logIn" element={<LogIn />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/forgotPass" element={<ForgotPass />} />
 
@@ -43,7 +44,8 @@ export default function AllRoutes() {
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/student" element={<StudentDashboard />} />
 
-      <Route path="/practice-exam-catg" element={<CategoryTable />} />
+      <Route path="/practice-exam-catg" element={<CategoryTable />} /> 
+
     </Routes>
   );
 }

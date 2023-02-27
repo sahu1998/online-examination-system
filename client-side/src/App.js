@@ -1,9 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import AllRoutes from "./all-routes";
 import "./App.css";
-import Category from "./components/owner/lms/categories/temp";
-import Content from "./components/owner/lms/contents/temp";
-import UsersTable from "./components/owner/users/temp";
 
 function App() {
   return (
@@ -11,7 +8,6 @@ function App() {
       <BrowserRouter>
         <AllRoutes />
       </BrowserRouter>
-      
       
     </div>
   );
