@@ -57,10 +57,19 @@ const getAllExamData = async () => {
     return { error, status: 400, message: "error" };
   }
 };
+const putExamData = async (id, values) => {
+  try {
+    const result = await examModel.findByIdAndUpdate(id, values);
+    return { data: result, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
 
 module.exports = {
   // postModel,
   postExamData,
   getAllExamData,
   deleteExamCatgData,
+  putExamData,
 };

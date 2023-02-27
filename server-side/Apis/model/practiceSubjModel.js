@@ -20,9 +20,9 @@ const questionSchema = new mongoose.Schema({
 
 const subjectSchema = mongoose.Schema({
   subjectName: String,
+  subjectDesc: String,
   marks: Number,
   timeLimit: Number,
-  subjectDesc: String,
   subjectImg: String,
   subjectQues: [questionSchema],
   categoryId: mongoose.Schema.Types.ObjectId,
@@ -70,8 +70,33 @@ const pushQuesInSubj = async (subj_id, values) => {
 
 const getAllSubjectData = async () => {
   try {
-    const response = await subjectModel.find({}, { subjectQues: 0 });
-    return { response, status: 200, message: "success" };
+    // const data = await subjectModel.find({}, { subjectQues: 0 });
+    const data = await subjectModel.aggregate([
+      {
+        $lookup: {
+          from: "exams",
+          localField: "categoryId",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          subjectName: 1,
+          // categoryId: 1,
+          marks: 1,
+          subjectImg: 1,
+          timeLimit: 1,
+          subjectDesc: 1,
+          // subjectQues: 0,
+          categoryName: {
+            $arrayElemAt: ["$category.examName", 0],
+          },
+        },
+      },
+    ]);
+    return { data, status: 200, message: "success" };
   } catch (error) {
     return { error, status: 400, message: "error" };
   }
@@ -151,6 +176,24 @@ const getPracticeQues = async (id) => {
   }
 };
 
+const deletePracticeExamData = async (id) => {
+  try {
+    const result = await subjectModel.findByIdAndDelete(id);
+    return { data: result, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
+const putPracticeSubjData = async (id, values) => {
+  try {
+    const result = await subjectModel.findByIdAndUpdate(id, values);
+    return { data: result, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
 module.exports = {
   // postModel,
   postSubjectData,
@@ -160,4 +203,6 @@ module.exports = {
   postQuesInSubject,
   pushQuesInSubj,
   getPracticeQues,
+  deletePracticeExamData,
+  putPracticeSubjData,
 };
