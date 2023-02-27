@@ -17,6 +17,8 @@ function App() {
       {/* <LmsCategory /> */}
       {/* <Content /> */}
       <Recaptcha />
+
+
     </div>
   );
 }
