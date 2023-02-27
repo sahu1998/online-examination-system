@@ -18,7 +18,7 @@ const siteSchema = mongoose.Schema({
   contryCode: String,
   backgroundLogo: String,
 });
-const site = mongoose.model("site", siteSchema);
+const site = mongoose.model("sites", siteSchema);
 const postSiteSettingData = async (obj) => {
   try {
     console.log("obj===>", obj);

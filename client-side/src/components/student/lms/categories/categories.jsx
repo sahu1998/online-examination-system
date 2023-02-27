@@ -22,19 +22,15 @@ export default function Categories() {
   const [category, setCategory] = useState([]);
   const [content, setContent] = useState([]);
   const [id, setId] = useState();
-const [viewId,setViewId]=useState();
-const [viewData,setViewData]=useState([]);
-const getByIdView = async (catg) => {
+  const [viewId, setViewId] = useState();
+  const [viewData, setViewData] = useState([]);
+  const getByIdView = async (catg) => {
     const getByIdData = await getApiHandler(`/getLmsView?id=${catg}`);
     console.log("getByIdData ===", getByIdData.data);
     setViewData(getByIdData.data);
-    console.log("viewData------------",viewData);
+    console.log("viewData------------", viewData);
   };
-  React.useEffect(() => {
-    if (viewId) {
-      getByIdView(viewId);
-    }
-  }, [viewId]);
+
   const getData = async () => {
     const categoryData = await getApiHandler("/getLmsCat");
     console.log("categoryData==", categoryData.data);
@@ -55,9 +51,17 @@ const getByIdView = async (catg) => {
   React.useEffect(() => {
     getData();
   }, []);
+  React.useEffect(() => {
+    if (viewId) {
+      getByIdView(viewId);
+    }
+  }, [viewId]);
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }} className="m-5 p-5 shadow-lg p-3 mb-5 bg-white rounded" >
+      <Box
+        sx={{ flexGrow: 1 }}
+        className="m-5 p-5 shadow-lg p-3 mb-5 bg-white rounded"
+      >
         <h5 className="m-2">Lms Categories</h5>
         <Divider />
         <Grid container spacing={4} className="mt-2">
@@ -70,12 +74,13 @@ const getByIdView = async (catg) => {
             className="row gx-5"
             style={{ columnGap: "20px", rowGap: "20px" }}
           >
-                       {viewId?<View viewData={viewData}/>:  id ? (
-              <Cards data={content} setViewId={setViewId}/>
+            {viewId ? (
+              <View viewData={viewData} />
+            ) : id ? (
+              <Cards data={content} setViewId={setViewId} />
             ) : (
               <CategoryCard data={category} setId={setId} />
             )}
-            
           </Grid>
         </Grid>
       </Box>

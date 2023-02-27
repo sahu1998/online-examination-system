@@ -22,12 +22,12 @@ export default function IconMenu() {
   const [hed, setHed] = React.useState();
   const [viewId, setViewId] = React.useState();
   const [viewData, setViewData] = React.useState([]);
-  
+
   const getByIdView = async (catg) => {
     const getByIdData = await getApiHandler(`/getLmsView?id=${catg}`);
     console.log("getByIdData ===", getByIdData.data);
     setViewData(getByIdData.data);
-    console.log("viewData------------",viewData);
+    console.log("viewData------------", viewData);
   };
   const getByData = async () => {
     const getApi = await getApiHandler("/getLmsCat");
@@ -53,7 +53,7 @@ export default function IconMenu() {
       getById(id);
     }
   }, [id]);
-  
+
   React.useEffect(() => {
     if (viewId) {
       getByIdView(viewId);
@@ -93,9 +93,15 @@ export default function IconMenu() {
             </MenuList>
           </Paper>
         </Grid>
-        
-        <Grid item container xs={12} md={10} sm={12}>
-         
+
+        <Grid
+          item
+          container
+          xs={12}
+          md={10}
+          sm={12}
+          style={{ columnGap: "30px" }}
+        >
           <Grid item xs={12} md={12} sm={12}>
             <SearchLms />
           </Grid>
@@ -104,9 +110,11 @@ export default function IconMenu() {
               {hed}
             </div>
           </Grid>
-         { viewId?<View viewData={viewData}/>:
-          <Cards data={getIdData} setViewId={setViewId}/>}
-          
+          {viewId ? (
+            <View viewData={viewData} />
+          ) : (
+            <Cards data={getIdData} setViewId={setViewId} />
+          )}
         </Grid>
       </Grid>
     </Container>

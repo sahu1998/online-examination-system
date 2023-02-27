@@ -5,7 +5,7 @@ const postApiHandler = async (endPoint, value) => {
   try {
     console.log("value post",value );
     const res = await axios.post(serverURL + endPoint, value);
-    console.log("post res",res);
+    console.log("post res",res.data);
     return res.data;
   } catch (err) {
     console.log("errors=>", err);

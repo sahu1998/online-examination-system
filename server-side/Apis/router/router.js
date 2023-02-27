@@ -66,7 +66,9 @@ const {
   uploadLmsCatImage,
 } = require("../middleware");
 const {
-  postSitSettingController, getSiteSettingController, putSiteSettingController,
+  postSitSettingController,
+  getSiteSettingController,
+  putSiteSettingController,
 } = require("../controller/mastersettingcontroller");
 const { uploadSiteSettingImage } = require("../middleware/mastersetting");
 const router = express.Router();
@@ -139,22 +141,29 @@ router.put(
   uploadLmsSubImage.single("image"),
   putLmsSubController
 );
-router.post("/postLmsView",uploadLmsViewPdf.single('pdf'), PostLmsViewController);
+router.post(
+  "/postLmsView",
+  uploadLmsViewPdf.single("pdf"),
+  PostLmsViewController
+);
 router.get("/getLmsView", getLmsViewController);
 router.get("/getRandomLmsSub", getRandomLmsSubController);
-// uploadLmsViewFile.single("view"),
 
 router.use("/lms-settingImage", express.static("storage/setting"));
 router.use("/view", express.static("storage/viewpdf"));
 
 router.post(
   "/site-setting",
-   uploadSiteSettingImage.array('siteLogo'),
- 
+  uploadSiteSettingImage.array("siteLogo"),
+
   postSitSettingController
 );
-router.get("/get-Site-setting",getSiteSettingController);
-router.put('/put-site-setting/:id',uploadSiteSettingImage.array('siteLogo'),putSiteSettingController);
+router.get("/get-Site-setting", getSiteSettingController);
+router.put(
+  "/put-site-setting/:id",
+  uploadSiteSettingImage.array("siteLogo"),
+  putSiteSettingController
+);
 router.post(
   "/exceltojson",
   uploadQuiz.single("quiz"),

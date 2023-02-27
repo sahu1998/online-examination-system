@@ -20,9 +20,9 @@ export default function LmsContent() {
   const [selected, setSelected] = useState();
   const [content, setContent] = useState([]);
   const [category, setCategory] = useState([]);
-  const [did, setDid] = useState();
+  const [update, setUpdate] = useState();
   const [id, setId] = useState();
-  console.log("id--0000",id);
+  console.log("id--0000", id);
   const file = watch("image");
   const getData = async () => {
     const temp = await getApiHandler("/getLmsSub");
@@ -51,27 +51,23 @@ export default function LmsContent() {
     formData.append("subjectName", subjectName);
     formData.append("type", type);
     formData.append("categoryId", id);
-console.log(" post id==",id);
-    const data1 = did
-      ? await putApiHandler(`/putLmsSub/${did}`, formData)
-      : await postApiHandler("/postLmsSub", formData)
+    console.log(" post id==", id);
+    const data1 = update
+      ? await putApiHandler(`/putLmsSub/${update}`, formData)
+      : await postApiHandler("/postLmsSub", formData);
 
     console.log("data1=>", data1);
     reset();
   };
 
   const deleteData = async (delete1) => {
-    console.log("did====", Divider);
+    console.log("update====", Divider);
     const deleteId = await deleteApiHandler(`/deleteLmsSub/${delete1}`);
     console.log("deleteId=====================", deleteId);
   };
-  // const selectedValue = React.useMemo(
-  //   () => Array.from(selected).join(", ").replaceAll("_", " "),
-  //   [selected]
-  // );
 
   const getById = async () => {
-    const idData = await getApiHandler(`/getLmsSub/${did}`);
+    const idData = await getApiHandler(`/getLmsSub/${update}`);
     console.log("idData====================", idData.data);
 
     const { subjectName, title, type } = idData.data;
@@ -83,23 +79,18 @@ console.log(" post id==",id);
     console.log("type ===============", type);
   };
   useEffect(() => {
-    if (did) {
-     
-      getById(did);
+    if (update) {
+      getById(update);
     }
-  }, [did]);
+  }, [update]);
   useEffect(() => {
     if (selected) {
-      console.log("selected.currentKey",selected.currentKey);
+      console.log("selected.currentKey", selected.currentKey);
       setId(category[selected.currentKey]?._id);
     }
-    // category
   }, [selected]);
   return (
     <>
-      {/* <Button color="neutral" auto onPress={handler}>
-        CREATE
-      </Button> */}
       <Button
         onPress={handler}
         auto
@@ -178,10 +169,9 @@ console.log(" post id==",id);
                   <Dropdown.Menu aria-label="Static Actions">
                     <Dropdown.Item key="new">
                       <button
-                        onClick={async() => {
+                        onClick={async () => {
                           deleteData(a._id);
-                           await getApiHandler("/getLmsSub");
-
+                          await getApiHandler("/getLmsSub");
                         }}
                       >
                         delete
@@ -189,11 +179,9 @@ console.log(" post id==",id);
                     </Dropdown.Item>
                     <Dropdown.Item key="new">
                       <button
-                        onClick={ async() => {
-                          setDid(a._id);
-                          handler()
-                           
-
+                        onClick={async () => {
+                          setUpdate(a._id);
+                          handler();
                         }}
                       >
                         {" "}
@@ -280,7 +268,7 @@ console.log(" post id==",id);
                 color="secondary"
                 css={{ tt: "capitalize" }}
               >
-               category {selected}
+                category {selected}
               </Dropdown.Button>
               <Dropdown.Menu
                 aria-label="Single selection actions"
@@ -295,11 +283,6 @@ console.log(" post id==",id);
                     <Dropdown.Item key={index}>{row.examName}</Dropdown.Item>
                   );
                 })}
-                {/* <Dropdown.Item key="text">Text</Dropdown.Item>
-        <Dropdown.Item key="number">Number</Dropdown.Item>
-        <Dropdown.Item key="date">Date</Dropdown.Item>
-        <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
-        <Dropdown.Item key="iteration">Iteration</Dropdown.Item> */}
               </Dropdown.Menu>
             </Dropdown>
             <Button type="submit" color="neutral" onPress={closeHandler}>
