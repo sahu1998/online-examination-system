@@ -12,12 +12,12 @@ import Categories from "./components/student/lms/categories/categories";
 function App() {
   return (
     <div>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <AllRoutes />
-      </BrowserRouter> */}
+      </BrowserRouter>
      {/* <LmsContent/> */}
            {/* <UsersTable /> */}
-         <SiteSetting/>
+         {/* <SiteSetting/> */}
          {/* <Categories/> */}
     </div>
   );

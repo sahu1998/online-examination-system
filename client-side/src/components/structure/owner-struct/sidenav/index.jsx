@@ -45,7 +45,7 @@ const Exam = [
 ];
 const lms = [
   { name: "Categories", url: "/ownercategories" },
-  { name: "Contacts", url: "/ownerquestion" },
+  { name: "Contacts", url: "/lms/content" },
   { name: "Series", url: "/ownerexamtype" },
 ];
 const settings = [

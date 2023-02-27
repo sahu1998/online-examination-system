@@ -1,20 +1,11 @@
-import { Typography } from '@mui/material'
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from "react";
+import SiteSetting from "../../../components/owner/master-settings/site-settings/site-settings";
+import OwnerLayout from "../../../layouts/owner-layout";
 
-export default function MasterSettings() {
-    const array =[
-        {name:"vikas",path:"/vikas"},
-        {name:"rajni",path:"/rajni"},
-
-    ]
+export default function Settings() {
   return (
-    <div>{array.map((text)=>{
-        return(
-            <NavLink to={text.path}>
-                <Typography>{text.name}</Typography>
-            </NavLink>
-        )
-    })}</div>
-  )
+    <OwnerLayout>
+      <SiteSetting />
+    </OwnerLayout>
+  );
 }

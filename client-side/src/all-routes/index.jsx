@@ -19,6 +19,8 @@ import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
+import Content from "../pages/owner/lms/contents";
+import Settings from "../pages/owner/master-settings";
 
 export default function AllRoutes() {
   return (
@@ -34,6 +36,12 @@ export default function AllRoutes() {
       <Route path="/resetPassword/:id/:token" element={<ResetPassword />} />
 
       <Route path="/lms" element={<Lms />} />
+      <Route path="/lms/content" element={<Content/>} />
+      <Route path="/ownercategories" element={<Settings/>} />
+
+      
+
+      
       {/* //////////.....Home.....////////// */}
       <Route path="/pattern" element={<Pattern />} />
       <Route path="/pricing" element={<Pricing />} />
