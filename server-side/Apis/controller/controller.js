@@ -1,5 +1,6 @@
+const { Console } = require("console");
 const fs = require("fs");
-const { PostLmsCatData, getLmsCatData } = require("../model/lmscatmodal");
+const { PostLmsCatData, getLmsCatData, deleteLmsCatData, getByIdLmsCatData, updateLmsCatData } = require("../model/lmscatmodal");
 const {
   PostLmsSubData,
   getLmsSubByCategory,
@@ -84,6 +85,18 @@ const getLmsViewController=async(req,res)=>{
   const id=req.query.id;
   const data = id? await getLmsByIdViewData(id):await getLmsViewData();
   console.log("get lms sub data",data);
+const getByIdLmsCatController = async (req, res) => {
+  const data = await getByIdLmsCatData(req.params.id);
+  res.send(data);
+}
+
+const deleteLmsCatController = async (req, res) => {
+  const data = await deleteLmsCatData(req.params.id);
+  res.send(data);
+}
+const updateLmsCatController = async (req, res) => {
+  const data = await updateLmsCatData(req.params.id, req.body);
+  console.log("dataupdate", data)
   res.send(data);
 }
 module.exports = {
@@ -97,5 +110,13 @@ module.exports = {
   getRandomLmsSubController,
   deleteLmsSubController,
   getByIdLmsSubController1,
-  PostLmsViewController
+  PostLmsViewController,
+  deleteLmsCatController,
+  getByIdLmsCatController,
+  updateLmsCatController
 };
+
+
+
+
+

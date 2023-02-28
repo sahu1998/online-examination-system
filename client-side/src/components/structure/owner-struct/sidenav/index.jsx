@@ -44,12 +44,14 @@ const Exam = [
   { name: "Subject Type", url: "/ownersubject" },
 ];
 const lms = [
-  { name: "Categories", url: "/ownercategories" },
-  { name: "Contacts", url: "/lms/content" },
+{ name: "Categories", url: "/lms/category" },
+{ name: "Contacts", url: "/lms/content" },
   { name: "Series", url: "/ownerexamtype" },
 ];
 const settings = [
-  { name: "Settings", url: "/ownersetting" }
+  { name: "Settings", url: "/ownersetting" },
+  { name: "Recaptcha Setting", url: "/mastersetting/recaptcha-setting" }
+
 ]
 
 function OwnerSideBar({ children }) {

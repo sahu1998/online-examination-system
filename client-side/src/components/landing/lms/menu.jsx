@@ -5,7 +5,7 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
-import { Button, Container, TextField, Typography } from "@mui/material";
+import { Button, Container, List, TextField, Typography } from "@mui/material";
 import Cards from "./card";
 import SearchIcon from "@mui/icons-material/Search";
 import "./lms.css";
@@ -66,30 +66,45 @@ export default function IconMenu() {
         <Grid item xs={12} md={2} sm={12}>
           <Paper>
             <MenuList>
-              {category.length ? (
-                category.map((row, index) => {
-                  return (
-                    <div key={index}>
-                      <MenuItem>
-                        <ListItemText
-                          onClick={() => {
-                            setHed(row.examName);
-                            setId(row._id);
-                            setViewId("");
-                          }}
-                        >
-                          {row.examName}
-                        </ListItemText>
-                      </MenuItem>
-                      <Divider />
-                    </div>
-                  );
-                })
-              ) : (
-                <Grid item xs={12} md={12} sm={12}>
-                  <p>!no data found</p>
-                </Grid>
-              )}
+              <List
+                // key={exam.examName}
+                component="nav"
+                aria-label="main mailbox folders"
+                sx={{
+                  width: "100%",
+                  // maxWidth: 360,
+                  bgcolor: "background.paper",
+                  position: "relative",
+                  overflow: "auto",
+                  maxHeight: 300,
+                  // "& ul": { padding: 0 },
+                }}
+              >
+                {category.length ? (
+                  category.map((row, index) => {
+                    return (
+                      <div key={index}>
+                        <MenuItem>
+                          <ListItemText
+                            onClick={() => {
+                              setHed(row.examName);
+                              setId(row._id);
+                              setViewId("");
+                            }}
+                          >
+                            {row.examName}
+                          </ListItemText>
+                        </MenuItem>
+                        <Divider />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <Grid item xs={12} md={12} sm={12}>
+                    <p>!no data found</p>
+                  </Grid>
+                )}
+              </List>
             </MenuList>
           </Paper>
         </Grid>
@@ -110,11 +125,20 @@ export default function IconMenu() {
               {hed}
             </div>
           </Grid>
-          {viewId ? (
-            <View viewData={viewData} />
-          ) : (
-            <Cards data={getIdData} setViewId={setViewId} />
-          )}
+          {getIdData.length ?
+            viewId ? (
+              <View viewData={viewData} />
+            ) : (
+              <Cards data={getIdData} setViewId={setViewId} />
+            )
+            :
+            <Result
+              status="404"
+              title="404"
+              subTitle="Sorry, the page you visited does not exist."
+              extra={<Button type="primary">Back Home</Button>}
+            />
+          }
         </Grid>
       </Grid>
     </Container>
