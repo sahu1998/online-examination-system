@@ -9,7 +9,9 @@ import {
   Dropdown,
   Textarea,
   Grid,
+  Avatar,
 } from "@nextui-org/react";
+import TableChartIcon from "@mui/icons-material/TableChart";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -18,7 +20,10 @@ import {
   getApiHandler,
   postApiHandler,
   putApiHandler,
+  serverURL,
 } from "../../../../apiHandler";
+import OwnerLayout from "../../../../layouts/owner-layout";
+import { Chip } from "@mui/material";
 
 // import "./category.m.css";
 
@@ -53,6 +58,7 @@ export default function PracticeSubjects() {
   const [catg_list, setCatg_list] = useState([]);
 
   const file = watch("image");
+  const quiz = watch("quiz");
 
   const onSubmit = async (values) => {
     const formData = new FormData();
@@ -62,6 +68,7 @@ export default function PracticeSubjects() {
     formData.append("timeLimit", values.timeLimit);
     formData.append("categoryId", values.categoryId);
     formData.append("image", file[0]);
+    formData.append("quiz", quiz[0]);
     if (subjectId) {
       console.log("updating... ", values);
       const result = await putApiHandler(
@@ -103,280 +110,311 @@ export default function PracticeSubjects() {
     setValue("subjectDesc", value.subjectDesc);
     setValue("marks", value.marks);
     setValue("timeLimit", value.timeLimit);
-    setValue("timeLimit", value.timeLimit);
   };
+  console.log("date: ", Date.now());
 
   useEffect(() => {
     getData();
   }, []);
 
   return (
-    <div className="my-5">
-      <Button
-        onPress={async () => {
-          await getCategories();
-          setVisible(true);
-        }}
-        auto
-        rel="noopener noreferrer"
-        target="_blank"
-        css={{
-          maxWidth: "$12", // space[12]
-          borderRadius: "$xs", // radii.xs
-          margin: "10px 0",
-          border: "$space$1 solid transparent",
-          background: "$gray400", // colors.gray800
-          color: "$gray800",
-          height: "$12", // space[12]
-          boxShadow: "$md", // shadows.md
-          "&:hover": {
-            background: "$gray100",
+    <OwnerLayout>
+      <div className="my-5">
+        <Button
+          onPress={async () => {
+            await getCategories();
+            setVisible(true);
+          }}
+          auto
+          rel="noopener noreferrer"
+          target="_blank"
+          css={{
+            maxWidth: "$12", // space[12]
+            borderRadius: "$xs", // radii.xs
+            margin: "10px 0",
+            border: "$space$1 solid transparent",
+            background: "$gray400", // colors.gray800
             color: "$gray800",
-          },
-          "&:active": {
-            background: "$gray200",
-          },
-          "&:focus": {
-            borderColor: "$gray400",
-          },
-        }}
-      >
-        ADD NEW SUBJECT
-      </Button>
-
-      <Table
-        bordered
-        css={{
-          height: "auto",
-          minWidth: "100%",
-        }}
-      >
-        <Table.Header>
-          <Table.Column>Image</Table.Column>
-          <Table.Column>Subject Name</Table.Column>
-          <Table.Column>Subject Category</Table.Column>
-          <Table.Column>Marks</Table.Column>
-          <Table.Column>Time Limit</Table.Column>
-          <Table.Column>Action</Table.Column>
-        </Table.Header>
-
-        <Table.Body>
-          {data.map((a) => (
-            <Table.Row>
-              <Table.Cell>{a.marks}</Table.Cell>
-              <Table.Cell>{a.subjectName}</Table.Cell>
-              <Table.Cell>{a.categoryName}</Table.Cell>
-              <Table.Cell>{a.marks}</Table.Cell>
-              <Table.Cell>{a.timeLimit}</Table.Cell>
-
-              <Table.Cell>
-                <Dropdown>
-                  <Dropdown.Button
-                    flat
-                    css={{ background: "$gray400", color: "$gray800" }}
-                  >
-                    Action
-                  </Dropdown.Button>
-                  <Dropdown.Menu aria-label="Static Actions">
-                    <Dropdown.Item aria-label="edit-action" key="edit">
-                      <button
-                        className="catg-btn-desing"
-                        onClick={async () => {
-                          setSubjectId(a._id);
-                          await getCategories();
-                          await prefilledForm(a);
-                          setVisible(true);
-                        }}
-                      >
-                        Edit
-                      </button>
-                    </Dropdown.Item>
-                    <Dropdown.Item aria-label="delete-action" key="delete">
-                      <button
-                        className="catg-btn-desing"
-                        onClick={() => {
-                          deleteData(a._id);
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-
-        <Table.Pagination
-          shadow
-          noMargin
-          align="center"
-          color="neutral"
-          rowsPerPage={5}
-          //   onPageChange={(page) => console.log({ page })}
-        />
-      </Table>
-
-      <Modal
-        blur
-        preventClose
-        open={visible}
-        onClose={() => {
-          setVisible(false);
-        }}
-        aria-labelledby="modal-title"
-        width={500}
-        height={500}
-      >
-        <Modal.Header aria-labelledby="modal-header">
-          <Text id="modal-title" size={18}>
-            <Text b size={18}>
-              {subjectId ? "Update Practice Subject" : "Add Practice Subject"}
-            </Text>
-          </Text>
-        </Modal.Header>
-        <form
-          style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-          onSubmit={handleSubmit(onSubmit)}
+            height: "$12", // space[12]
+            boxShadow: "$md", // shadows.md
+            "&:hover": {
+              background: "$gray100",
+              color: "$gray800",
+            },
+            "&:active": {
+              background: "$gray200",
+            },
+            "&:focus": {
+              borderColor: "$gray400",
+            },
+          }}
         >
-          <Modal.Body aria-labelledby="modal-body">
-            <Grid.Container gap={2}>
-              <Grid xs={12}>
-                <Input
-                  clearable
-                  bordered
-                  fullWidth
-                  color={errors?.subjectName ? "error" : "primary"}
-                  size="lg"
-                  placeholder="Title"
-                  error={!!errors?.subjectName}
-                  helperText={errors?.subjectName?.message}
-                  helperColor="error"
-                  {...register("subjectName")}
-                />
-              </Grid>
-              <Grid xs={12}>
-                <Textarea
-                  clearable
-                  bordered
-                  fullWidth
-                  color={errors?.subjectDesc ? "error" : "primary"}
-                  size="lg"
-                  placeholder="Description"
-                  error={!!errors?.subjectDesc}
-                  helperText={errors?.subjectDesc?.message}
-                  helperColor="error"
-                  {...register("subjectDesc")}
-                />
-              </Grid>
+          ADD NEW QUIZ
+        </Button>
 
-              <Grid xs={6}>
-                <Input
-                  clearable
-                  bordered
-                  fullWidth
-                  color={errors?.marks ? "error" : "primary"}
-                  size="lg"
-                  placeholder="Marks"
-                  error={!!errors?.marks}
-                  helperText={errors?.marks?.message}
-                  helperColor="error"
-                  {...register("marks")}
-                />
-              </Grid>
-              <Grid xs={6}>
-                <Input
-                  clearable
-                  bordered
-                  fullWidth
-                  color={errors?.timeLimit ? "error" : "primary"}
-                  size="lg"
-                  placeholder="Time Limit"
-                  error={!!errors?.timeLimit}
-                  helperText={errors?.timeLimit?.message}
-                  helperColor="error"
-                  {...register("timeLimit")}
-                />
-              </Grid>
-              <Grid xs={12}>
-                {/* <Dropdown>
-                  <Dropdown.Button
-                    className="w-100 item-start"
-                    bordered
+        <Table
+          bordered
+          css={{
+            height: "auto",
+            minWidth: "100%",
+          }}
+        >
+          <Table.Header>
+            <Table.Column>Image</Table.Column>
+            <Table.Column>Subject Name</Table.Column>
+            <Table.Column>Subject Description</Table.Column>
+            <Table.Column>Subject Category</Table.Column>
+            <Table.Column>Marks</Table.Column>
+            <Table.Column>Time Limit</Table.Column>
+            <Table.Column>Action</Table.Column>
+          </Table.Header>
+
+          <Table.Body>
+            {data.map((a) => (
+              <Table.Row>
+                <Table.Cell>
+                  <Avatar
+                    squared
+                    text={a.subjectName}
                     color="primary"
-                    css={{ tt: "capitalize" }}
-                  >
-                    {selectedCatg
-                      ? catg_list[selectedCatg.currentKey].examName
-                      : "Select"}
-                  </Dropdown.Button>
-                  <Dropdown.Menu
-                    aria-label="Single selection actions"
-                    color="secondary"
-                    disallowEmptySelection
-                    selectionMode="single"
-                    selectedKeys={selectedCatg}
-                    onSelectionChange={setSelectedCatg}
-                  >
-                    {catg_list.map((catg, index) => {
-                      return (
-                        <Dropdown.Item key={index}>
-                          {catg.examName}
-                        </Dropdown.Item>
-                      );
-                    })}
-                  </Dropdown.Menu>
-                </Dropdown> */}
-                <div className="w-100">
-                  <select
-                    {...register("categoryId")}
-                    className="form-control rounded  w-100 p-1"
-                  >
-                    {catg_list.map((catg, index) => {
-                      return (
-                        <option key={index} value={catg._id}>
-                          {catg.examName}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </Grid>
-              <Grid xs={12}>
-                <input
-                  className="border  border-3 rounded border-primary w-100 p-1"
-                  required
-                  fullWidth
-                  name="file"
-                  type="file"
-                  // inputProps={{
-                  //   multiple: true,
-                  // }}
-                  {...register("image")}
-                />
-              </Grid>
-            </Grid.Container>
-          </Modal.Body>
-          <Modal.Footer aria-labelledby="modal-footer">
-            <Button
-              auto
-              flat
-              color="warning"
-              onPress={() => {
-                setVisible(false);
-                reset();
-                setSubjectId(null);
-              }}
-            >
-              Close
-            </Button>
-            <Button type="submit" color="success">
-              {subjectId ? "Update" : "Add"}
-            </Button>
-          </Modal.Footer>
-        </form>
-      </Modal>
-    </div>
+                    textColor="white"
+                    src={
+                      a.subjectImg &&
+                      `${serverURL}/practice-subject-img/${
+                        a.subjectImg.split("\\")[2]
+                      }`
+                    }
+                    size="xl"
+                    variant="rounded"
+                    bordered={true}
+                  />
+                </Table.Cell>
+                <Table.Cell>{a.subjectName}</Table.Cell>
+                <Table.Cell>
+                  {a.subjectDesc
+                    ? a.subjectDesc.substring(0, 15) + "..."
+                    : "No Description"}
+                </Table.Cell>
+                <Table.Cell>{a.categoryName}</Table.Cell>
+                <Table.Cell>{a.marks}</Table.Cell>
+                <Table.Cell>{a.timeLimit}</Table.Cell>
+
+                <Table.Cell>
+                  <Dropdown>
+                    <Dropdown.Button
+                      flat
+                      css={{ background: "$gray400", color: "$gray800" }}
+                    >
+                      Action
+                    </Dropdown.Button>
+                    <Dropdown.Menu aria-label="Static Actions">
+                      <Dropdown.Item aria-label="edit-action" key="edit">
+                        <button
+                          className="catg-btn-desing"
+                          onClick={async () => {
+                            setSubjectId(a._id);
+                            await getCategories();
+                            await prefilledForm(a);
+                            setVisible(true);
+                          }}
+                        >
+                          Edit
+                        </button>
+                      </Dropdown.Item>
+                      <Dropdown.Item aria-label="delete-action" key="delete">
+                        <button
+                          className="catg-btn-desing"
+                          onClick={() => {
+                            deleteData(a._id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+
+          <Table.Pagination
+            shadow
+            noMargin
+            align="center"
+            color="primary"
+            rowsPerPage={5}
+            //   onPageChange={(page) => console.log({ page })}
+          />
+        </Table>
+
+        <Modal
+          blur
+          preventClose
+          open={visible}
+          onClose={() => {
+            setVisible(false);
+          }}
+          aria-labelledby="modal-title"
+          width={750}
+          height={500}
+        >
+          <Modal.Header aria-labelledby="modal-header">
+            <Text id="modal-title" size={18}>
+              <Text b size={18}>
+                {subjectId ? "Update Practice Subject" : "Add Practice Subject"}
+              </Text>
+            </Text>
+          </Modal.Header>
+          <form
+            style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Modal.Body aria-labelledby="modal-body">
+              <Grid.Container gap={2}>
+                <Grid xs={12}>
+                  <Input
+                    clearable
+                    bordered
+                    fullWidth
+                    color={errors?.subjectName ? "error" : "primary"}
+                    size="lg"
+                    placeholder="Title"
+                    error={!!errors?.subjectName}
+                    helperText={errors?.subjectName?.message}
+                    helperColor="error"
+                    {...register("subjectName")}
+                  />
+                </Grid>
+                <Grid xs={12}>
+                  <Textarea
+                    clearable
+                    bordered
+                    fullWidth
+                    color={errors?.subjectDesc ? "error" : "primary"}
+                    size="lg"
+                    placeholder="Description"
+                    error={!!errors?.subjectDesc}
+                    helperText={errors?.subjectDesc?.message}
+                    helperColor="error"
+                    {...register("subjectDesc")}
+                  />
+                </Grid>
+
+                <Grid xs={6}>
+                  <Input
+                    clearable
+                    bordered
+                    fullWidth
+                    color={errors?.marks ? "error" : "primary"}
+                    size="lg"
+                    placeholder="Total Marks"
+                    error={!!errors?.marks}
+                    helperText={errors?.marks?.message}
+                    helperColor="error"
+                    {...register("marks")}
+                  />
+                </Grid>
+                <Grid xs={6}>
+                  <Input
+                    clearable
+                    bordered
+                    fullWidth
+                    color={errors?.timeLimit ? "error" : "primary"}
+                    size="lg"
+                    placeholder="Time Limit"
+                    error={!!errors?.timeLimit}
+                    helperText={errors?.timeLimit?.message}
+                    helperColor="error"
+                    {...register("timeLimit")}
+                  />
+                </Grid>
+                <Grid xs={12}>
+                  <div className="w-100">
+                    <select
+                      {...register("categoryId")}
+                      className="form-control rounded  w-100 p-1"
+                    >
+                      {catg_list.map((catg, index) => {
+                        return (
+                          <option key={index} value={catg._id}>
+                            {catg.examName}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </Grid>
+                <Grid xs={12}>
+                  <div class=" w-100">
+                    <label for="formFile" class="form-label">
+                      Image
+                    </label>
+                    <input
+                      className="form-control border  border-3 rounded border-primary w-100 p-1"
+                      id="formFile"
+                      required
+                      fullWidth
+                      name="file"
+                      type="file"
+                      // inputProps={{
+                      //   multiple: true,
+                      // }}
+                      {...register("image")}
+                    />
+                  </div>
+                </Grid>
+                <Grid xs={12}>
+                  <div class=" w-100">
+                    <label for="formFile" class="form-label">
+                      Upload Excel File (<i>Quiz Questions</i>)
+                      <Chip
+                        icon={<TableChartIcon />}
+                        label="Download Template"
+                        component="a"
+                        href="http://localhost:3000/assets/files/quiz-ques.xlsx"
+                        variant="outlined"
+                        clickable
+                        download="quiz-ques.xlsx"
+                        size="small"
+                      />
+                    </label>
+                    <input
+                      className="form-control border border-3 rounded border-primary p-1"
+                      id="formFile"
+                      required
+                      fullWidth
+                      name="quiz"
+                      type="file"
+                      // inputProps={{
+                      //   multiple: true,
+                      // }}
+                      {...register("quiz")}
+                    />
+                  </div>
+                </Grid>
+              </Grid.Container>
+            </Modal.Body>
+            <Modal.Footer aria-labelledby="modal-footer">
+              <Button
+                auto
+                flat
+                color="warning"
+                onPress={() => {
+                  setVisible(false);
+                  reset();
+                  setSubjectId(null);
+                }}
+              >
+                Close
+              </Button>
+              <Button type="submit" color="success">
+                {subjectId ? "Update" : "Add"}
+              </Button>
+            </Modal.Footer>
+          </form>
+        </Modal>
+      </div>
+    </OwnerLayout>
   );
 }
