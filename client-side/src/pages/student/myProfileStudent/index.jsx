@@ -27,7 +27,7 @@ export default function MyProfileStudent() {
     formData.append("email", email);
     formData.append("password", password);
 
-    formData.append("image", file[0]);
+    formData.append("image", file && file[0]);
     formData.append("role", role);
     formData.append("status", status);
     formData.append("phone", phone);

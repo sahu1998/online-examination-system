@@ -31,7 +31,7 @@ const schema = yup
   })
   .required();
 
-export default function FeedbackForm() {
+export default function FeedbackStudent() {
   const {
     register,
     handleSubmit,
