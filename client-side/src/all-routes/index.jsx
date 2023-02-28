@@ -19,6 +19,7 @@ import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
+import QuestionBank from "../pages/owner/exams/question-bank";
 import ChangePasswordAdmin from "../pages/admin/changePassword";
 import ChangePasswordOwner from "../pages/owner/changePassword";
 import ChangePasswordStudent from "../pages/student/changePassword";
@@ -69,8 +70,9 @@ export default function AllRoutes() {
       <Route path="/adminPassword" element={<ChangePasswordAdmin />} />
       <Route path="/contactUs" element={<ContactUs />} />
 
-      <Route path="/practice-exam-catg" element={<PracticeCatg />} />
-      <Route path="/practice-exam-subjects" element={<PracticeSubjects />} />
+      <Route path="/exams/categories" element={<PracticeCatg />} />
+      <Route path="/exams/subjects" element={<PracticeSubjects />} />
+      <Route path="/exams/questionbank" element={<QuestionBank />} />
     </Routes>
   );
 }
