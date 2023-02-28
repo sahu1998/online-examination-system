@@ -4,6 +4,7 @@ export const serverURL = "http://localhost:8080/oes";
 const postApiHandler = async (endPoint, value) => {
   try {
     const res = await axios.post(serverURL + endPoint, value);
+    console.log("postres", res)
     return res.data;
   } catch (err) {
     console.log("errors=>", err);
@@ -32,8 +33,9 @@ const deleteApiHandler = async (endPoint) => {
 const putApiHandler = async (endPoint, value) => {
   console.log("v===>", value);
   try {
+    console.log("put", value)
     const res = await axios.put(serverURL + endPoint, value);
-
+    console.log("res", res)
     return res.data;
   } catch (err) {
     console.log("errors=>", err);

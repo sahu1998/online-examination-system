@@ -44,12 +44,14 @@ const Exam = [
   { name: "Subject Type", url: "/ownersubject" },
 ];
 const lms = [
-  { name: "Categories", url: "/ownercategories" },
+  { name: "Categories", url: "/lms/category" },
   { name: "Contacts", url: "/ownerquestion" },
   { name: "Series", url: "/ownerexamtype" },
 ];
-
-const settings = [{ name: "Settings", url: "/ownercategories" }];
+const settings = [
+  { name: "Settings", url: "/ownercategories" },
+  { name: "Recaptcha Setting", url: "/mastersetting/recaptcha-setting" }
+]
 
 function OwnerSideBar({ children }) {
   const [settingsdata, setSettingsdata] = React.useState(null);

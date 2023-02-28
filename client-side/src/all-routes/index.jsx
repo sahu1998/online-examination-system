@@ -17,8 +17,13 @@ import Quiz from "../pages/student/exams/quiz";
 import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
+
+
+
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
+import LmsCategory from "../pages/owner/lms/categories";
+import RecaptchaSetting from "../pages/owner/master-settings/google-recaptcha"
 import QuestionBank from "../pages/owner/exams/question-bank";
 import ChangePasswordAdmin from "../pages/admin/changePassword";
 import ChangePasswordOwner from "../pages/owner/changePassword";
@@ -48,6 +53,8 @@ export default function AllRoutes() {
       <Route path="/resetPassword/:id/:token" element={<ResetPassword />} />
 
       <Route path="/lms" element={<Lms />} />
+      <Route path="/lms/category" element={<LmsCategory />} />
+      <Route path="/mastersetting/recaptcha-setting" element={<RecaptchaSetting />} />
       {/* //////////.....Home.....////////// */}
       <Route path="/pattern" element={<Pattern />} />
       <Route path="/pricing" element={<Pricing />} />
