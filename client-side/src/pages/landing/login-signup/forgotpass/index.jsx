@@ -60,7 +60,6 @@ export default function ForgotPass() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <TextField
-            placeholder="Email"
             name="email"
             type="email"
             label="Email Address"

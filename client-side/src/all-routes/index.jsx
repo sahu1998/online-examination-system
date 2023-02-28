@@ -19,10 +19,25 @@ import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 
 
+
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
 import LmsCategory from "../pages/owner/lms/categories";
 import RecaptchaSetting from "../pages/owner/master-settings/google-recaptcha"
+import UsersTable from "../pages/owner/users/temp";
+import FeedbackForm from "../pages/student/feedback/temp";
+import FeedbackTable from "../pages/owner/feedbackTable";
+// import MyProfileStudent from "../pages/student/myprofileStudent";
+
+import NotificationTable from "../pages/owner/notification";
+import MyProfileOwner from "../pages/owner/myprofileOwner";
+import MyProfileAdmin from "../pages/admin/myprofileAdmin";
+import NotificationMsg from "../pages/student/notification";
+import ChangePasswordStudent from "../pages/student/changePassword";
+import ChangePasswordOwner from "../pages/owner/changePassword";
+import ChangePasswordAdmin from "../pages/admin/changePassword";
+import ContactUs from "../pages/landing/contact-us"
+
 export default function AllRoutes() {
   return (
     <Routes>
@@ -48,6 +63,18 @@ export default function AllRoutes() {
       <Route path="/owner" element={<OwnerDasboad />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/student" element={<StudentDashboard />} />
+      <Route path="/users" element={<UsersTable />} />
+      <Route path="/feedback" element={<FeedbackForm />} />
+      <Route path="/feedbacktable" element={<FeedbackTable />} />
+      {/* <Route path="/myprofileStudent" element={<MyProfileStudent />} /> */}
+      <Route path="/notification" element={<NotificationTable />} />
+      <Route path="/myprofileAdmin" element={<MyProfileAdmin />} />
+      <Route path="/myprofileOwner" element={<MyProfileOwner />} />
+      <Route path="/studentNotification" element={<NotificationMsg />} />
+      <Route path="/studentPassword" element={<ChangePasswordStudent />} />
+      <Route path="/ownerPassword" element={<ChangePasswordOwner />} />
+      <Route path="/adminPassword" element={<ChangePasswordAdmin />} />
+      <Route path="/contactUs" element={<ContactUs />} />
 
       <Route path="/practice-exam-catg" element={<PracticeCatg />} />
       <Route path="/practice-exam-subjects" element={<PracticeSubjects />} />

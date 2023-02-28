@@ -1,8 +1,9 @@
 const nodemailer = require("nodemailer");
-const loginSchema = require("../Model/loginmodel");
+// const loginSchema = require("../Model/loginmodel");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
+const userSchema = require("../model/usersmodel");
 
 const sendEmail = async ({ link, email }) => {
   const transporter = nodemailer.createTransport({
@@ -36,7 +37,7 @@ const verificationEmail = async (req, res) => {
   console.log("Email", email);
   try {
     if (email) {
-      const oldUser = await loginSchema.findOne({
+      const oldUser = await userSchema.findOne({
         email,
       });
       console.log("OLDUSER", oldUser);
@@ -72,7 +73,7 @@ const updatePassword = async (req, res) => {
   const { password, confirmPassword } = req.body;
   const salt = bcrypt.genSaltSync(10);
   const hashpass = bcrypt.hashSync(password, salt);
-  const oldUser = await loginSchema.findOne({ _id: id });
+  const oldUser = await userSchema.findOne({ _id: id });
   if (!oldUser) {
     return res.send({ message: "email does not exits", status: 400 });
   }
@@ -84,7 +85,7 @@ const updatePassword = async (req, res) => {
     if (verify.email === oldUser.email) {
       if (!!confirmPassword) {
         if (password === confirmPassword) {
-          await loginSchema.updateOne(
+          await userSchema.updateOne(
             { _id: id },
             { $set: { password: hashpass } }
           );

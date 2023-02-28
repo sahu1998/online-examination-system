@@ -54,6 +54,8 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
+    setError,
+
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -85,6 +87,22 @@ export default function SignUp() {
     SetRecaptcha(value);
   }
 
+  React.useEffect(() => {
+    {
+      message
+        ? message === "password not match"
+          ? setError("confirmPassword", {
+            type: "custom",
+            message: message ?? "",
+          })
+          : //   ?  message === "pastch"
+          // ? setError("xfgh", { type: "custom", message: message ?? "" }):""
+
+          setError("email", { type: "custom", message: message ?? "" })
+        : null;
+    }
+  }, [message]);
+
   return (
     <LandingLayout>
       <ThemeProvider theme={theme}>
@@ -103,6 +121,7 @@ export default function SignUp() {
               noValidate
               sx={{ mt: 1 }}
               onSubmit={handleSubmit(onSubmit)}
+              style={{ marginLeft: "3rem" }}
             >
               <Typography className="typography">Name*</Typography>
 
@@ -148,6 +167,7 @@ export default function SignUp() {
                     : message
                   : ""}
               </h6> */}
+
               <Typography className="typography">Password*</Typography>
               <TextField
                 className="textfeild"
@@ -175,13 +195,13 @@ export default function SignUp() {
                 helperText={errors?.confirmPassword?.message}
               />
 
-              <h6 class="message">
+              {/* <h6 class="message">
                 {message
                   ? message === "password not match"
                     ? message
                     : ""
                   : ""}
-              </h6>
+              </h6> */}
               <ReCAPTCHA
                 sitekey="6LeHNZokAAAAAC5sRNYDUeqWL8Asc4KW_lCKP-5N"
                 onChange={onChange}

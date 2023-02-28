@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink, Link } from "react-router-dom";
-import './header.css'
+import "./header.css";
 
 const pages = [
   { name: "Home", path: "/" },
@@ -21,7 +21,7 @@ const pages = [
   { name: "Pricing", path: "/pricing" },
   { name: "Syllabus", path: "/syllabus" },
   { name: "About Us", path: "/about" },
-  { name: "Contact Us", path: "/contact" },
+  { name: "Contact Us", path: "/contactUs" },
 ];
 
 function Navbar() {
@@ -102,15 +102,19 @@ function Navbar() {
                 }}
               >
                 {pages.map((tabs) => {
-                  return(
-                  <MenuItem  onClick={handleCloseNavMenu}>
-                    <NavLink to={tabs.path} style={{ textDecoration: "none" }}>
-                      <Typography textAlign="center" sx={{ color: "black" }}>
-                        {tabs.name}
-                      </Typography>
-                    </NavLink>
-                  </MenuItem>
-)})}
+                  return (
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <NavLink
+                        to={tabs.path}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Typography textAlign="center" sx={{ color: "black" }}>
+                          {tabs.name}
+                        </Typography>
+                      </NavLink>
+                    </MenuItem>
+                  );
+                })}
               </Menu>
             </Box>
 
@@ -141,25 +145,25 @@ function Navbar() {
               }}
             >
               {pages.map((tab) => {
-                return(
-                <NavLink  to={tab.path}  >
-                  <Button
-                   
-                    onClick={handleCloseNavMenu}
-                    className="nav-link"
-                    sx={{
-                      my: 2,
-                      color: "black",
-                      display: "block",
-                      fontSize: "13px",
-                      fontFamily: "inherit",
-                      textDecoration:"none"
-                    }}
-                  >
-                    {tab.name}
-                  </Button>
-                </NavLink>
-)})}
+                return (
+                  <NavLink to={tab.path}>
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      className="nav-link"
+                      sx={{
+                        my: 2,
+                        color: "black",
+                        display: "block",
+                        fontSize: "13px",
+                        fontFamily: "inherit",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {tab.name}
+                    </Button>
+                  </NavLink>
+                );
+              })}
             </Box>
             {/* /////////.....Buttons.....///////// */}
 
@@ -172,7 +176,7 @@ function Navbar() {
                   fontFamily: "inherit",
                   border: "ridge",
                   marginRight: "6px",
-                  borderRadius:"18px",
+                  borderRadius: "18px",
                 }}
                 variant=""
               >
@@ -188,7 +192,7 @@ function Navbar() {
                   color: "black",
                   fontFamily: "inherit",
                   border: "solid",
-                  borderRadius:"18px",
+                  borderRadius: "18px",
                 }}
                 variant=""
               >

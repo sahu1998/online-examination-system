@@ -1,7 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import React from 'react';
 import OwnerLayout from '../../../layouts/owner-layout';
-import HomeIcon from '@mui/icons-material/Home';
+
 import Upper from '../../../components/owner/dashboard/upper';
 import Chart from '../../../components/owner/dashboard/piechart';
 import ColumnChart from '../../../components/owner/dashboard/coloumchart';
@@ -13,8 +13,7 @@ import {  Grid } from "@nextui-org/react";
 export default function OwnerDasboad() {
   return (
     <OwnerLayout>
-      <div  style={{display:"flex"}}><HomeIcon sx={{height:"30px",width:"30px"}}/>
-      <Typography variant='h6'>Dashboard</Typography></div>
+     
       <br/>
       <Upper/><br/>
       <Chart/><br/>
