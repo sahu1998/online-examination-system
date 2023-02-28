@@ -42,6 +42,7 @@ export default function LogIn() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm({
     resolver: yupResolver(schema),
     default: {
@@ -59,6 +60,7 @@ export default function LogIn() {
     console.log("resss=======>", response.temp);
     if (response.status === 200) {
       localStorage.setItem("token", response.temp.token);
+      localStorage.setItem("id", response.temp._id);
 
       if (response.temp.role === "owner" && role === "owner") {
         console.log(role, response.temp.role);
@@ -77,6 +79,16 @@ export default function LogIn() {
       setMessage(response.message);
     }
   };
+
+  React.useEffect(() => {
+    {
+      message
+        ? message === "password not match"
+          ? setError("password", { type: "custom", message: message ?? "" })
+          : setError("email", { type: "custom", message: message ?? "" })
+        : null;
+    }
+  }, [message]);
 
   return (
     <LandingLayout>
@@ -111,13 +123,13 @@ export default function LogIn() {
                   error={!!errors?.email}
                   helperText={errors?.email?.message}
                 />
-                <h6 class="message">
+                {/* <h6 class="message">
                   {message
                     ? message === "password not match"
                       ? ""
                       : message
                     : ""}
-                </h6>
+                </h6> */}
               </div>
 
               <div>
@@ -136,13 +148,6 @@ export default function LogIn() {
                   error={!!errors?.password}
                   helperText={errors?.password?.message}
                 />
-                <h6 class="message">
-                  {message
-                    ? message === "password not match"
-                      ? message
-                      : ""
-                    : ""}
-                </h6>
               </div>
               <Button
                 type="submit"
@@ -188,7 +193,7 @@ export default function LogIn() {
               <Typography variant="h6" className="login ">
                 Login As
               </Typography>
-              <Box class="box">
+              <Box className="box">
                 <Button
                   class="button"
                   onClick={() => {

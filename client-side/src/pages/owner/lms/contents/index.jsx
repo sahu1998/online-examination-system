@@ -1,7 +1,7 @@
 import React from "react";
 import LmsContent from "../../../../components/owner/lms/contents/temp";
 import OwnerLayout from "../../../../layouts/owner-layout";
-const Content=()=>{
+const Contects=()=>{
     return(
         
             <OwnerLayout>
@@ -12,4 +12,4 @@ const Content=()=>{
         
     )
 }
-export default Content;
+export default Contects;

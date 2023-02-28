@@ -2,11 +2,10 @@ const mongoose = require("mongoose");
 
 const feedbackSchema = mongoose.Schema({
   title: String,
-  desc: String,
   subject: String,
+  desc: String,
   postedOn: String,
-  name: String,
-  image: String,
+  userId: mongoose.Schema.Types.ObjectId,
 });
 
 const feedbackModel = mongoose.model("feedbacks", feedbackSchema);

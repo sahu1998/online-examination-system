@@ -20,55 +20,58 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const schema = yup.object().shape({
-  siteTitle: yup
-    .string()
-    .required()
-    .matches(/^[a-z]/),
-  siteState: yup
-    .string()
-    .required()
-    .matches(/^[aA-zZ\s]+$/),
-  siteZipcode: yup
-    .string()
-    .required()
-    .matches(/^[0-9a-zA-Z]*[0-9][0-9a-zA-Z]*$/),
-  fbLogin: yup
-    .string()
-    .required()
-    .matches(/^[a-z]/),
-  siteAddress: yup
-    .string()
-    .required()
-    .matches(/^[a-z]/),
+const schema = yup
+  .object()
+  .shape({
+    siteTitle: yup
+      .string()
+      .required()
+      .matches(/^[a-z]/),
+    siteState: yup
+      .string()
+      .required()
+      .matches(/^[aA-zZ\s]+$/),
+    siteZipcode: yup
+      .string()
+      .required()
+      .matches(/^[0-9a-zA-Z]*[0-9][0-9a-zA-Z]*$/),
+    fbLogin: yup
+      .string()
+      .required()
+      .matches(/^[a-z]/),
+    siteAddress: yup
+      .string()
+      .required()
+      .matches(/^[a-z]/),
 
-  siteCity: yup
-    .string()
-    .required()
-    .matches(/^[aA-zZ\s]+$/),
-  siteContry: yup
-    .string()
-    .required()
-    .matches(/^[a-z]/),
-  sitePhone: yup
-    .string()
-    .required()
-    .matches(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/),
-  currencyCode: yup
-    .string()
-    .required()
-    .matches(/^[0-9]/),
-  twitterLogin: yup
-    .string()
-    .required()
-    .matches(/^[a-z]/),
-  // enableOtpLogin: yup.string().required(),
-  // validityType: yup.string().required(),
-  contryCode: yup
-    .string()
-    .required()
-    .matches(/^[0-9]/),
-});
+    siteCity: yup
+      .string()
+      .required()
+      .matches(/^[aA-zZ\s]+$/),
+    siteContry: yup
+      .string()
+      .required()
+      .matches(/^[a-z]/),
+    sitePhone: yup
+      .string()
+      .required()
+      .matches(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/),
+    currencyCode: yup
+      .string()
+      .required()
+      .matches(/^[0-9]/),
+    twitterLogin: yup
+      .string()
+      .required()
+      .matches(/^[a-z]/),
+    // enableOtpLogin: yup.string().required(),
+    // validityType: yup.string().required(),
+    contryCode: yup
+      .string()
+      .required()
+      .matches(/^[0-9]/),
+  })
+  .required();
 
 export default function SiteSetting() {
   const {
@@ -78,7 +81,8 @@ export default function SiteSetting() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm();
+  // { resolver: yupResolver(schema) }
   const [update, setUpdate] = React.useState();
   const file = watch("siteLogo");
   const onSubmit = async (value) => {
@@ -105,7 +109,7 @@ export default function SiteSetting() {
     formData.append("siteState", siteState);
     formData.append("siteZipcode", siteZipcode);
     formData.append("fbLogin", fbLogin);
-    formData.append("siteAddress", siteAddress);
+     formData.append("siteAddress", siteAddress);
     formData.append("siteLogo", file[0]);
     formData.append("siteCity", siteCity);
     formData.append("siteContry", siteContry);
@@ -115,11 +119,11 @@ export default function SiteSetting() {
     formData.append("enableOtpLogin", enableOtpLogin);
     formData.append("validityType", validityType);
     formData.append("contryCode", contryCode);
-    // const data = await putApiHandler(`/put-site-setting/${update}`, formData);
-    const data1=await postApiHandler("/site-setting", formData);
-     console.log("data1====>",data1);
+     const data = await putApiHandler(`/put-site-setting/${update}`, formData);
+    //const data1 = await postApiHandler("/site-setting", formData);
+    //console.log("data1====>", data1);
 
-    // console.log("data==", data);
+     console.log("data==", data);
   };
   const getByData = async () => {
     const getData = await getApiHandler("/get-Site-setting");
@@ -127,9 +131,9 @@ export default function SiteSetting() {
     setUpdate(getData.data[0]._id);
   };
 
-  // React.useEffect(() => {
-  //   getByData();
-  // }, []);
+   React.useEffect(() => {
+   getByData();
+   }, []);
   return (
     <Box
       sx={{ flexGrow: 1 }}
@@ -143,8 +147,8 @@ export default function SiteSetting() {
             <TextField
               label="Site Title"
               {...register("siteTitle")}
-              error={!!errors?.siteTitle}
-              helperText={errors?.siteTitle?.message}
+              // error={!!errors?.siteTitle}
+              // helperText={errors?.siteTitle?.message}
             />
           </Grid>
 
@@ -152,36 +156,36 @@ export default function SiteSetting() {
             <TextField
               label="Site State"
               {...register("siteState")}
-              error={!!errors?.siteState}
-              helperText={errors?.siteState?.message}
+              // error={!!errors?.siteState}
+              // helperText={errors?.siteState?.message}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               label="Site ZipCode"
               {...register("siteZipcode")}
-              error={!!errors?.siteZipcode}
-              helperText={errors?.siteZipcode?.message}
+              // error={!!errors?.siteZipcode}
+              // helperText={errors?.siteZipcode?.message}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               label="facebook Login"
               {...register("fbLogin")}
-              error={!!errors?.fbLogin}
-              helperText={errors?.fbLogin?.message}
+              // error={!!errors?.fbLogin}
+              // helperText={errors?.fbLogin?.message}
             />
           </Grid>
-          <Grid item xs={6}>
-            {/* <TextField type={"text"} label="Site Address"/>  */}
+           <Grid item xs={6}>
+            {/* <TextField type={"text"} label="Site Address"/>   */}
             <textarea
               type={"textarea"}
               placeholder="Address"
               {...register("siteAddress")}
-              error={!!errors?.siteAddress}
-              helperText={errors?.siteAddress?.message}
+              // error={!!errors?.siteAddress}
+              // helperText={errors?.siteAddress?.message}
             />
-          </Grid>
+          </Grid> 
           <Grid item xs={6}>
             <TextField
               type={"file"}
@@ -193,8 +197,8 @@ export default function SiteSetting() {
             <TextField
               label="Site City"
               {...register("siteCity")}
-              error={!!errors?.siteCity}
-              helperText={errors?.siteCity?.message}
+              // error={!!errors?.siteCity}
+              // helperText={errors?.siteCity?.message}
             />
           </Grid>
           <Grid item xs={6}>
@@ -202,8 +206,8 @@ export default function SiteSetting() {
               type="text"
               label="Site Contry"
               {...register("siteContry")}
-              error={!!errors?.siteContry}
-              helperText={errors?.siteContry?.message}
+              // error={!!errors?.siteContry}
+              // helperText={errors?.siteContry?.message}
             />
           </Grid>
           <Grid item xs={6}>
@@ -211,24 +215,24 @@ export default function SiteSetting() {
               type={"text"}
               label="Site Phone"
               {...register("sitePhone")}
-              error={!!errors?.sitePhone}
-              helperText={errors?.sitePhone?.message}
+              // error={!!errors?.sitePhone}
+              // helperText={errors?.sitePhone?.message}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               label="Currency Code"
               {...register("currencyCode")}
-              error={!!errors?.currencyCode}
-              helperText={errors?.currencyCode?.message}
+              // error={!!errors?.currencyCode}
+              // helperText={errors?.currencyCode?.message}
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               label="twitter Login"
               {...register("twitterLogin")}
-              error={!!errors?.twitterLogin}
-              helperText={errors?.twitterLogin?.message}
+              // error={!!errors?.twitterLogin}
+              // helperText={errors?.twitterLogin?.message}
             />
           </Grid>
           <Grid item xs={6}>
@@ -244,8 +248,8 @@ export default function SiteSetting() {
             <TextField
               label="Contry Code"
               {...register("contryCode")}
-              error={!!errors?.contryCode}
-              helperText={errors?.contryCode?.message}
+              // error={!!errors?.contryCode}
+              // helperText={errors?.contryCode?.message}
             />
           </Grid>
           <Grid item xs={12}>

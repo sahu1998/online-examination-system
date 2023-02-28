@@ -32,24 +32,26 @@ const {
 const {
   postFeedbackController,
   getFeedbackController,
+  getByIdFeedbackController,
+  deleteFeedbackController,
 } = require("../controller/feedbackcontoller");
-const {
-  getloginController,
-  postsignupController,
-  postloginController,
-} = require("../controller/logincontoller");
+// const {
+//   getloginController,
+//   postsignupController,
+//   postloginController,
+// } = require("../controller/logincontoller");
 const {
   verificationEmail,
   updatePassword,
 } = require("../controller/sendmailcontroller");
 const {
-  postUsersController,
-
   getUsersController,
   deleteUsersController,
   putUsersController,
 
   getByIdUserController,
+  postloginController,
+  postsignupController,
 } = require("../controller/userscontroller");
 const {
   auth,
@@ -71,6 +73,15 @@ const {
   putSiteSettingController,
 } = require("../controller/mastersettingcontroller");
 const { uploadSiteSettingImage } = require("../middleware/mastersetting");
+const { postnotification,
+  getnotification,
+  deletenotification,
+  updatenotification,
+  getnotificationById,
+} = require("../controller/notificationcontoller");
+const {
+  changePasswordController,
+} = require("../controller/changePasswordcontroller");
 const router = express.Router();
 
 router.post("/post-exam-catg", postExamCatgController);
@@ -98,7 +109,7 @@ router.get("/getsubject", getAllSubjectController);
 router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
 
-router.get("/get-login/:token", auth, getloginController);
+// router.get("/get-login/:token", auth, getloginController);
 
 router.post("/post-signup", postsignupController);
 router.post("/post-login", postloginController);
@@ -109,13 +120,27 @@ router.post("/resetPassword/:id/:token", updatePassword);
 router.use("/subject", express.static("storage/subjects"));
 router.use("/feedback", express.static("storage/feedbackImages"));
 
-router.post("/post-users", uploadUserImage, postUsersController);
-router.get("/get-users", getUsersController);
-router.delete("/delete-users/:id", deleteUsersController);
-router.put("/put-users/:id", uploadUserImage, putUsersController);
-router.post("/post-feedback", uploadFeedbackImage, postFeedbackController);
-router.get("/get-feedback", getFeedbackController);
-router.get("/getByUserId/:id", getByIdUserController);
+router.get("/get-users/:token", auth, getUsersController);
+router.delete("/delete-users/:token/:id", auth, deleteUsersController);
+router.put("/put-users/:token/:id", auth, uploadUserImage, putUsersController);
+router.put("/put-changePassword/:id/:token", auth, changePasswordController);
+
+router.post(
+  "/post-feedback/:token",
+  auth,
+  uploadFeedbackImage,
+  postFeedbackController
+);
+router.get("/get-feedback/:token", auth, getFeedbackController);
+router.delete("/delete-feedback/:token/:id", auth, deleteFeedbackController);
+router.post("/post-notification/:token", postnotification);
+router.get("/get-notification/:token", auth, getnotification);
+router.delete("/delete-notification/:token/:id", auth, deletenotification);
+router.put("/put-notification/:token/:id", auth, updatenotification);
+router.get("/get-notificationById/:token/:id", auth, getnotificationById);
+
+router.get("/getByUserId/:token/:id", auth, getByIdUserController);
+router.get("/get-feedbackaggregate/:token", auth, getByIdFeedbackController);
 
 router.use("/lms-sub", express.static("storage/lmssubject"));
 router.use("/lms-cat", express.static("storage/lmscategory"));

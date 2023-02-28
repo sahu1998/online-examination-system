@@ -52,6 +52,8 @@ export default function SignUp() {
   const {
     register,
     handleSubmit,
+    setError,
+
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -78,6 +80,22 @@ export default function SignUp() {
     }
   };
 
+  React.useEffect(() => {
+    {
+      message
+        ? message === "password not match"
+          ? setError("confirmPassword", {
+              type: "custom",
+              message: message ?? "",
+            })
+          : //   ?  message === "pastch"
+            // ? setError("xfgh", { type: "custom", message: message ?? "" }):""
+
+            setError("email", { type: "custom", message: message ?? "" })
+        : null;
+    }
+  }, [message]);
+
   return (
     <LandingLayout>
       <ThemeProvider theme={theme}>
@@ -96,6 +114,7 @@ export default function SignUp() {
               noValidate
               sx={{ mt: 1 }}
               onSubmit={handleSubmit(onSubmit)}
+              style={{ marginLeft: "3rem" }}
             >
               <Typography className="typography">Name*</Typography>
 
@@ -134,13 +153,7 @@ export default function SignUp() {
                 error={!!errors?.email}
                 helperText={errors?.email?.message}
               />
-              <h6 class="message">
-                {message
-                  ? message === "password not match"
-                    ? ""
-                    : message
-                  : ""}
-              </h6>
+
               <Typography className="typography">Password*</Typography>
               <TextField
                 className="textfeild"
@@ -167,14 +180,6 @@ export default function SignUp() {
                 error={!!errors?.confirmPassword}
                 helperText={errors?.confirmPassword?.message}
               />
-
-              <h6 class="message">
-                {message
-                  ? message === "password not match"
-                    ? message
-                    : ""
-                  : ""}
-              </h6>
 
               <Button
                 type="submit"
