@@ -15,6 +15,7 @@ const {
   getPracticeQues,
   deletePracticeExamData,
   putPracticeSubjData,
+  getSubjectDataById,
 } = require("../model/practiceSubjModel");
 
 //////////////////////////////////////////////////////////////////////
@@ -75,6 +76,12 @@ const getAllSubjectController = async (req, res) => {
   res.send(data);
 };
 
+const getSubjectById = async (req, res) => {
+  const id = req.params.id;
+  const data = await getSubjectDataById(id);
+  res.send(data);
+};
+
 const getSubjectByCatgController = async (req, res) => {
   const id = req.params.id;
   const data = await getSubjectByCategory(id);
@@ -131,4 +138,5 @@ module.exports = {
   putExamCatgController,
   deletePracticeSubjController,
   putPracticeSubjController,
+  getSubjectById,
 };

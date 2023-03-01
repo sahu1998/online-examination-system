@@ -22,6 +22,7 @@ const {
   deletePracticeSubjController,
   putPracticeSubjController,
   temp,
+  getSubjectById,
 } = require("../controller/practiceExamController");
 const {
   postFeedbackController,
@@ -78,9 +79,12 @@ router.delete("/del-practice-catg/:id", deleteExamCatgController);
 router.put("/update-practice-catg/:id", putExamCatgController);
 router.get("/about", getAboutController);
 
+router.use("/practice-subject-img", express.static("storage/subjects"));
 router.post(
   "/postsubject",
   uploadSubjectImage.single("image"),
+  uploadQuiz.single("quiz"),
+  convertExcelToJson,
   postSubjectController
 );
 router.delete("/delete-practice-subj/:id", deletePracticeSubjController);
@@ -94,6 +98,7 @@ router.post(
 router.put("/add-que-in-subj/:id", pushQuesInSubjController);
 router.get("/get-practice-ques/:id", getPracticeQuesController);
 router.get("/getsubject", getAllSubjectController);
+router.get("/getsubjectbyid/:id", getSubjectById);
 router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
 

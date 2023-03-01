@@ -68,6 +68,45 @@ const pushQuesInSubj = async (subj_id, values) => {
   }
 };
 
+const getSubjectDataById = async (id) => {
+  try {
+    // const data = await subjectModel.find({}, { subjectQues: 0 });
+    const data = await subjectModel.aggregate([
+      {
+        $match: {
+          _id: ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: "exams",
+          localField: "categoryId",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          subjectName: 1,
+          // categoryId: 1,
+          marks: 1,
+          subjectImg: 1,
+          timeLimit: 1,
+          subjectDesc: 1,
+          // subjectQues: 0,
+          categoryName: {
+            $arrayElemAt: ["$category.examName", 0],
+          },
+        },
+      },
+    ]);
+    return { data, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
 const getAllSubjectData = async () => {
   try {
     // const data = await subjectModel.find({}, { subjectQues: 0 });
@@ -205,4 +244,5 @@ module.exports = {
   getPracticeQues,
   deletePracticeExamData,
   putPracticeSubjData,
+  getSubjectDataById,
 };
