@@ -17,8 +17,13 @@ import Quiz from "../pages/student/exams/quiz";
 import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
+
+
+
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
+import LmsCategory from "../pages/owner/lms/categories";
+import RecaptchaSetting from "../pages/owner/master-settings/google-recaptcha"
 import QuestionBank from "../pages/owner/exams/question-bank";
 import ChangePasswordAdmin from "../pages/admin/changePassword";
 import ChangePasswordOwner from "../pages/owner/changePassword";
@@ -26,12 +31,13 @@ import ChangePasswordStudent from "../pages/student/changePassword";
 import NotificationMsg from "../pages/student/notification";
 import MyProfileOwner from "../pages/owner/myprofileOwner";
 import MyProfileAdmin from "../pages/admin/myprofileAdmin";
-import NotificationTable from "../pages/owner/notification";
 import MyProfileStudent from "../pages/student/myProfileStudent";
-import FeedbackTable from "../pages/owner/feedbackTable";
-import FeedbackForm from "../pages/student/feedback/temp";
-import UsersTable from "../pages/owner/users/temp";
+
 import ContactUs from "../pages/landing/contact-us";
+import UsersOwner from "../pages/owner/users/temp";
+import FeedbackOwner from "../pages/owner/feedbackTable";
+import NotificationOwner from "../pages/owner/notification";
+import FeedbackStudent from "../pages/student/feedback/temp";
 
 export default function AllRoutes() {
   return (
@@ -47,6 +53,8 @@ export default function AllRoutes() {
       <Route path="/resetPassword/:id/:token" element={<ResetPassword />} />
 
       <Route path="/lms" element={<Lms />} />
+      <Route path="/lms/category" element={<LmsCategory />} />
+      <Route path="/mastersetting/recaptcha-setting" element={<RecaptchaSetting />} />
       {/* //////////.....Home.....////////// */}
       <Route path="/pattern" element={<Pattern />} />
       <Route path="/pricing" element={<Pricing />} />
@@ -56,13 +64,13 @@ export default function AllRoutes() {
       <Route path="/owner" element={<OwnerDasboad />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/student" element={<StudentDashboard />} />
-      <Route path="/users" element={<UsersTable />} />
-      <Route path="/feedback" element={<FeedbackForm />} />
-      <Route path="/feedbacktable" element={<FeedbackTable />} />
+      <Route path="/owneruser" element={<UsersOwner />} />
+      <Route path="/feedback" element={<FeedbackStudent />} />
+      <Route path="/ownerfeedback" element={<FeedbackOwner />} />
       <Route path="/myprofileStudent" element={<MyProfileStudent />} />
-      <Route path="/notification" element={<NotificationTable />} />
+      <Route path="/ownernotification" element={<NotificationOwner />} />
       <Route path="/myprofileAdmin" element={<MyProfileAdmin />} />
-      <Route path="/myprofileOwner" element={<MyProfileOwner />} />
+      <Route path="/ownerprofile" element={<MyProfileOwner />} />
       <Route path="/studentNotification" element={<NotificationMsg />} />
       <Route path="/studentPassword" element={<ChangePasswordStudent />} />
       <Route path="/ownerPassword" element={<ChangePasswordOwner />} />

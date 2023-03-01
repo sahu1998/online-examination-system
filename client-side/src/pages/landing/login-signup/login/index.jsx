@@ -149,6 +149,7 @@ export default function LogIn() {
                   helperText={errors?.password?.message}
                 />
               </div>
+
               <Button
                 type="submit"
                 variant="contained"
@@ -171,7 +172,7 @@ export default function LogIn() {
                     style={{
                       textDecoration: "none",
                     }}
-                    // onClick={handleOpen}
+                  // onClick={handleOpen}
                   >
                     Forgot password
                   </Link>

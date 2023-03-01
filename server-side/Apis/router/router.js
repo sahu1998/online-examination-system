@@ -6,6 +6,9 @@ const {
   PostLmsCatController,
   getLmsCatController,
   getRandomLmsSubController,
+  deleteLmsCatController,
+  getByIdLmsCatController,
+  updateLmsCatController,
 } = require("../controller/controller");
 const {
   postExamCatgController,
@@ -151,7 +154,10 @@ router.post(
   PostLmsCatController
 );
 router.get("/getLmsCat", getLmsCatController);
-router.get("/getRandomLmsSub", getRandomLmsSubController);
+router.get("/getLmsCat/:id", getByIdLmsCatController);
+router.get("/getRandomLmsSub", getRandomLmsSubController)
+router.delete("/deleteLmsCat/:id", deleteLmsCatController)
+router.put("/updateLmsCat/:id", uploadLmsCatImage.single("image"), updateLmsCatController)
 
 router.post(
   "/exceltojson",

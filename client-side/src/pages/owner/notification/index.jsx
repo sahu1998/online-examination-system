@@ -31,7 +31,7 @@ const style = {
   p: 4,
 };
 
-export default function NotificationTable() {
+export default function NotificationOwner() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

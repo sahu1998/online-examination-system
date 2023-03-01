@@ -24,44 +24,17 @@ import GTranslateIcon from "@mui/icons-material/GTranslate";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Container } from "@mui/material";
 
 const drawerWidth = 240;
 const ProfileArray = [
-  { name: "My Profile", path: "/myprofileOwner" },
+  { name: "My Profile", path: "/ownerprofile" },
   { name: "Theams", path: "/ownertheam" },
   { name: "Language", path: "/ownerlanguage" },
   { name: "Send Push Notification", path: "/ownernotification" },
-  { name: "Change Password", path: "/ownerPassword" },
+  { name: "Change Password", path: "/ownerpassword" },
   { name: "Logout", path: "/ownerlogout" },
-];
-const Array = [
-  { name: "Dashboard", path: "/owner", icon: <DashboardIcon /> },
-  { name: "Language", path: "/ownerlanguage", icon: <GTranslateIcon /> },
-  { name: "User", path: "/users", icon: <AccountCircleIcon /> },
-  {
-    name: "Exam",
-    path: "",
-    icon: <ComputerIcon />,
-    subcatg: [
-      { name: "Categories", url: "/ownercategories" },
-      { name: "Question Bank", url: "/ownerquestion" },
-      { name: "Exam Type", url: "/ownerexamtype" },
-      { name: "Instructions", url: "/ownerinstruct" },
-      { name: "Subject Type", url: "/ownersubject" },
-    ],
-  },
-  { name: "LMS", path: "/ownerlms", icon: <DesktopWindowsIcon /> },
-  {
-    name: "Notification",
-    path: "/ownernotification",
-    icon: <NotificationsActiveIcon />,
-  },
-  { name: "Feedback", path: "/ownerfeedback", icon: <FeedbackIcon /> },
-  { name: "Master Settings", path: "/ownersettings", icon: <SettingsIcon /> },
 ];
 const Exam = [
   { name: "Categories", url: "/ownercategories" },
@@ -71,11 +44,14 @@ const Exam = [
   { name: "Subject Type", url: "/ownersubject" },
 ];
 const lms = [
-  { name: "Categories", url: "/ownercategories" },
+  { name: "Categories", url: "/lms/category" },
   { name: "Contacts", url: "/ownerquestion" },
   { name: "Series", url: "/ownerexamtype" },
 ];
-const settings = [{ name: "Settings", url: "/ownercategories" }];
+const settings = [
+  { name: "Settings", url: "/ownercategories" },
+  { name: "Recaptcha Setting", url: "/mastersetting/recaptcha-setting" }
+]
 
 function OwnerSideBar({ children }) {
   const [settingsdata, setSettingsdata] = React.useState(null);
@@ -160,7 +136,9 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
         <NavLink to="/ownerlanguage" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
@@ -178,7 +156,9 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
         <NavLink to="/owneruser" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
@@ -196,7 +176,9 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
         <ListItem>
           <ListItemButton onClick={handleClick2}>
             <ListItemIcon>
@@ -232,7 +214,9 @@ function OwnerSideBar({ children }) {
             })}
           </Popover>
         </ListItem>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
         <ListItem>
           <ListItemButton onClick={handleClick3}>
             <ListItemIcon>
@@ -268,7 +252,9 @@ function OwnerSideBar({ children }) {
             })}
           </Popover>
         </ListItem>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
         <NavLink to="/ownernotification" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
@@ -286,7 +272,9 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
         <NavLink to="/ownerfeedback" style={{ textDecoration: "none" }}>
           <ListItem>
             <ListItemButton>
@@ -304,7 +292,9 @@ function OwnerSideBar({ children }) {
             </ListItemButton>
           </ListItem>
         </NavLink>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
         <ListItem>
           <ListItemButton onClick={handleClick4}>
             <ListItemIcon>
@@ -340,7 +330,9 @@ function OwnerSideBar({ children }) {
             })}
           </Popover>
         </ListItem>
-        {/* .......................................................................................................................... */}
+        {
+          // / .......................................................................................................................... /
+        }
       </List>
     </div>
   );
@@ -426,7 +418,9 @@ function OwnerSideBar({ children }) {
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        {
+          // / The implementation can be swapped with js to avoid SEO duplication of links. /
+        }
         <Drawer
           variant="temporary"
           open={mobileOpen}

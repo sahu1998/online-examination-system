@@ -180,8 +180,7 @@ export default function PracticeSubjects() {
                     textColor="white"
                     src={
                       a.subjectImg &&
-                      `${serverURL}/practice-subject-img/${
-                        a.subjectImg.split("\\")[2]
+                      `${serverURL}/practice-subject-img/${a.subjectImg.split("\\")[2]
                       }`
                     }
                     size="xl"
@@ -244,7 +243,7 @@ export default function PracticeSubjects() {
             align="center"
             color="primary"
             rowsPerPage={5}
-            //   onPageChange={(page) => console.log({ page })}
+          //   onPageChange={(page) => console.log({ page })}
           />
         </Table>
 
