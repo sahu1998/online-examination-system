@@ -14,9 +14,9 @@ const postApiHandler = async (endPoint, value) => {
 
 const getApiHandler = async (endpoint) => {
   try {
-    const getExamApi = await axios.get(serverURL + endpoint);
-    console.log("getExamApi===", getExamApi.data);
-    return getExamApi.data;
+    const res = await axios.get(serverURL + endpoint);
+    console.log("res===234567890-=-09876543", res.data);
+    return res.data;
   } catch (error) {
     return { message: error.message, status: 400 };
   }

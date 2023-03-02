@@ -9,7 +9,7 @@ import { Button, Container, List, TextField, Typography } from "@mui/material";
 import Cards from "./card";
 import SearchIcon from "@mui/icons-material/Search";
 import "./lms.css";
-import { getApiHandler } from "../../../apiHandler";
+import { getApiHandler, getByIdApiHandler } from "../../../apiHandler";
 import { Result } from "antd";
 import SearchLms from "./SearchLms";
 import View from "./view";
@@ -22,12 +22,14 @@ export default function IconMenu() {
   const [hed, setHed] = React.useState();
   const [viewId, setViewId] = React.useState();
   const [viewData, setViewData] = React.useState([]);
-
-  const getByIdView = async (catg) => {
-    const getByIdData = await getApiHandler(`/getLmsView?id=${catg}`);
+console.log("viewId=========",viewId);
+  const getByIdView = async () => {
+    console.log("viewId==============0000000=====",viewId);
+    const getByIdData = await getByIdApiHandler(`/getLmsView?id=${viewId}`);
+    console.log("0000000000000000000000000000======");
     console.log("getByIdData ===", getByIdData.data);
     setViewData(getByIdData.data);
-    console.log("viewData------------", viewData);
+    console.log("viewData----------787888989--",viewData);
   };
   const getByData = async () => {
     const getApi = await getApiHandler("/getLmsCat");
@@ -55,8 +57,11 @@ export default function IconMenu() {
   }, [id]);
 
   React.useEffect(() => {
+    console.log("viewId===>",viewId);
     if (viewId) {
       getByIdView(viewId);
+      console.log("viewId==    mahi=>",viewId);
+
     }
   }, [viewId]);
 
@@ -128,7 +133,8 @@ export default function IconMenu() {
           {getIdData.length ?
             viewId ? (
               <View viewData={viewData} />
-            ) : (
+            ) 
+            : (
               <Cards data={getIdData} setViewId={setViewId} />
             )
             :

@@ -78,7 +78,7 @@ const uploadFeedbackImage = uploadFeedback.single("image");
 
 const subjectLmsStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log("mahi ===============");
+    console.log("mahi ===============",req);
     cb(null, "./storage/lmssubject");
   },
   filename: (req, file, cb) => {
@@ -88,8 +88,13 @@ const subjectLmsStorage = multer.diskStorage({
 });
 const uploadLmsSubImage = multer({
   storage: subjectLmsStorage,
-  limits: { fileSize: 1000000 },
+  // limits: { fileSize: 1000000 },
 });
+const uploadLmsSubImage2=multer({
+  storage:subjectLmsStorage,
+  limits: { fileSize: 1000000 }
+})
+//  const uploadLmsSubImageMul=uploadLmsSubImage.single("image");
 const categoryLmsStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log("mahi ===============");
@@ -118,7 +123,7 @@ const viewLmsStorage = multer.diskStorage({
 });
 const uploadLmsViewPdf = multer({
   storage:viewLmsStorage,
-  // limits: { fileSize: 1000000 },
+   limits: { fileSize: 1000000 },
 });
 const quizStorage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -188,15 +193,17 @@ const convertExcelToJson = (req, res, next) => {
   req.quiz = jsonObj;
   next();
 };
-module.exports = {
-  uploadSubjectImage,
-  uploadLmsSubImage,
-  uploadLmsCatImage,
-  auth,
-  uploadUserImage,
-  uploadFeedbackImage,
-  uploadLmsViewPdf, 
-  uploadQuiz,
+
+module.exports={
   convertExcelToJson,
   convertExcelToJson2,
-};
+  uploadQuiz,
+  uploadLmsViewPdf,
+  uploadLmsCatImage,
+  uploadLmsSubImage,
+  uploadFeedbackImage,
+  uploadUserImage,
+  uploadSubjectImage,
+  auth,
+  uploadLmsSubImage2
+}
