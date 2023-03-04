@@ -96,7 +96,7 @@ export default function MyProfileStudent() {
             {...register("name")}
           />
           <Typography>Username</Typography>
-
+          
           <Input
             clearable
             bordered
