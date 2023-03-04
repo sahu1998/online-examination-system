@@ -26,6 +26,8 @@ export default function ForgotPass() {
     register,
     handleSubmit,
     reset,
+    setError,
+
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -33,7 +35,6 @@ export default function ForgotPass() {
       email: "",
     },
   });
-  console.log("REGISTER", register);
 
   const onSubmit = async (value) => {
     console.log("Value", value);
@@ -42,11 +43,31 @@ export default function ForgotPass() {
     reset();
     if (res.status === 200) {
       swal("Good job!", res.message, "success");
-
+    } else if (res.message === "email does not exits") {
+      swal("opps!", res.message, "error");
+    } else {
+      res.message === "please enter your email";
+      swal("opps!", res.message, "error");
       setMessage(res.message);
     }
   };
+
   const redirectToLogin = () => router("/logIn");
+
+  React.useEffect(() => {
+    {
+      message
+        ? message === "email does not exits"
+          ? setError("email", {
+              type: "custom",
+              message: message ?? "",
+            })
+          : // : message === "email does not exits"
+            // ? setError("email", { type: "custom", message: message ?? "" })
+            ""
+        : null;
+    }
+  }, [message]);
 
   return (
     <LandingLayout>

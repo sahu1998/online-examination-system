@@ -19,7 +19,11 @@ const PostLmsSubData = async (obj) => {
 };
 const getLmsSubData = async () => {
   try {
-    const data = await lmssubject.find();
+    const data = await lmssubject.find({},{},{
+      sort:{
+        _id:-1,
+      }
+    });
     return {
       data: data,
       message: "subject  data get succesfully",
@@ -29,9 +33,48 @@ const getLmsSubData = async () => {
     return { message: error.message, status: 400 };
   }
 };
+const getByIdLmsSubData = async (id) => {
+  try {
+    const data = await lmssubject.findById(id);
+    return {
+      data: data,
+      message: "subject  data get succesfully",
+      status: 200,
+    };
+  } catch (error) {
+    return { message: error.message, status: 400 };
+  }
+};
+
+const deleteLmsSubData = async (obj) => {
+  try {
+    const data = await lmssubject.findByIdAndDelete(obj);
+    return {
+      data: data,
+      message: "subject  data delete succesfully",
+      status: 200,
+    };
+  } catch (error) {
+    return { message: error.message, status: 400 };
+  }
+};
+const putLmsSubData = async (id, value) => {
+  console.log("model value===",value);
+  try {
+    const data = await lmssubject.findByIdAndUpdate(id, { $set: value });
+    return {
+      data: data,
+      message: "subject  data updated succesfully",
+      status: 200,
+    };
+  } catch (error) {
+    return { message: error.message, status: 400 };
+  }
+};
+
 const objectId = mongoose.Types.ObjectId;
 const getLmsSubByCategory = async (id) => {
-  console.log("id :================", id);
+  console.log("id :==========8989", id);
   try {
     const data = await lmssubject.aggregate([
       {
@@ -96,4 +139,7 @@ module.exports = {
   getLmsSubByCategory,
   getLmsSubData,
   getRandomLmsSubData,
+  deleteLmsSubData,
+  putLmsSubData,
+  getByIdLmsSubData,
 };

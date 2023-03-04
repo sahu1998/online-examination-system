@@ -19,7 +19,7 @@ const postnotification = async (req, res) => {
     };
     const data = await notificationSchema.create(temp);
 
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -27,7 +27,7 @@ const postnotification = async (req, res) => {
 const getnotification = async (req, res) => {
   try {
     const data = await notificationSchema.find();
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -36,7 +36,7 @@ const getnotificationById = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await notificationSchema.findById(id);
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -47,7 +47,7 @@ const deletenotification = async (req, res) => {
     const { id } = req.params;
 
     const data = await notificationSchema.findByIdAndDelete(id);
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -60,7 +60,7 @@ const updatenotification = async (req, res) => {
 
     const data = await notificationSchema.findByIdAndUpdate(id, { $set: temp });
 
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }

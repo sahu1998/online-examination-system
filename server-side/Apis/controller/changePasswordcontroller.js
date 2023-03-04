@@ -30,6 +30,7 @@ const changePasswordController = async (req, res) => {
         return res.send({
           message: "password update successfully",
           status: 200,
+          auth: "true",
         });
       } else {
         return res.send({ message: "password does not match", status: 400 });

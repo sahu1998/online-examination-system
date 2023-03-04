@@ -20,6 +20,7 @@ import OwnerDasboad from "../pages/owner/dashboard";
 
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
+import Settings from "../pages/owner/master-settings";
 import LmsCategory from "../pages/owner/lms/categories";
 import RecaptchaSetting from "../pages/owner/master-settings/google-recaptcha";
 // import QuestionBank from "../pages/owner/exams/question-bank";
@@ -32,6 +33,7 @@ import MyProfileAdmin from "../pages/admin/myprofileAdmin";
 import MyProfileStudent from "../pages/student/myProfileStudent";
 
 import ContactUs from "../pages/landing/contact-us";
+import Contects from "../pages/owner/lms/contents";
 import UsersOwner from "../pages/owner/users/temp";
 import FeedbackOwner from "../pages/owner/feedbackTable";
 import NotificationOwner from "../pages/owner/notification";
@@ -52,6 +54,12 @@ export default function AllRoutes() {
       <Route path="/resetPassword/:id/:token" element={<ResetPassword />} />
 
       <Route path="/lms" element={<Lms />} />
+      <Route path="/lms/content" element={<Contects/>} />
+      <Route path="/ownersetting" element={<Settings/>} />
+
+      
+   
+      
       <Route path="/lms/category" element={<LmsCategory />} />
       <Route
         path="/mastersetting/recaptcha-setting"

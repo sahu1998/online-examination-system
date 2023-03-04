@@ -11,14 +11,20 @@ import CheckIcon from "@mui/icons-material/Check";
 import FeedbackForm from "../../student/feedback/temp";
 import * as React from "react";
 import OwnerLayout from "../../../layouts/owner-layout";
+import { useNavigate } from "react-router-dom";
 
 export default function FeedbackOwner() {
   const [data, setData] = React.useState([]);
   const token = localStorage.getItem("token");
+  const history = useNavigate();
 
   const getData = async () => {
     const res = await getApiHandler(`/get-feedbackaggregate/${token}`);
     console.log("Aggregate", res.data);
+    if (res.auth === "false") {
+      localStorage.removeItem("token");
+      history("/logIn");
+    }
     setData(res.data);
   };
   useEffect(() => {
@@ -28,7 +34,12 @@ export default function FeedbackOwner() {
   const deleteData = async (id) => {
     const response = await deleteApiHandler(`/delete-feedback/${token}/${id}`);
     console.log("DELETE", response);
-
+    if (response.status === 200 && response.auth === "true") {
+      swal("delete  successfully!", "You clicked the button!", "success");
+    } else {
+      localStorage.removeItem("token");
+      history("/logIn");
+    }
     getData();
   };
 

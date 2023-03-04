@@ -66,26 +66,18 @@ export default function ChangePasswordStudent() {
       value
     );
     console.log("res=======>", res);
-    reset();
     if (res.status === 200) {
       swal("updated  successfully!", "You clicked the button!", "success");
-
+      history("/logIn");
+    } else if (res.auth == "false") {
+      localStorage.removeItem("token");
       history("/logIn");
     } else {
       setMessage(res.message);
     }
-    // if (res.status === 200) {
-    //   swal("Good job!", res.message, "success");
-    //   history("/student");
-    // } else {
-    //   if (res.message === "password does not match") {
-    //     swal("opps!", res.message, "error");
-    //   } else {
-    //     swal("opps!", "somthing went wrong", "error");
-    //   }
-    //   setMessage(res.message);
-    // }
+    reset();
   };
+
   React.useEffect(() => {
     {
       message

@@ -9,7 +9,7 @@ import Popover from "@mui/material/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { deleteApiHandler, getApiHandler } from "../../../apiHandler";
 import StudentLayout from "../../../layouts/student-layout";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineEllipsisVertical } from "react-icons/hi2";
 import { Button } from "@mui/material";
 
@@ -24,10 +24,15 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 export default function NotificationMsg() {
   const [data, setData] = React.useState([]);
   const token = localStorage.getItem("token");
-
+  const history = useNavigate();
   const getData = async () => {
     const res = await getApiHandler(`/get-notification/${token}`);
     console.log("RESPONSE", res);
+    if (res.auth === "false") {
+      localStorage.removeItem("token");
+      history("/logIn");
+    }
+
     setData(res.data);
   };
   React.useEffect(() => {
@@ -38,6 +43,12 @@ export default function NotificationMsg() {
       `/delete-notification/${token}/${id}`
     );
     console.log("DELETE", response);
+    if (response.status === 200 && response.auth === "true") {
+      swal("delete  successfully!", "You clicked the button!", "success");
+    } else {
+      localStorage.removeItem("token");
+      history("/logIn");
+    }
 
     getData();
   };

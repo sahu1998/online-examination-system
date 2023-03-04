@@ -11,14 +11,20 @@ import ClearIcon from "@mui/icons-material/Clear";
 import CheckIcon from "@mui/icons-material/Check";
 import OwnerLayout from "../../../layouts/owner-layout";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 export default function UsersOwner() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
+  const history = useNavigate();
 
   const getData = async () => {
     const res = await getApiHandler(`/get-users/${token}`);
     console.log("aaaaaaaaa=?", res);
+    if (res.auth === "false") {
+      localStorage.removeItem("token");
+      history("/logIn");
+    }
     setData(res.data);
   };
   useEffect(() => {
@@ -28,7 +34,13 @@ export default function UsersOwner() {
   const deleteData = async (id) => {
     const response = await deleteApiHandler(`/delete-users/${token}/${id}`);
     console.log("DELETE", response);
-    swal("deleted  successfully!", "You clicked the button!", "success");
+    if (response.status === 200 && response.auth === "true") {
+      swal("delete  successfully!", "You clicked the button!", "success");
+    } else {
+      localStorage.removeItem("token");
+      history("/logIn");
+    }
+
     getData();
   };
 

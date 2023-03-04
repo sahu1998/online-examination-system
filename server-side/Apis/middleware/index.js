@@ -15,7 +15,7 @@ const auth = (req, res, next) => {
   if (!token) {
     return res.send({
       status: 400,
-      auth: false,
+      auth: "false",
       message: "token not provided",
     });
   }
@@ -27,7 +27,7 @@ const auth = (req, res, next) => {
       console.log("err", err);
       console.log("valid", valid);
       if (err) {
-        return res.send({ status: 400, auth: false });
+        return res.send({ status: 400, auth: "false" });
       }
 
       next();
@@ -90,7 +90,7 @@ const uploadFeedbackImage = uploadFeedback.single("image");
 
 const subjectLmsStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log("mahi ===============");
+    console.log("mahi ===============", req);
     cb(null, "./storage/lmssubject");
   },
   filename: (req, file, cb) => {
@@ -100,8 +100,13 @@ const subjectLmsStorage = multer.diskStorage({
 });
 const uploadLmsSubImage = multer({
   storage: subjectLmsStorage,
+  // limits: { fileSize: 1000000 },
+});
+const uploadLmsSubImage2 = multer({
+  storage: subjectLmsStorage,
   limits: { fileSize: 1000000 },
 });
+//  const uploadLmsSubImageMul=uploadLmsSubImage.single("image");
 const categoryLmsStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     console.log("mahi ===============");
@@ -117,6 +122,21 @@ const uploadLmsCatImage = multer({
   limits: { fileSize: 1000000 },
 });
 
+const viewLmsStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    console.log("mahi ===============");
+    cb(null, "./storage/viewpdf");
+  },
+  filename: (req, file, cb) => {
+    console.log("file.....", file);
+    cb(null, file.originalname);
+    console.log("null", file.originalname);
+  },
+});
+const uploadLmsViewPdf = multer({
+  storage: viewLmsStorage,
+  limits: { fileSize: 1000000 },
+});
 const quizStorage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "./storage/quizes");
@@ -193,14 +213,17 @@ const convertExcelToJson = (req, res, next) => {
   req.quiz = quiz;
   next();
 };
+
 module.exports = {
-  uploadSubjectImage,
-  uploadLmsSubImage,
-  uploadLmsCatImage,
-  auth,
-  uploadUserImage,
-  uploadFeedbackImage,
-  uploadQuiz,
   convertExcelToJson,
   convertExcelToJson2,
+  uploadQuiz,
+  uploadLmsViewPdf,
+  uploadLmsCatImage,
+  uploadLmsSubImage,
+  uploadFeedbackImage,
+  uploadUserImage,
+  uploadSubjectImage,
+  auth,
+  uploadLmsSubImage2,
 };

@@ -23,7 +23,7 @@ import Popover from "@mui/material/Popover";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import ArticleIcon from "@mui/icons-material/Article";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const drawerWidth = 240;
@@ -50,6 +50,17 @@ const Array = [
 ];
 
 function StudentSideBar({ children }) {
+  const history = useNavigate();
+
+  if (!localStorage.getItem("token")) {
+    history("/logIn");
+  }
+  React.useEffect(() => {
+    if (localStorage.getItem("role") !== "student") {
+      history("/logIn");
+    }
+  }, [localStorage.getItem("token")]);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
