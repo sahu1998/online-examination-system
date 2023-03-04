@@ -1,0 +1,65 @@
+import { Container } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getApiHandler } from "../../../../apiHandler";
+
+function QuizResult() {
+  const { id } = useParams();
+  const [questions, setQuestions] = useState();
+  const [userAnswers, setUserAnswers] = useState();
+
+  console.log("user answers: ", userAnswers);
+
+  const getQuestions = async () => {
+    const temp = await getApiHandler(`/get-practice-ques/${id}`);
+    setQuestions(temp.response.subjectQues);
+  };
+  console.log(questions);
+  console.log("userans: ", localStorage.getItem("userAnswer").split(","));
+  console.log("sdkfldskk: ", userAnswers);
+  useEffect(() => {
+    setUserAnswers(localStorage.getItem("userAnswer").split(","));
+    getQuestions();
+  }, []);
+
+  return (
+    <Container maxWidth="xl" className="px-5">
+      {questions &&
+        userAnswers &&
+        // questions?.length === userAnswers?.length &&
+        questions.map((value, i) => {
+          return (
+            <div key={`que-${i}`} className="">
+              <h1>
+                {i + 1}.){value.question}
+              </h1>
+              {value.options.map((option, index) => (
+                <div key={index} className="form-check py-2">
+                  <input
+                    className="form-check-input"
+                    disabled
+                    type="radio"
+                    name={`option${i}`}
+                    id={`option${index}`}
+                    value={index}
+                    checked={userAnswers[i] == index}
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor={`option${index}`}
+                  >
+                    {option}
+                  </label>
+                </div>
+              ))}
+              <div className="py-2 bg-info text-end fw-bold fs-5">
+                Correct Answer: {value.options[value.answer]}
+              </div>
+            </div>
+          );
+        })}
+    </Container>
+  );
+}
+
+export default QuizResult;

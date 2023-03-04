@@ -51,16 +51,23 @@ const getExamCatgController = async (req, res) => {
 
 const postSubjectController = async (req, res) => {
   // const data = await postModel(req.body);
-  // console.log("POST CONTROLLER Data===>", data);
-  const subject = { ...req.body, subjectImg: req.file?.path };
+  const subject = {
+    ...req.body,
+    subjectImg: req.files.image[0].path,
+    subjectQues: req.quiz,
+  };
   console.log("postExamCatgController: ", subject);
   const data = await postSubjectData(subject);
   res.send(data);
 };
 
 const putPracticeSubjController = async (req, res) => {
-  const subject = { ...req.body, subjectImg: req.file?.path };
-  const data = await putPracticeSubjData(req.params.id, req.body);
+  const subject = {
+    ...req.body,
+    subjectImg: req.files.image[0].path,
+    subjectQues: req.quiz,
+  };
+  const data = await putPracticeSubjData(req.params.id, subject);
   res.send(data);
 };
 

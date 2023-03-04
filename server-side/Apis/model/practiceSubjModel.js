@@ -33,10 +33,12 @@ const subjectModel = mongoose.model("subjects", subjectSchema);
 const ObjectId = mongoose.Types.ObjectId;
 
 const postSubjectData = async (values) => {
+  console.log("sdfsdfsdfsdfsfdsfsdfsdfdsfds");
   try {
     const result = await subjectModel.create(values);
     return { response: result, status: 200, message: "success" };
   } catch (error) {
+    console.log("Error: ", error);
     return { error, status: 400, message: "error" };
   }
 };

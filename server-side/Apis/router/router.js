@@ -85,13 +85,35 @@ router.get("/about", getAboutController);
 router.use("/practice-subject-img", express.static("storage/subjects"));
 router.post(
   "/postsubject",
-  uploadSubjectImage.single("image"),
-  uploadQuiz.single("quiz"),
+  uploadSubjectImage.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "quiz",
+      maxCount: 1,
+    },
+  ]),
   convertExcelToJson,
   postSubjectController
 );
 router.delete("/delete-practice-subj/:id", deletePracticeSubjController);
-router.put("/update-practice-subj/:id", putPracticeSubjController);
+router.put(
+  "/update-practice-subj/:id",
+  uploadSubjectImage.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "quiz",
+      maxCount: 1,
+    },
+  ]),
+  convertExcelToJson,
+  putPracticeSubjController
+);
 router.post(
   "/postques/:id",
   uploadQuiz.single("quiz"),
@@ -155,9 +177,13 @@ router.post(
 );
 router.get("/getLmsCat", getLmsCatController);
 router.get("/getLmsCat/:id", getByIdLmsCatController);
-router.get("/getRandomLmsSub", getRandomLmsSubController)
-router.delete("/deleteLmsCat/:id", deleteLmsCatController)
-router.put("/updateLmsCat/:id", uploadLmsCatImage.single("image"), updateLmsCatController)
+router.get("/getRandomLmsSub", getRandomLmsSubController);
+router.delete("/deleteLmsCat/:id", deleteLmsCatController);
+router.put(
+  "/updateLmsCat/:id",
+  uploadLmsCatImage.single("image"),
+  updateLmsCatController
+);
 
 router.post(
   "/exceltojson",
