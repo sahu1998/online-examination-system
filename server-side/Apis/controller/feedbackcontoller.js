@@ -19,7 +19,7 @@ const postFeedbackController = async (req, res) => {
     };
     const data = await feedbackModel.create(temp);
 
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -28,7 +28,7 @@ const postFeedbackController = async (req, res) => {
 const getFeedbackController = async (req, res) => {
   try {
     const data = await feedbackModel.find();
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -38,7 +38,7 @@ const deleteFeedbackController = async (req, res) => {
     const { id } = req.params;
 
     const data = await feedbackModel.findByIdAndDelete(id);
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -74,7 +74,7 @@ const getByIdFeedbackController = async (req, res) => {
         },
       },
     ]);
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "faild", status: 400 });
   }

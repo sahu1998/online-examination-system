@@ -1,13 +1,11 @@
-import { Container } from '@mui/material';
-import React from 'react';
-import OwnerSideBar from '../../components/structure/owner-struct/sidenav';
+import { Container } from "@mui/material";
 
-export default function OwnerLayout({children}) {
+import OwnerSideBar from "../../components/structure/owner-struct/sidenav";
+
+export default function OwnerLayout({ children }) {
   return (
-   
     <Container maxWidth="xl">
-    <OwnerSideBar>{children}</OwnerSideBar>
+      <OwnerSideBar>{children}</OwnerSideBar>
     </Container>
-
-  )
+  );
 }

@@ -9,6 +9,7 @@
 }
 .reset {
   margin-top: 4rem;
+  margin-right: 3rem;
 }
 .Button {
   font-weight: 600 !important;
@@ -17,13 +18,13 @@
 .Text {
   width: 22rem !important;
 }
-.boxes {
+.boxess {
   margin-top: 15rem;
   display: flex;
   flex-direction: column;
   align-items: center !important;
   box-shadow: 4px 6px 34px -6px grey;
-  width: 35rem;
+  width: 30rem;
   height: 25rem;
   position: relative;
   top: -7rem;

@@ -18,14 +18,12 @@ import AdminDashboard from "../pages/admin/dashboard";
 import StudentDashboard from "../pages/student/dashboard";
 import OwnerDasboad from "../pages/owner/dashboard";
 
-
-
 import PracticeCatg from "../pages/owner/exams/categories";
 import PracticeSubjects from "../pages/owner/exams/subject-topics";
 import Settings from "../pages/owner/master-settings";
 import LmsCategory from "../pages/owner/lms/categories";
-import RecaptchaSetting from "../pages/owner/master-settings/google-recaptcha"
-import QuestionBank from "../pages/owner/exams/question-bank";
+import RecaptchaSetting from "../pages/owner/master-settings/google-recaptcha";
+// import QuestionBank from "../pages/owner/exams/question-bank";
 import ChangePasswordAdmin from "../pages/admin/changePassword";
 import ChangePasswordOwner from "../pages/owner/changePassword";
 import ChangePasswordStudent from "../pages/student/changePassword";
@@ -40,6 +38,7 @@ import UsersOwner from "../pages/owner/users/temp";
 import FeedbackOwner from "../pages/owner/feedbackTable";
 import NotificationOwner from "../pages/owner/notification";
 import FeedbackStudent from "../pages/student/feedback/temp";
+import QuizResult from "../pages/student/exams/quiz-result";
 
 export default function AllRoutes() {
   return (
@@ -62,7 +61,10 @@ export default function AllRoutes() {
    
       
       <Route path="/lms/category" element={<LmsCategory />} />
-      <Route path="/mastersetting/recaptcha-setting" element={<RecaptchaSetting />} />
+      <Route
+        path="/mastersetting/recaptcha-setting"
+        element={<RecaptchaSetting />}
+      />
       {/* //////////.....Home.....////////// */}
       <Route path="/pattern" element={<Pattern />} />
       <Route path="/pricing" element={<Pricing />} />
@@ -87,7 +89,8 @@ export default function AllRoutes() {
 
       <Route path="/exams/categories" element={<PracticeCatg />} />
       <Route path="/exams/subjects" element={<PracticeSubjects />} />
-      <Route path="/exams/questionbank" element={<QuestionBank />} />
+      {/* <Route path="/exams/questionbank" element={<QuestionBank />} /> */}
+      <Route path="/result/:id" element={<QuizResult />} />
     </Routes>
   );
 }

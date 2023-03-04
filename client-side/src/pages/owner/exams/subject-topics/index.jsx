@@ -24,8 +24,7 @@ import {
 } from "../../../../apiHandler";
 import OwnerLayout from "../../../../layouts/owner-layout";
 import { Chip } from "@mui/material";
-
-// import "./category.m.css";
+import "./index.m.css";
 
 const schema = yup.object().shape({
   subjectName: yup.string().required("*Subject Name is required"),
@@ -48,6 +47,7 @@ export default function PracticeSubjects() {
     reset,
     setValue,
     formState: { errors },
+    getValues,
     watch,
   } = useForm({
     resolver: yupResolver(schema),
@@ -73,7 +73,7 @@ export default function PracticeSubjects() {
       console.log("updating... ", values);
       const result = await putApiHandler(
         `/update-practice-subj/${subjectId}`,
-        values
+        formData
       );
       console.log("updated.....", result);
       setSubjectId(null);
@@ -180,7 +180,8 @@ export default function PracticeSubjects() {
                     textColor="white"
                     src={
                       a.subjectImg &&
-                      `${serverURL}/practice-subject-img/${a.subjectImg.split("\\")[2]
+                      `${serverURL}/practice-subject-img/${
+                        a.subjectImg.split("\\")[2]
                       }`
                     }
                     size="xl"
@@ -243,7 +244,7 @@ export default function PracticeSubjects() {
             align="center"
             color="primary"
             rowsPerPage={5}
-          //   onPageChange={(page) => console.log({ page })}
+            //   onPageChange={(page) => console.log({ page })}
           />
         </Table>
 
@@ -332,11 +333,15 @@ export default function PracticeSubjects() {
                   <div className="w-100">
                     <select
                       {...register("categoryId")}
-                      className="form-control rounded  w-100 p-1"
+                      className="form-control rounded w-100 p-1 appearance-revert"
                     >
                       {catg_list.map((catg, index) => {
                         return (
-                          <option key={index} value={catg._id}>
+                          <option
+                            key={index}
+                            value={catg._id}
+                            selected={catg._id == getValues("categoryId")}
+                          >
                             {catg.examName}
                           </option>
                         );

@@ -29,7 +29,7 @@ import GTranslateIcon from "@mui/icons-material/GTranslate";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 const drawerWidth = 240;
@@ -56,6 +56,17 @@ const Array = [
 ];
 
 function AdminSideBar({ children }) {
+  const history = useNavigate();
+
+  if (!localStorage.getItem("token")) {
+    history("/logIn");
+  }
+  React.useEffect(() => {
+    if (localStorage.getItem("role") !== "admin") {
+      history("/logIn");
+    }
+  }, [localStorage.getItem("token")]);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {

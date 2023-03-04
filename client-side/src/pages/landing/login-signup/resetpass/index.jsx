@@ -41,6 +41,8 @@ export default function ResetPassword() {
     register,
     handleSubmit,
     reset,
+    setError,
+
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -67,6 +69,19 @@ export default function ResetPassword() {
       setMessage(res.message);
     }
   };
+
+  React.useEffect(() => {
+    {
+      message
+        ? message === "password not match"
+          ? setError("confirmPassword", {
+              type: "custom",
+              message: message ?? "",
+            })
+          : ""
+        : null;
+    }
+  }, [message]);
   return (
     <LandingLayout>
       <ThemeProvider theme={theme}>
@@ -82,7 +97,7 @@ export default function ResetPassword() {
             //   width: "30rem",
             //   height: "26rem",
             // }}
-            className="boxes"
+            className="boxess"
           >
             <Box
               component="form"
@@ -122,10 +137,6 @@ export default function ResetPassword() {
                 error={!!errors?.confirmPassword}
                 helperText={errors?.confirmPassword?.message}
               />
-
-              <h6 style={{ color: "red", textAlign: "initial" }}>
-                {message ? message : ""}
-              </h6>
 
               <Button
                 type="submit"

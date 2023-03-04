@@ -3,6 +3,33 @@ import React, { useEffect, useState } from "react";
 function Timer({ duration, onTimeout }) {
   const [timeRemaining, setTimeRemaining] = useState(duration);
 
+  const [seconds, setSeconds] = useState(60);
+  const [minutes, setMinutes] = useState(45);
+  const [hours, setHours] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds((seconds) => seconds - 1);
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          if (hours === 0) {
+            clearInterval(interval);
+          } else {
+            setHours((hours) => hours - 1);
+            setMinutes(59);
+            setSeconds(59);
+          }
+        } else {
+          setMinutes((minutes) => minutes - 1);
+          setSeconds(59);
+        }
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [seconds]);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimeRemaining((time) => time - 1);
@@ -16,7 +43,24 @@ function Timer({ duration, onTimeout }) {
     }
   }, [timeRemaining, onTimeout]);
 
-  return <div>{timeRemaining} seconds remaining</div>;
+  return (
+    <div className="text-end p-3 fs-1 fw-bold text-warning">
+      {/* {timeRemaining} seconds remaining */}
+      <div className="">
+        <span className="p-2 border border-3 rounded  mx-1">
+          {hours.toString().padStart(2, "0")}
+        </span>
+        :
+        <span className="p-2 border border-3 rounded mx-1">
+          {minutes.toString().padStart(2, "0")}
+        </span>
+        :
+        <span className="p-2 border border-3 rounded  mx-1">
+          {seconds.toString().padStart(2, "0")}
+        </span>
+      </div>
+    </div>
+  );
 }
 
 export default Timer;

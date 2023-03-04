@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./index.css";
 import swal from "sweetalert";
 
@@ -51,7 +51,10 @@ export default function LogIn() {
     },
   });
   const history = useNavigate();
-
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window && console.log(window.location.href);
+  }, [window]);
   const onSubmit = async (value) => {
     const { email, password } = value;
     const a = { email, password, role };
@@ -61,6 +64,7 @@ export default function LogIn() {
     if (response.status === 200) {
       localStorage.setItem("token", response.temp.token);
       localStorage.setItem("id", response.temp._id);
+      localStorage.setItem("role", response.temp.role);
 
       if (response.temp.role === "owner" && role === "owner") {
         console.log(role, response.temp.role);
@@ -172,7 +176,7 @@ export default function LogIn() {
                     style={{
                       textDecoration: "none",
                     }}
-                  // onClick={handleOpen}
+                    // onClick={handleOpen}
                   >
                     Forgot password
                   </Link>
