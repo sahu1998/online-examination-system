@@ -46,11 +46,11 @@ const Exam = [
 ];
 const lms = [
   { name: "Categories", url: "/lms/category" },
-  { name: "Contacts", url: "/ownerquestion" },
+  { name: "Contacts", url: "/lms/content" },
   { name: "Series", url: "/ownerexamtype" },
 ];
 const settings = [
-  { name: "Settings", url: "/ownercategories" },
+  { name: "Settings", url: "/ownersetting" },
   { name: "Recaptcha Setting", url: "/mastersetting/recaptcha-setting" },
 ];
 

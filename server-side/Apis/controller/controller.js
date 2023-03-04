@@ -1,12 +1,26 @@
-const { Console } = require("console");
+// const { Console } = require("console");
 const fs = require("fs");
-const { PostLmsCatData, getLmsCatData, deleteLmsCatData, getByIdLmsCatData, updateLmsCatData } = require("../model/lmscatmodal");
+const {
+  PostLmsCatData,
+  getLmsCatData,
+  deleteLmsCatData,
+  getByIdLmsCatData,
+  updateLmsCatData,
+} = require("../model/lmscatmodal");
 const {
   PostLmsSubData,
   getLmsSubByCategory,
   getLmsSubData,
   getRandomLmsSubData,
+  deleteLmsSubData,
+  putLmsSubData,
+  getByIdLmsSubData,
 } = require("../model/lmssubmodal");
+const {
+  postLmsViewData,
+  getLmsViewData,
+  getLmsByIdViewData,
+} = require("../model/lmsviewmodal");
 
 //////////////////////////////////////////
 const getAboutController = (req, res) => {
@@ -22,14 +36,15 @@ const getAboutController = (req, res) => {
 ///////////////////////////////////////////////////
 
 const PostLmsSubController = async (req, res) => {
-  // const temp=req.body;
-  const files = req.file.path;
+  console.log("req.body===", req.body);
+  const files = req?.file?.path;
   const temp = { ...req.body, image: files };
   console.log("temp======", temp);
   const data = await PostLmsSubData(temp);
   console.log("temp data====", data);
   res.send(data);
 };
+
 const PostLmsCatController = async (req, res) => {
   const files = req?.file?.path;
   const temp = { ...req.body, image: files };
@@ -39,6 +54,15 @@ const PostLmsCatController = async (req, res) => {
 const getLmsSubController = async (req, res) => {
   const id = req.query.id;
   const data = id ? await getLmsSubByCategory(id) : await getLmsSubData();
+  console.log("get lms sub data", data);
+  res.send(data);
+};
+const getByIdLmsSubController1 = async (req, res) => {
+  const id = req.params.id;
+  const data = await getByIdLmsSubData(id);
+  console.log("id", id);
+  console.log("data by id=====", data);
+
   res.send(data);
 };
 const getLmsCatController = async (req, res) => {
@@ -48,29 +72,60 @@ const getLmsCatController = async (req, res) => {
 const getRandomLmsSubController = async (req, res) => {
   const data = await getRandomLmsSubData();
   res.send(data);
-}
-const getByIdLmsCatController = async (req, res) => {
-  const data = await getByIdLmsCatData(req.params.id);
-  res.send(data);
-}
-
-const deleteLmsCatController = async (req, res) => {
-  const data = await deleteLmsCatData(req.params.id);
-  res.send(data);
-}
-const updateLmsCatController = async (req, res) => {
-  const data = await updateLmsCatData(req.params.id, req.body);
-  console.log("dataupdate", data)
-  res.send(data);
-}
-module.exports = {
-  PostLmsSubController,
-  PostLmsCatController,
-  getLmsSubController,
-  getLmsCatController,
-  getAboutController,
-  getRandomLmsSubController,
-  deleteLmsCatController,
-  getByIdLmsCatController,
-  updateLmsCatController
 };
+const deleteLmsSubController = async (req, res) => {
+  const data = await deleteLmsSubData(req.params.id);
+  res.send(data);
+};
+const putLmsSubController = async (req, res) => {
+  const files = req?.file?.path;
+  const temp = { ...req.body, image: files };
+  const data = await putLmsSubData(req.params.id, temp);
+  res.send(data);
+};
+const PostLmsViewController = async (req, res) => {
+  const file = req.file.path;
+  console.log("file====>", file);
+  const temp = { ...req.body, viewImage: file };
+  const data = await postLmsViewData(temp);
+  console.log("data=====>", data);
+  res.send(data);
+};
+const getLmsViewController = async (req, res) => {
+  const id = req.query.id;
+  const data = id ? await getLmsByIdViewData(id) : await getLmsViewData();
+  console.log("get lms sub data", data);
+  res.send(data);
+}
+  const getByIdLmsCatController = async (req, res) => {
+    const data = await getByIdLmsCatData(req.params.id);
+    res.send(data);
+  };
+
+  const deleteLmsCatController = async (req, res) => {
+    const data = await deleteLmsCatData(req.params.id);
+    res.send(data);
+  };
+  const updateLmsCatController = async (req, res) => {
+    const data = await updateLmsCatData(req.params.id, req.body);
+    console.log("dataupdate", data);
+    res.send(data);
+  };
+  
+  module.exports={
+    updateLmsCatController,
+    deleteLmsCatController,
+    getByIdLmsCatController,
+    getLmsViewController,
+    PostLmsViewController,
+    putLmsSubController,
+    getAboutController,
+    deleteLmsSubController,
+    getRandomLmsSubController,
+    getLmsCatController,
+     getByIdLmsSubController1,
+     getLmsSubController,
+    PostLmsCatController,
+     PostLmsSubController
+  }
+
