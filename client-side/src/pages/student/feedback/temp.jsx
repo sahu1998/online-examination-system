@@ -55,9 +55,12 @@ export default function FeedbackStudent() {
     const temp = { title, subject, desc, id };
     const response = await postApiHandler(`/post-feedback/${token}`, temp);
     console.log("res!!!=======>", response.data);
-    if (response.status === 200) {
+    if (response.status === 200 && response.auth === "true") {
       swal("added  successfully!", "You clicked the button!", "success");
       history("/student");
+    } else {
+      localStorage.removeItem("token");
+      history("/logIn");
     }
   };
 

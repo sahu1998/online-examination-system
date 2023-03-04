@@ -3,20 +3,25 @@ const userSchema = require("../model/usersmodel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const axios = require('axios')
-const secret_key = '6LeHNZokAAAAADpDro3y7rWF0E0cxtDUc90-zLLt'
+const axios = require("axios");
+const secret_key = "6LeHNZokAAAAADpDro3y7rWF0E0cxtDUc90-zLLt";
 
 const postsignupController = async (req, res) => {
   console.log("req.body==>", req.body);
   try {
-    const { name, userName, email, password, confirmPassword, reCaptcha } = req.body;
-    const recaptchaData = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${reCaptcha}`)
+    const { name, userName, email, password, confirmPassword, reCaptcha } =
+      req.body;
+    const recaptchaData = await axios.post(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${reCaptcha}`
+    );
+
     const isExist = await userSchema.findOne({
       email,
     });
     if (isExist) {
       return res.send({ message: "email already exits" });
     }
+
     if (password === confirmPassword) {
       const salt = bcrypt.genSaltSync(10);
       const hashpass = bcrypt.hashSync(password, salt);
@@ -27,16 +32,14 @@ const postsignupController = async (req, res) => {
         password: hashpass,
       };
       console.log("==========>", temp);
+
       console.log("hhhhh: ", recaptchaData.data);
       if (recaptchaData.data.success) {
         const data = await userSchema.create({ ...temp, role: "student" });
         return res.send({ data, message: " recaptcha is valid", status: 200 });
+      } else {
+        return res.send({ message: "recaptcha is not valid", status: 400 });
       }
-      else {
-        return res.send({ message: "recaptcha is not valid", status: 400 })
-      }
-
-
     } else {
       return res.send({ message: "password not match", status: 400 });
     }
@@ -67,7 +70,7 @@ const postloginController = async (req, res) => {
       if (data) {
         const { email, password, _id, role } = data;
         const token = jwt.sign({ userId: _id }, process.env.SECRET_KEY, {
-          expiresIn: "3h",
+          expiresIn: "7h",
         });
         const temp = { email, password, _id, role };
         temp.token = token;
@@ -96,7 +99,7 @@ const getUsersController = async (req, res) => {
         userName: 0,
       }
     );
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -106,7 +109,7 @@ const deleteUsersController = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await userSchema.findByIdAndDelete(id);
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -129,7 +132,7 @@ const putUsersController = async (req, res) => {
       phone,
     };
     const data = await userSchema.findByIdAndUpdate(id, { $set: temp });
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }
@@ -138,7 +141,7 @@ const getByIdUserController = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await userSchema.findById(id);
-    res.send({ data, message: "success", status: 200 });
+    res.send({ data, message: "success", status: 200, auth: "true" });
   } catch (err) {
     res.send({ message: "failed", status: 400 });
   }

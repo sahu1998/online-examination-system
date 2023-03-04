@@ -48,14 +48,13 @@ const schema = yup
 
 export default function SignUp() {
   const [message, setMessage] = React.useState();
-  const [reCaptcha, SetRecaptcha] = React.useState('');
-  const captchaRef = React.useRef();
+  const [reCaptcha, setRecaptcha] = React.useState("");
+  const captchaRef = React.useRef(null);
 
   const {
     register,
     handleSubmit,
     setError,
-
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -68,15 +67,33 @@ export default function SignUp() {
     },
   });
   const history = useNavigate();
-
+  React.useEffect(() => {
+    if (reCaptcha) {
+      setError("reCaptcha", {
+        type: "custom",
+        message: "",
+      });
+    }
+  }, [reCaptcha]);
   const onSubmit = async (value) => {
+    if (!reCaptcha) {
+      setError("reCaptcha", {
+        type: "custom",
+        message: "please check",
+      });
+      return;
+    }
     console.log("Value", { ...value, reCaptcha });
 
-    const response = await postApiHandler("/post-signup", { ...value, reCaptcha });
+    const response = await postApiHandler("/post-signup", {
+      ...value,
+      reCaptcha,
+    });
+
     console.log("res!!!=======>", response);
+    setMessage("");
     if (response.status === 200) {
       swal("Registration successfully!", "You clicked the button!", "success");
-
       history("/logIn");
     } else {
       setMessage(response.message);
@@ -84,21 +101,25 @@ export default function SignUp() {
   };
   const onChange = (value) => {
     console.log("Captcha value:", value);
-    SetRecaptcha(value);
-  }
+    setRecaptcha(value);
+  };
 
   React.useEffect(() => {
     {
       message
         ? message === "password not match"
           ? setError("confirmPassword", {
-            type: "custom",
-            message: message ?? "",
-          })
-          : //   ?  message === "pastch"
-          // ? setError("xfgh", { type: "custom", message: message ?? "" }):""
-
-          setError("email", { type: "custom", message: message ?? "" })
+              type: "custom",
+              message: message ?? "",
+            })
+          : message === "email already exits"
+          ? setError("email", { type: "custom", message: message ?? "" })
+          : message === "recaptcha is not valid"
+          ? setError("reCaptcha", {
+              type: "custom",
+              message: "recaptcha is not valid",
+            })
+          : ""
         : null;
     }
   }, [message]);
@@ -121,7 +142,7 @@ export default function SignUp() {
               noValidate
               sx={{ mt: 1 }}
               onSubmit={handleSubmit(onSubmit)}
-              style={{ marginLeft: "3rem" }}
+              // style={{ marginLeft: "0rem" }}
             >
               <Typography className="typography">Name*</Typography>
 
@@ -160,13 +181,6 @@ export default function SignUp() {
                 error={!!errors?.email}
                 helperText={errors?.email?.message}
               />
-              {/* <h6 class="message">
-                {message
-                  ? message === "password not match"
-                    ? ""
-                    : message
-                  : ""}
-              </h6> */}
 
               <Typography className="typography">Password*</Typography>
               <TextField
@@ -195,18 +209,17 @@ export default function SignUp() {
                 helperText={errors?.confirmPassword?.message}
               />
 
-              {/* <h6 class="message">
-                {message
-                  ? message === "password not match"
-                    ? message
-                    : ""
-                  : ""}
-              </h6> */}
               <ReCAPTCHA
                 sitekey="6LeHNZokAAAAAC5sRNYDUeqWL8Asc4KW_lCKP-5N"
                 onChange={onChange}
                 ref={captchaRef}
               />
+              {errors?.reCaptcha && (
+                <p className="text-danger text-small">
+                  {errors?.reCaptcha?.message}
+                </p>
+              )}
+              {console.log(errors)}
               <Button
                 type="submit"
                 variant="contained"

@@ -36,13 +36,15 @@ export default function MyProfileAdmin() {
     const res = await putApiHandler(`/put-users/${token}/${id}`, formData);
 
     console.log("RESSSSS=>", res.data);
-    if (res.status === 200) {
+    if (res.status === 200 && res.auth === "true") {
       swal("updated  successfully!", "You clicked the button!", "success");
-      history("/owner");
+      history("/admin");
+    } else {
+      localStorage.removeItem("token");
+      history("/logIn");
     }
-    // setId("");
 
-    // reset();
+    reset();
   };
 
   const getDataById = async () => {

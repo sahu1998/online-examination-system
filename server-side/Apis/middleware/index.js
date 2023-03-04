@@ -15,7 +15,7 @@ const auth = (req, res, next) => {
   if (!token) {
     return res.send({
       status: 400,
-      auth: false,
+      auth: "false",
       message: "token not provided",
     });
   }
@@ -27,7 +27,7 @@ const auth = (req, res, next) => {
       console.log("err", err);
       console.log("valid", valid);
       if (err) {
-        return res.send({ status: 400, auth: false });
+        return res.send({ status: 400, auth: "false" });
       }
 
       next();

@@ -24,8 +24,9 @@ import GTranslateIcon from "@mui/icons-material/GTranslate";
 import Avatar from "@mui/material/Avatar";
 import Popover from "@mui/material/Popover";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Container } from "@mui/material";
+import { useEffect } from "react";
 
 const drawerWidth = 240;
 const ProfileArray = [
@@ -50,10 +51,22 @@ const lms = [
 ];
 const settings = [
   { name: "Settings", url: "/ownercategories" },
-  { name: "Recaptcha Setting", url: "/mastersetting/recaptcha-setting" }
-]
+  { name: "Recaptcha Setting", url: "/mastersetting/recaptcha-setting" },
+];
 
 function OwnerSideBar({ children }) {
+  const history = useNavigate();
+
+  if (!localStorage.getItem("token")) {
+    history("/logIn");
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("role") !== "owner") {
+      history("/logIn");
+    }
+  }, [localStorage.getItem("token")]);
+
   const [settingsdata, setSettingsdata] = React.useState(null);
 
   const handleClick4 = (event) => {
