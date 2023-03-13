@@ -24,6 +24,11 @@ function QuizResult() {
 
   return (
     <Container maxWidth="xl" className="px-5">
+      <div className="py-3 text-end fs-1">
+        Score: <span>{localStorage.getItem("score")}</span> out of{" "}
+        <span>10</span>
+        <button className="rounded bg-light">Save Result</button>
+      </div>
       {questions &&
         userAnswers &&
         // questions?.length === userAnswers?.length &&

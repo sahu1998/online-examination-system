@@ -277,6 +277,7 @@ export default function PracticeSubjects() {
                     clearable
                     bordered
                     fullWidth
+                    aria-label="input-field"
                     color={errors?.subjectName ? "error" : "primary"}
                     size="lg"
                     placeholder="Title"
@@ -291,6 +292,7 @@ export default function PracticeSubjects() {
                     clearable
                     bordered
                     fullWidth
+                    aria-label="input-field"
                     color={errors?.subjectDesc ? "error" : "primary"}
                     size="lg"
                     placeholder="Description"
@@ -306,6 +308,7 @@ export default function PracticeSubjects() {
                     clearable
                     bordered
                     fullWidth
+                    aria-label="input-field"
                     color={errors?.marks ? "error" : "primary"}
                     size="lg"
                     placeholder="Total Marks"
@@ -320,6 +323,7 @@ export default function PracticeSubjects() {
                     clearable
                     bordered
                     fullWidth
+                    aria-label="input-field"
                     color={errors?.timeLimit ? "error" : "primary"}
                     size="lg"
                     placeholder="Time Limit"
@@ -334,6 +338,7 @@ export default function PracticeSubjects() {
                     <select
                       {...register("categoryId")}
                       className="form-control rounded w-100 p-1 appearance-revert"
+                      aria-label="input-field"
                     >
                       {catg_list.map((catg, index) => {
                         return (
@@ -359,6 +364,7 @@ export default function PracticeSubjects() {
                       id="formFile"
                       required
                       fullWidth
+                      aria-label="input-field"
                       name="file"
                       type="file"
                       // inputProps={{
@@ -388,6 +394,7 @@ export default function PracticeSubjects() {
                       id="formFile"
                       required
                       fullWidth
+                      aria-label="input-field"
                       name="quiz"
                       type="file"
                       // inputProps={{

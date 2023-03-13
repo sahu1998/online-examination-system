@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import { getApiHandler } from "../../../../apiHandler";
 import LandingLayout from "../../../../layouts/landing-layout";
 import Timer from "./Timer";
+import "./index.m.css";
 function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState();
@@ -17,6 +18,17 @@ function Quiz() {
 
   function handleTimeout() {
     // do something when time runs out
+    swal({
+      title: "Time's Up",
+      text: "you ran out of time",
+      icon: "warning",
+      dangerMode: true,
+      button: "Submit",
+    }).then((willPerform) => {
+      // if (willPerform) {
+      calculateScore();
+      // }
+    });
     console.log("Time's up");
   }
 
@@ -27,6 +39,18 @@ function Quiz() {
     setUserAnswers(newUserAnswers);
   };
 
+  const calculateScore = () => {
+    let rightAns = 0;
+    questions.forEach((question, index) => {
+      if (question.answer === userAnswers[index]) {
+        ++rightAns;
+      }
+    });
+    // setScore(rightAns);
+    localStorage.setItem("userAnswer", userAnswers);
+    localStorage.setItem("score", rightAns);
+    history(`/result/${id}`);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // swal({
@@ -37,17 +61,7 @@ function Quiz() {
     //   buttons: true,
     // }).then((willPerform) => {
     //   if (willPerform) {
-    let rightAns = 0;
-    questions.forEach((question, index) => {
-      if (question.answer === userAnswers[index]) {
-        ++rightAns;
-      }
-    });
-    console.log("score: ", rightAns);
-    setScore(rightAns);
-    localStorage.setItem("userAnswer", userAnswers);
-    localStorage.setItem("score", score);
-    history(`/result/${id}`);
+    calculateScore();
     //   }
     // });
   };
@@ -57,7 +71,6 @@ function Quiz() {
     const temp = await getApiHandler(`/get-practice-ques/${id}`);
     setQuestions(temp.response.subjectQues);
   };
-  console.log(questions);
 
   useEffect(() => {
     getQuestions();
@@ -67,7 +80,7 @@ function Quiz() {
     <LandingLayout>
       <div className="background">
         <Container className="bg-white">
-          <Timer duration={60 * 60} onTimeout={handleTimeout} />
+          <Timer h={0} m={10} s={0} onTimeout={handleTimeout} />
           <form onSubmit={handleSubmit}>
             {queOver ? (
               <div className="">
@@ -86,7 +99,7 @@ function Quiz() {
                       className="form-check py-2"
                     >
                       <input
-                        className="form-check-input"
+                        className="form-check-input cursor-pointer"
                         type="radio"
                         name={`option${index}`}
                         value={index}

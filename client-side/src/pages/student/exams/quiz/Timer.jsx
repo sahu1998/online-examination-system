@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-function Timer({ duration, onTimeout }) {
-  const [timeRemaining, setTimeRemaining] = useState(duration);
+function Timer({ h = 1, m = 0, s = 0, onTimeout }) {
+  // const [timeRemaining, setTimeRemaining] = useState(duration);
 
-  const [seconds, setSeconds] = useState(60);
-  const [minutes, setMinutes] = useState(45);
-  const [hours, setHours] = useState(0);
+  const [seconds, setSeconds] = useState(s);
+  const [minutes, setMinutes] = useState(m);
+  const [hours, setHours] = useState(h);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,18 +30,24 @@ function Timer({ duration, onTimeout }) {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimeRemaining((time) => time - 1);
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setTimeRemaining((time) => time - 1);
+  //   }, 1000);
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (timeRemaining <= 0) {
+  //     onTimeout();
+  //   }
+  // }, [timeRemaining, onTimeout]);
 
   useEffect(() => {
-    if (timeRemaining <= 0) {
+    if (hours <= 0 && minutes <= 0 && seconds <= 0) {
       onTimeout();
     }
-  }, [timeRemaining, onTimeout]);
+  }, [hours, minutes, seconds, onTimeout]);
 
   return (
     <div className="text-end p-3 fs-1 fw-bold text-warning">
