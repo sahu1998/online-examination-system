@@ -7,7 +7,7 @@ const userSchema = require("../model/usersmodel");
 
 const sendEmail = async ({ link, email }) => {
   const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    service: "Gmail", 
 
     auth: {
       user: "aarupatidar4169@gmail.com",
@@ -89,7 +89,6 @@ const updatePassword = async (req, res) => {
             { _id: id },
             { $set: { password: hashpass } }
           );
-
           return res.send({
             message: "password update successfully",
             status: 200,

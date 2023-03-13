@@ -137,11 +137,9 @@ router.get("/getsubjectbyid/:id", getSubjectById);
 router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
 
-// router.get("/get-login/:token", auth, getloginController);
-
 router.post("/post-signup", postsignupController);
 router.post("/post-login", postloginController);
-router.post("/verify", auth);
+// router.post("/verify", auth);
 router.post("/verificationEmail", verificationEmail);
 router.post("/resetPassword/:id/:token", updatePassword);
 
