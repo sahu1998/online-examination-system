@@ -7,6 +7,7 @@ import { getApiHandler } from "../../../../apiHandler";
 import LandingLayout from "../../../../layouts/landing-layout";
 import Timer from "./Timer";
 import "./index.m.css";
+import StudentLayout from "../../../../layouts/student-layout";
 function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState();
@@ -77,7 +78,7 @@ function Quiz() {
   }, []);
 
   return (
-    <LandingLayout>
+    <StudentLayout>
       <div className="background">
         <Container className="bg-white">
           <Timer h={0} m={10} s={0} onTimeout={handleTimeout} />
@@ -152,7 +153,7 @@ function Quiz() {
           </form>
         </Container>
       </div>
-    </LandingLayout>
+    </StudentLayout>
   );
 }
 

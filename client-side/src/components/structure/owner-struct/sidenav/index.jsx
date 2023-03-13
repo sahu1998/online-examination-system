@@ -38,11 +38,9 @@ const ProfileArray = [
   { name: "Logout", path: "/ownerlogout" },
 ];
 const Exam = [
-  { name: "Categories", url: "/ownercategories" },
-  { name: "Question Bank", url: "/ownerquestion" },
-  { name: "Exam Type", url: "/ownerexamtype" },
+  { name: "Categories", url: "/exams/categories" },
+  { name: "Subject", url: "/exams/subjects" },
   { name: "Instructions", url: "/ownerinstruct" },
-  { name: "Subject Type", url: "/ownersubject" },
 ];
 const lms = [
   { name: "Categories", url: "/lms/category" },
