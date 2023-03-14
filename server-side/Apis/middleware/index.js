@@ -37,12 +37,24 @@ const auth = (req, res, next) => {
 
 const subjectStorage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "./storage/subjects");
+    console.log(file);
+    if (file.fieldname === "image") {
+      callback(null, "./storage/subjects");
+    }
+    if (file.fieldname === "quiz") {
+      callback(null, "./storage/quizes");
+    }
   },
   filename: (req, file, callback) => {
     callback(null, file.originalname);
   },
 });
+// const fileUpload = (req, res, next) => {
+//   uploadSubjectImage.single("image")(req, res, next);
+//   uploadQuiz.single("quiz")(req, res, next);
+//   next();
+// };
+
 const uploadSubjectImage = multer({
   storage: subjectStorage,
   limits: { fileSize: 1000000 },
@@ -78,7 +90,7 @@ const uploadFeedbackImage = uploadFeedback.single("image");
 
 const subjectLmsStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log("mahi ===============",req);
+    console.log("mahi ===============", req);
     cb(null, "./storage/lmssubject");
   },
   filename: (req, file, cb) => {
@@ -90,10 +102,10 @@ const uploadLmsSubImage = multer({
   storage: subjectLmsStorage,
   // limits: { fileSize: 1000000 },
 });
-const uploadLmsSubImage2=multer({
-  storage:subjectLmsStorage,
-  limits: { fileSize: 1000000 }
-})
+const uploadLmsSubImage2 = multer({
+  storage: subjectLmsStorage,
+  limits: { fileSize: 1000000 },
+});
 //  const uploadLmsSubImageMul=uploadLmsSubImage.single("image");
 const categoryLmsStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -118,12 +130,12 @@ const viewLmsStorage = multer.diskStorage({
   filename: (req, file, cb) => {
     console.log("file.....", file);
     cb(null, file.originalname);
-    console.log("null",file.originalname);
+    console.log("null", file.originalname);
   },
 });
 const uploadLmsViewPdf = multer({
-  storage:viewLmsStorage,
-   limits: { fileSize: 1000000 },
+  storage: viewLmsStorage,
+  limits: { fileSize: 1000000 },
 });
 const quizStorage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -184,17 +196,25 @@ const convertExcelToJson2 = (req, res, next) => {
 };
 
 const convertExcelToJson = (req, res, next) => {
-  const workbook = XLSX.readFile(req.file.path);
+  console.log(req.files.quiz);
+  const workbook = XLSX.readFile(req.files.quiz[0].path);
   // console.log("workbook: ", workbook);
   const sheetName = workbook.SheetNames[0];
   const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
   const jsonData = JSON.stringify(sheetData);
   const jsonObj = JSON.parse(jsonData);
-  req.quiz = jsonObj;
+  const quiz = jsonObj.map((obj) => {
+    return {
+      question: obj.question,
+      options: obj.options.split(";"),
+      answer: parseInt(obj.answer),
+    };
+  });
+  req.quiz = quiz;
   next();
 };
 
-module.exports={
+module.exports = {
   convertExcelToJson,
   convertExcelToJson2,
   uploadQuiz,
@@ -205,5 +225,5 @@ module.exports={
   uploadUserImage,
   uploadSubjectImage,
   auth,
-  uploadLmsSubImage2
-}
+  uploadLmsSubImage2,
+};

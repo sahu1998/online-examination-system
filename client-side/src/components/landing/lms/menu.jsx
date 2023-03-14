@@ -130,13 +130,13 @@ console.log("viewId=========",viewId);
               {hed}
             </div>
           </Grid>
-          {getIdData.length ?
+          {getIdData.length ?(
             viewId ? (
               <View viewData={viewData} />
             ) 
             : (
               <Cards data={getIdData} setViewId={setViewId} />
-            )
+            ))
             :
             <Result
               status="404"

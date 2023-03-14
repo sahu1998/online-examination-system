@@ -10,13 +10,9 @@ import Categories from "./components/student/lms/categories/categories";
 import LmsCategory from "./components/owner/lms/categories/temp";
 import Recaptcha from "./components/owner/master-settings/google-recaptcha/temp";
 
-
-
-
 function App() {
   return (
     <div>
-
       <BrowserRouter>
         <AllRoutes />
       </BrowserRouter>

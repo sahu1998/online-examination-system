@@ -33,10 +33,12 @@ const subjectModel = mongoose.model("subjects", subjectSchema);
 const ObjectId = mongoose.Types.ObjectId;
 
 const postSubjectData = async (values) => {
+  console.log("sdfsdfsdfsdfsfdsfsdfsdfdsfds");
   try {
     const result = await subjectModel.create(values);
     return { response: result, status: 200, message: "success" };
   } catch (error) {
+    console.log("Error: ", error);
     return { error, status: 400, message: "error" };
   }
 };
@@ -63,6 +65,45 @@ const pushQuesInSubj = async (subj_id, values) => {
       { safe: true, upsert: true, new: true }
     );
     return { response, status: 200, message: "success" };
+  } catch (error) {
+    return { error, status: 400, message: "error" };
+  }
+};
+
+const getSubjectDataById = async (id) => {
+  try {
+    // const data = await subjectModel.find({}, { subjectQues: 0 });
+    const data = await subjectModel.aggregate([
+      {
+        $match: {
+          _id: ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: "exams",
+          localField: "categoryId",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          subjectName: 1,
+          // categoryId: 1,
+          marks: 1,
+          subjectImg: 1,
+          timeLimit: 1,
+          subjectDesc: 1,
+          // subjectQues: 0,
+          categoryName: {
+            $arrayElemAt: ["$category.examName", 0],
+          },
+        },
+      },
+    ]);
+    return { data, status: 200, message: "success" };
   } catch (error) {
     return { error, status: 400, message: "error" };
   }
@@ -205,4 +246,5 @@ module.exports = {
   getPracticeQues,
   deletePracticeExamData,
   putPracticeSubjData,
+  getSubjectDataById,
 };

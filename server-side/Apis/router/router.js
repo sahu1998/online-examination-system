@@ -15,6 +15,7 @@ const {
   deletePracticeSubjController,
   putPracticeSubjController,
   temp,
+  getSubjectById,
 } = require("../controller/practiceExamController");
 const {
   postFeedbackController,
@@ -90,14 +91,39 @@ router.delete("/del-practice-catg/:id", deleteExamCatgController);
 router.put("/update-practice-catg/:id", putExamCatgController);
 router.get("/about", getAboutController);
 
+router.use("/practice-subject-img", express.static("storage/subjects"));
 router.post(
   "/postsubject",
-  uploadSubjectImage.single("image"),
+  uploadSubjectImage.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "quiz",
+      maxCount: 1,
+    },
+  ]),
+  convertExcelToJson,
   postSubjectController
 );
 
 router.delete("/delete-practice-subj/:id", deletePracticeSubjController);
-router.put("/update-practice-subj/:id", putPracticeSubjController);
+router.put(
+  "/update-practice-subj/:id",
+  uploadSubjectImage.fields([
+    {
+      name: "image",
+      maxCount: 1,
+    },
+    {
+      name: "quiz",
+      maxCount: 1,
+    },
+  ]),
+  convertExcelToJson,
+  putPracticeSubjController
+);
 router.post(
   "/postques/:id",
   uploadQuiz.single("quiz"),
@@ -107,10 +133,9 @@ router.post(
 router.put("/add-que-in-subj/:id", pushQuesInSubjController);
 router.get("/get-practice-ques/:id", getPracticeQuesController);
 router.get("/getsubject", getAllSubjectController);
+router.get("/getsubjectbyid/:id", getSubjectById);
 router.get("/getsubjectbycatg/:id", getSubjectByCatgController);
 router.get("/get-random-subjects", getRandomSubjController);
-
-// router.get("/get-login/:token", auth, getloginController);
 
 router.post("/post-signup", postsignupController);
 router.post("/post-login", postloginController);
@@ -175,7 +200,6 @@ router.post(
 );
 router.get("/getLmsCat", getLmsCatController);
 router.get("/getLmsCat/:id", getByIdLmsCatController);
-
 router.get("/getRandomLmsSub", getRandomLmsSubController);
 router.delete("/deleteLmsCat/:id", deleteLmsCatController);
 router.put(
