@@ -31,6 +31,7 @@ import Popover from "@mui/material/Popover";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
 const ProfileArray = [
@@ -187,6 +188,13 @@ function AdminSideBar({ children }) {
               ))}
             </Popover>
           </div>
+          <LogoutIcon
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              localStorage.removeItem("token");
+              history("/logIn");
+            }}
+          />
         </Toolbar>
       </AppBar>
       <Box

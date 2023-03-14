@@ -16,7 +16,7 @@ import * as React from "react";
 import { Typography } from "antd";
 import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
-import OwnerLayout from "../../../layouts/owner-layout";
+import AdminLayout from "../../../layouts/admin-layout";
 // import { NavLink } from "react-router-dom";
 
 const style = {
@@ -31,7 +31,7 @@ const style = {
   p: 4,
 };
 
-export default function NotificationOwner() {
+export default function NotificationAdmin() {
   const { register, handleSubmit, watch, reset, setValue } = useForm();
   const [data, setData] = useState([]);
   const [id, setId] = useState("");
@@ -99,7 +99,7 @@ export default function NotificationOwner() {
   };
 
   return (
-    <OwnerLayout>
+    <AdminLayout>
       <div className="my-5">
         <Button
           onClick={() => {
@@ -334,6 +334,6 @@ export default function NotificationOwner() {
           </Fade>
         </Modal>
       </div>
-    </OwnerLayout>
+    </AdminLayout>
   );
 }

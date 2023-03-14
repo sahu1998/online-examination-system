@@ -68,7 +68,7 @@ export default function ChangePasswordAdmin() {
     console.log("res=======>", res);
     if (res.status === 200) {
       swal("updated  successfully!", "You clicked the button!", "success");
-      history("/admin");
+      history("/logIn");
     } else if (res.auth == "false") {
       localStorage.removeItem("token");
       history("/logIn");

@@ -88,7 +88,7 @@ router.post("/post-exam-catg", postExamCatgController);
 router.get("/get-exam-catg", getExamCatgController);
 router.delete("/del-practice-catg/:id", deleteExamCatgController);
 router.put("/update-practice-catg/:id", putExamCatgController);
- router.get("/about", getAboutController);
+router.get("/about", getAboutController);
 
 router.post(
   "/postsubject",
@@ -114,7 +114,7 @@ router.get("/get-random-subjects", getRandomSubjController);
 
 router.post("/post-signup", postsignupController);
 router.post("/post-login", postloginController);
-router.post("/verify", auth);
+// router.post("/verify", auth);
 router.post("/verificationEmail", verificationEmail);
 router.post("/resetPassword/:id/:token", updatePassword);
 

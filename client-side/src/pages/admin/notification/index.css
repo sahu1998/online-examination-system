@@ -1,0 +1,18 @@
+.typography {
+  font-size: 22px;
+  font-weight: 600;
+}
+.type {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #353f4d;
+}
+.button {
+  background: blueviolet !important;
+  margin-left: 19rem !important;
+  color: white !important;
+}
+.btn {
+  text-transform: capitalize !important;
+  color: black !important;
+}

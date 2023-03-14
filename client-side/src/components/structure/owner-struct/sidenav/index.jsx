@@ -27,7 +27,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Container } from "@mui/material";
 import { useEffect } from "react";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 const drawerWidth = 240;
 const ProfileArray = [
   { name: "My Profile", path: "/ownerprofile" },
@@ -35,7 +35,7 @@ const ProfileArray = [
   { name: "Language", path: "/ownerlanguage" },
   { name: "Send Push Notification", path: "/ownernotification" },
   { name: "Change Password", path: "/ownerpassword" },
-  { name: "Logout", path: "/ownerlogout" },
+  // { name: "Logout", path: "/ownerlogout" },
 ];
 const Exam = [
   { name: "Categories", url: "/ownercategories" },
@@ -425,6 +425,13 @@ function OwnerSideBar({ children }) {
               ))}
             </Popover>
           </div>
+          <LogoutIcon
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              localStorage.removeItem("token");
+              history("/logIn");
+            }}
+          />
         </Toolbar>
       </AppBar>
       <Box
